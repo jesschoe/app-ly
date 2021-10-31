@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 import { verifyUser, loginUser, registerUser, removeToken } from './services/auth';
 import MainContainer from './containers/MainContainer';
+import SignIn from './screens/SignIn/SignIn';
+import SignUp from './screens/SignUp/SignUp';
 import './App.css';
 
 function App() {
@@ -40,12 +42,12 @@ function App() {
         <Route path='/jobs'>
           <MainContainer user={user} handleLogout={handleLogout} />
         </Route>
-        {/* <Route path='/signup'>
+        <Route path='/signup'>
           <SignUp handleRegister={handleRegister} />
         </Route>
         <Route path='/'>
           <SignIn handleLogin={handleLogin} />
-        </Route> */}
+        </Route>
       </Switch>
     </div>
   );
