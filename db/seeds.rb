@@ -25,6 +25,18 @@
     # offer_salary: ,
     # priority: ,
     # column:
-    user: @tester
+    user_id: @tester.id
+  },
+  {
+    company: 'tester',
+    location: 'remote',
+    position: 'job',
+    salary: '$15,000',
+    url: 'www.www.com',
+    user_id: @tester.id
   }
 ]
+
+@jobs.each do |job|
+  Job.create!(job)
+end
