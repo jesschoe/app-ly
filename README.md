@@ -19,7 +19,7 @@
 
 ## Overview
 
-_**App/ly** is a job application tracking app that will help organize information and contacts for users during their job search._
+_**App/ly** is a job application tracking app that will help organize information and contacts for users during their job search. Users can start by creating an account, and then start adding information about any job openings that they're interested in. Once added to the user's database, they can go back to view the details, update important dates and information as they progress in the application process, and even leave notes and add contacts for each job posting._
 
 <br>
 
@@ -33,10 +33,11 @@ _The **App/ly** MVP is a full CRUD, full stack application with a Rails back end
 
 - _RESTful JSON API built with Ruby on Rails with full CRUD_
 - _Full CRUD interactive front end built with React_
+- _Forms to input job postings, notes on job postings, and contacts_
+- _Display all job postings saved to user's account along with notes and contacts_
 - _Implement Auth for users_
 - _Fully responsive styling with two media queries_
-- \_\_
-- _etc._
+- _Clean, organized, structured code_
 
 <br>
 
@@ -98,13 +99,29 @@ _The **App/ly** MVP is a full CRUD, full stack application with a Rails back end
 
 src
 |__ assets/
-      |__ fonts
-      |__ graphics
+      |__ icons
       |__ images
       |__ mockups
 |__ components/
+      |__ ContactCreate.jsx
+      |__ ContactEdit.jsx
       |__ Header.jsx
+      |__ JobCreate.jsx
+      |__ JobEdit.jsx
+      |__ Navbar.jsx
+|__ containers/
+      |__ MainContainer.jsx
+|__ layouts/
+      |__ Layout.jsx
+|__ screens/
+      |__ Contacts.jsx
+      |__ JobDetail.jsx
+      |__ SignIn.jsx
+      |__ SignUp.jsx
 |__ services/
+      |__ api_config.js
+      |__ auth.js
+      |__ jobs.js
 
 ```
 
@@ -126,9 +143,7 @@ src
 
 #### ERD Model
 
-> Use this section to display an image of a computer generated ERD model. You can use draw.io, Lucidchart or another ERD tool.
-
-[ERD Sample](https://drive.google.com/file/d/1kLyQTZqfcA4jjKWQexfEkG2UspyclK8Q/view)
+![ERD](./config/assets/apply-erd.png)
 <br>
 
 ---
