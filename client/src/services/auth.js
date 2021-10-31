@@ -1,13 +1,13 @@
 import api from './api-config';
 
-export const signIn = async (userData) => {
-  const resp = await api.post('/auth/login, { authentication: userData })
+export const loginUser = async (userData) => {
+  const resp = await api.post('/auth/login', { authentication: userData })
   localStorage.setItem('authToken', resp.data.token);
   api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`
   return resp.data.user
 }
 
-export const signUp = async (userData) => {
+export const registerUser = async (userData) => {
   const resp = await api.post('/users/', { user: userData })
   localStorage.setItem('authToken', resp.data.token);
   api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`
