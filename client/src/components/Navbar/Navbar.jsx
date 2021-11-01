@@ -9,7 +9,11 @@ const Nav = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-content: center;
-  font-size: .7em;
+  font-size: .6em;
+`
+
+const LinkName = styled.div`
+  margin: 5px 0 40px 0;
 `
 
 export default function Navbar({ user, handleLogout }) {
@@ -18,16 +22,16 @@ export default function Navbar({ user, handleLogout }) {
       <div>
         <Link to='/jobs' style={{ textDecoration:'none', color:'white' }}>
           <img src={jobsIcon} alt='' />
-          <div>jobs</div>
+          <LinkName>jobs</LinkName>
         </Link>
         <Link to='/contacts' style={{ textDecoration:'none', color:'white' }}>
           <img src={contactsIcon} alt='' />
-          <div>contacts</div>
+          <LinkName>contacts</LinkName>
         </Link>
       </div>
       <div onClick={handleLogout}>
         <img src={accountIcon} alt='' />
-        <div>signout</div>
+        <LinkName>signout</LinkName>
       </div>
     </Nav>
   )
