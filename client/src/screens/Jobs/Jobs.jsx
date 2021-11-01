@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom'
 import JobCard from '../../components/JobCard/JobCard'
+import styled from 'styled-components'
+
+const CardContainer = styled.div`
+  display: flex;
+`
 
 export default function Jobs({ user, jobs }) {
 
   return (
-    <div>
+    <CardContainer>
       {jobs.map(job => {
         return (
           <div key={job.id}>
@@ -14,6 +19,6 @@ export default function Jobs({ user, jobs }) {
           </div>
         )
       })}
-    </div>
+    </CardContainer>
   )
 }
