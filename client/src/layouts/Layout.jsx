@@ -19,7 +19,8 @@ const Main = styled.div`
 
 const Nav = styled.div`
   display: flex;
-  width: 10%;
+  justify-content: center;
+  width: 90px;
   background-color: #0F3875;
   color: white;
   height: 100vh;
@@ -41,11 +42,11 @@ export default function Layout({ children, user, handleLogout }) {
   return (
     <Container>
       <Nav>
-        <Navbar />
+        <Navbar user={user} handleLogout={handleLogout}/>
       </Nav>
       <Main>
         <HeaderLinks>
-          <Header user={user} handleLogout={handleLogout}/>
+          <Header user={user}/>
         </HeaderLinks>
         <Content>
           {children}

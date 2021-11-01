@@ -27,7 +27,7 @@ export default function ({ user }) {
     <Container>
       <Logo>
         <Link 
-          to='/' 
+          to='/jobs' 
           style={{ textDecoration: 'none', color: '#E94D4D', display: 'flex' }}
         >
           <div style={{ margin: '0 8px' }}>app</div><Slash></Slash><div>ly</div>
