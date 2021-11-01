@@ -10,59 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_225330) do
-
+ActiveRecord::Schema.define(version: 20_211_030_225_330) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "contacts", force: :cascade do |t|
-    t.string "name"
-    t.string "position"
-    t.string "email"
-    t.string "phone"
-    t.bigint "job_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["job_id"], name: "index_contacts_on_job_id"
+  create_table 'contacts', force: :cascade do |t|
+    t.string 'name'
+    t.string 'position'
+    t.string 'email'
+    t.string 'phone'
+    t.bigint 'job_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['job_id'], name: 'index_contacts_on_job_id'
   end
 
-  create_table "jobs", force: :cascade do |t|
-    t.string "company"
-    t.string "location"
-    t.string "position"
-    t.string "salary"
-    t.text "description"
-    t.text "url"
-    t.date "applied"
-    t.date "interview"
-    t.date "offer"
-    t.string "offer_salary"
-    t.string "priority"
-    t.string "column"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_jobs_on_user_id"
+  create_table 'jobs', force: :cascade do |t|
+    t.string 'company'
+    t.string 'location'
+    t.string 'position'
+    t.string 'salary'
+    t.text 'description'
+    t.text 'url'
+    t.date 'applied'
+    t.date 'interview'
+    t.date 'offer'
+    t.string 'offer_salary'
+    t.string 'priority'
+    t.string 'column'
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['user_id'], name: 'index_jobs_on_user_id'
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.text "content"
-    t.date "date"
-    t.bigint "job_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["job_id"], name: "index_notes_on_job_id"
+  create_table 'notes', force: :cascade do |t|
+    t.text 'content'
+    t.date 'date'
+    t.bigint 'job_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['job_id'], name: 'index_notes_on_job_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'username'
+    t.string 'email'
+    t.string 'password_digest'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  add_foreign_key "contacts", "jobs"
-  add_foreign_key "jobs", "users"
-  add_foreign_key "notes", "jobs"
+  add_foreign_key 'contacts', 'jobs'
+  add_foreign_key 'jobs', 'users'
+  add_foreign_key 'notes', 'jobs'
 end

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { verifyUser, loginUser, registerUser, removeToken } from './services/auth';
 import MainContainer from './containers/MainContainer';
 import SignIn from './screens/SignIn/SignIn';
@@ -35,18 +35,24 @@ function App() {
     localStorage.removeItem("authToken");
     removeToken();
     setUser(null);
+    history.push('/')
   }
   return (
     <div className="App">
       <Switch>
-        <Route path='/jobs'>
-          <MainContainer user={user} handleLogout={handleLogout} />
-        </Route>
         <Route path='/signup'>
           <SignUp handleRegister={handleRegister} />
         </Route>
-        <Route path='/'>
+        <Route path='/signin'>
           <SignIn handleLogin={handleLogin} />
+        </Route>
+        <Route path='/' render={() => {
+          return(
+            !user ? <Redirect to='/signin' /> :
+            <Redirect to='/jobs' />
+          )
+        }}>
+          <MainContainer user={user} handleLogout={handleLogout} />
         </Route>
       </Switch>
     </div>

@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: %i[show update destroy]
+  # before_action :set_job, only: %i[create]
+  before_action :set_user_job, only: %i[show update destroy]
   before_action :authorize_request, except: %i[index show]
 
   # GET /jobs
@@ -18,7 +19,7 @@ class JobsController < ApplicationController
   # POST /jobs
   def create
     @job = Job.new(job_params)
-
+    @job.user = @current_user
     if @job.save
       render json: @job, status: :created
     else
@@ -45,6 +46,10 @@ class JobsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_job
     @job = Job.find(params[:id])
+  end
+
+  def set_user_job
+    @job = @current_user.jobs.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
