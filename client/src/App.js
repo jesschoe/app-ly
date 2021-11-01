@@ -22,7 +22,7 @@ function App() {
   const handleLogin = async (formData) => {
     const user = await loginUser(formData);
     setUser(user);
-    history.push('/')
+    history.push('/jobs')
   }
 
   const handleRegister = async (formData) => {

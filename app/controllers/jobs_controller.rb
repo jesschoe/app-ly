@@ -7,7 +7,7 @@ class JobsController < ApplicationController
     @user = User.find(params[:user_id])
     @jobs = Job.where(user_id: @user.id)
 
-    render json: @jobs, status: :ok
+    render json: @jobs, include: %i[notes contacts], status: :ok
   end
 
   # GET /jobs/1

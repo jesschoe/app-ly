@@ -47,21 +47,22 @@ export default function MainContainer({ user, handleLogout }) {
         <Switch>
           <Route path='/contacts'>
             <Contacts
-              newJob={newJob}
+              jobs={jobs}
             />
           </Route>
           <Route path='/jobs/:id'>
             <JobDetail
-              deleteJob={deleteJob}
+              jobs={jobs}
               user={user}
               editJob={editJob}
-              jobs={jobs}
+              deleteJob={deleteJob}
             />
           </Route>
           <Route path='/jobs'>
             <Jobs
               user={user}
               jobs={jobs}
+              newJob={newJob}
             />
           </Route>
         </Switch>

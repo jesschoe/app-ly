@@ -61,27 +61,25 @@ _The **App/ly** MVP is a full CRUD, full stack application with a Rails back end
 
 [Link to Wireframes](https://www.figma.com/file/BXyZWYWtr7aOrBZy27KO4o/p4?node-id=0%3A1)
 
-- Desktop Landing
+- Desktop Landing / Sign In and Sign Up screens
 
-![Dummy Link](url)
+![home](/client/src/assets/homescreen.png)
 
-- Desktop Hero
+- Jobs screens / See all jobs, details, and create/edit forms
 
-![Dummy Link](url)
+![jobs](/client/src/assets/jobs.png)
 
-- Resource Index
+- Contacts screens / All contacts and forms
 
-![Dummy Link](url)
+![contacts](/client/src/assets/contacts.png)
 
-- Resource Show
+- Jobs screen on tablet
 
-![Dummy Link](url)
+![tablet](client/src/assets/tablet.png)
 
-- Tablet Resource Index
+- Sign up and jobs on mobile
 
-![Dummy Link](url)
-
-- Mobile Resource Index
+![mobile](client/src/assets/mobile.png)
 
 #### Component Tree
 
