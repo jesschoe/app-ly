@@ -36,6 +36,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `
 
 export default function Layout({ children, user, handleLogout }) {
