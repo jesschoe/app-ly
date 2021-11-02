@@ -19,13 +19,13 @@ export default function MainContainer({ user, handleLogout }) {
   }, [])
 
   const newJob = async (formData) => {
-    const newJob = await createJob(formData);
+    const newJob = await createJob(user.id, formData);
     setJobs(prevState => [...prevState, newJob]);
-    history.push('/');
+    history.push('/jobs');
   }
 
-  const editJob = async (user_id, id, formData) => {
-    const updatedJob = await updateJob(user, id, formData);
+  const editJob = async (id, formData) => {
+    const updatedJob = await updateJob(user.id, id, formData);
     setJobs(prevState => prevState.map(job => {
       return job.id === Number(id) ? updatedJob : job
     }))
@@ -33,11 +33,11 @@ export default function MainContainer({ user, handleLogout }) {
   }
 
   const deleteJob = async (id) => {
-    await destroyJob(id);
+    await destroyJob(user.id, id);
     setJobs(prevState => prevState.filter(job => {
       return job.id !== id
     }))
-    history.push('/');
+    history.push('/jobs');
   }
 
   return (

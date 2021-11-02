@@ -63,17 +63,21 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
   const [job, setJob] = useState({})
   const [showModal, setShowModal] = useState(false)
   const { id } = useParams()
-
+  
+  console.log(id)
   useEffect(() => {
     if(jobs.length) {
       const job = jobs.find(job => job.id === Number(id))
       setJob(job)
-      console.log('hi',job)
     }
-  }, [id])
+  }, [jobs, id])
 
   const handleEdit = () => {
     setShowModal(prev => !prev)
+  }
+
+  const handleDelete = () => {
+    deleteJob(id)
   }
 
   return (
@@ -92,7 +96,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
             <button onClick={handleEdit}>
               edit
             </button>
-            <button onClick={deleteJob}>
+            <button onClick={handleDelete}>
               delete
             </button>
           </div>
@@ -121,7 +125,11 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
           )
         })}
       </NotesList>
-      {showModal ? <JobEdit job={job} editJob={editJob} setShowModal={setShowModal}/> : ''}
+      {showModal ? 
+        <JobEdit 
+          job={job} 
+          editJob={editJob} 
+          setShowModal={setShowModal}/> : ''}
     </DetailsContainer>
   )
 }

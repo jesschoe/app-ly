@@ -1,7 +1,7 @@
 import api from './api-config';
 
-export const createJob = async (data) => {
-  const resp = await api.post('/jobs', { job: data })
+export const createJob = async (user_id, data) => {
+  const resp = await api.post(`/users/${user_id}/jobs`, { job: data })
   return resp.data
 }
 
@@ -20,7 +20,7 @@ export const updateJob = async (user_id, id, data) => {
   return resp.data
 }
 
-export const destroyJob = async (id) => {
-  const resp = await api.delete(`/jobs/${id}`)
+export const destroyJob = async (user_id, id) => {
+  const resp = await api.delete(`users/${user_id}/jobs/${id}`)
   return resp.data
 }
