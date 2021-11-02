@@ -15,8 +15,8 @@ export const readOneJob = async (id) => {
   return resp.data
 }
 
-export const updateJob = async (id, data) => {
-  const resp = await api.put(`/jobs/${id}`, { job: data })
+export const updateJob = async (user_id, id, data) => {
+  const resp = await api.put(`users/${user_id}/jobs/${id}`, { job: data })
   return resp.data
 }
 

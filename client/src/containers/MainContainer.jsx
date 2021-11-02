@@ -13,7 +13,6 @@ export default function MainContainer({ user, handleLogout }) {
   useEffect(() => {
     const fetchJobs = async () => {
       const jobs = await readAllJobs(1);
-      console.log(jobs)
       setJobs(jobs);
     }
     fetchJobs();
@@ -25,12 +24,12 @@ export default function MainContainer({ user, handleLogout }) {
     history.push('/');
   }
 
-  const editJob = async (id, formData) => {
-    const updatedJob = await updateJob(id, formData);
+  const editJob = async (user_id, id, formData) => {
+    const updatedJob = await updateJob(user, id, formData);
     setJobs(prevState => prevState.map(job => {
       return job.id === Number(id) ? updatedJob : job
     }))
-    history.push(`/${id}`);
+    history.push(`/jobs/${id}`);
   }
 
   const deleteJob = async (id) => {

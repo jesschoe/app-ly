@@ -22,7 +22,7 @@ const Slash = styled.div`
   margin: 10px 0 0 5px;
 `
 
-export default function ({ user }) {
+export default function Header({ user }) {
   return (
     <Container>
       <Logo>

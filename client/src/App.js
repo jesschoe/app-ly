@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { verifyUser, loginUser, registerUser, removeToken } from './services/auth';
 import MainContainer from './containers/MainContainer';
 import SignIn from './screens/SignIn/SignIn';
@@ -46,13 +46,9 @@ function App() {
         <Route path='/signin'>
           <SignIn handleLogin={handleLogin} />
         </Route>
-        <Route path='/' render={() => {
-          return(
-            !user ? <Redirect to='/signin' /> :
-            <Redirect to='/jobs' />
-          )
-        }}>
+        <Route path={!user ? '/signin' : '/jobs'}>
           <MainContainer user={user} handleLogout={handleLogout} />
+        
         </Route>
       </Switch>
     </div>

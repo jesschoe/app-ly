@@ -13,7 +13,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/1
   def show
-    render json: @job
+    render json: @job, include: %i[notes contacts]
   end
 
   # POST /jobs
