@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Switch, Route, useHistory } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
 import Layout from '../layouts/Layout'
 import Jobs from '../screens/Jobs/Jobs'
@@ -13,41 +13,41 @@ export default function MainContainer({ user, handleLogout }) {
   useEffect(() => {
     const fetchJobs = async () => {
       const jobs = await readAllJobs(1);
-      console.log(jobs)
       setJobs(jobs);
     }
     fetchJobs();
   }, [])
 
   const newJob = async (formData) => {
-    const newJob = await createJob(formData);
+    const newJob = await createJob(user.id, formData);
     setJobs(prevState => [...prevState, newJob]);
-    history.push('/');
+    history.push('/jobs');
   }
 
   const editJob = async (id, formData) => {
-    const updatedJob = await updateJob(id, formData);
+    const updatedJob = await updateJob(user.id, id, formData);
     setJobs(prevState => prevState.map(job => {
       return job.id === Number(id) ? updatedJob : job
     }))
-    history.push(`/${id}`);
+    history.push(`/jobs/${id}`);
   }
 
   const deleteJob = async (id) => {
-    await destroyJob(id);
+    await destroyJob(user.id, id);
     setJobs(prevState => prevState.filter(job => {
       return job.id !== id
     }))
-    history.push('/');
+    history.push('/jobs');
   }
 
   return (
     <div>
       <Layout user={user} handleLogout={handleLogout}>
         <Switch>
-          <Route path='/contacts'>
+          <Route path='/jobs/all/contacts'>
             <Contacts
               jobs={jobs}
+              user={user}
             />
           </Route>
           <Route path='/jobs/:id'>
@@ -58,7 +58,7 @@ export default function MainContainer({ user, handleLogout }) {
               deleteJob={deleteJob}
             />
           </Route>
-          <Route path='/jobs'>
+          <Route exact path='/jobs'>
             <Jobs
               user={user}
               jobs={jobs}

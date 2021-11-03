@@ -43,16 +43,11 @@ function App() {
         <Route path='/signup'>
           <SignUp handleRegister={handleRegister} />
         </Route>
-        <Route path='/signin'>
-          <SignIn handleLogin={handleLogin} />
-        </Route>
-        <Route path='/' render={() => {
-          return(
-            !user ? <Redirect to='/signin' /> :
-            <Redirect to='/jobs' />
-          )
-        }}>
+        <Route path='/jobs'>
           <MainContainer user={user} handleLogout={handleLogout} />
+        </Route>
+        <Route exact path='/'>
+          {!user? <SignIn handleLogin={handleLogin} /> : <Redirect to='/jobs'/>}
         </Route>
       </Switch>
     </div>
