@@ -4,8 +4,8 @@ import styled from 'styled-components'
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-right: 10px;
+  align-content: center;
+  width: 90%;
 `
 const Logo = styled.div`
   font-family: 'Ephesis', cursive;
@@ -21,7 +21,10 @@ const Slash = styled.div`
   transform: skew(-35deg);
   margin: 10px 0 0 5px;
 `
-
+const Title = styled.h4`
+  text-transform: uppercase;
+  color: #0F3875;
+`
 export default function Header({ user }) {
   return (
     <Container>
@@ -34,7 +37,7 @@ export default function Header({ user }) {
         </Link>
       </Logo>
       <div>
-        {user?.username}'s jobs
+        <Title>{user?.username}'s jobs</Title>
       </div>
     </Container>
   )

@@ -10,6 +10,11 @@ const Card = styled.div`
   padding: 10px;
 `
 
+const TitleOrange = styled.h4`
+  color: #E94D4D;
+  text-transform: uppercase;
+`
+
 const Details = styled.div`
   font-size: .7em;
   line-height: 1.7em;
@@ -19,10 +24,10 @@ const Details = styled.div`
 export default function JobCard({ job }) {
   return (
     <Card>
-      <h4>{job.company}</h4>
-      <Details>location: {job.location}</Details>
-      <Details>position: {job.position}</Details>
-      <Details>salary: {job.salary}</Details>
+      <TitleOrange>{job.company}</TitleOrange>
+      <Details>Location: {job.location}</Details>
+      <Details>Position: {job.position}</Details>
+      <Details>Salary: {job.salary}</Details>
     </Card>
   )
 }

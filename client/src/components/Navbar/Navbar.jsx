@@ -9,11 +9,12 @@ const Nav = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-content: center;
+  text-transform: uppercase;
   font-size: .6em;
 `
 
 const LinkName = styled.div`
-  margin: 5px 0 40px 0;
+  margin: 5px 5px 40px 5px;
 `
 
 export default function Navbar({ user, handleLogout }) {
@@ -29,7 +30,7 @@ export default function Navbar({ user, handleLogout }) {
           <LinkName>contacts</LinkName>
         </Link>
       </div>
-      <div onClick={handleLogout}>
+      <div style={{cursor: 'pointer'}}onClick={handleLogout}>
         <img src={accountIcon} alt='' />
         <LinkName>signout</LinkName>
       </div>

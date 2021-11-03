@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
+import { createContact, updateContact } from '../services/contacts'
 import Layout from '../layouts/Layout'
 import Jobs from '../screens/Jobs/Jobs'
 import Contacts from '../screens/Contacts/Contacts'
@@ -38,6 +39,15 @@ export default function MainContainer({ user, handleLogout }) {
       return job.id !== id
     }))
     history.push('/jobs');
+  }
+
+  const editContact = async (job_id, id, formData) => {
+    // const updatedContact = await updateContact(user.id, job_id, id, formData);
+    // setJobs(prevState => prevState.find(job => {
+    //   return job.id === Number(job_id)}).contacts.find(contact => {
+    //     return contact.id === Number(id)}) = updatedContact
+    // )
+    // history.push(`/jobs/${id}/contacts`);
   }
 
   return (

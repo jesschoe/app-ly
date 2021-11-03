@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.destroy_all
-Job.destroy_all
-Note.destroy_all
-Contact.destroy_all
+# User.destroy_all
+# Job.destroy_all
+# Note.destroy_all
+# Contact.destroy_all
 
 @tester = User.create!(
   username: 'tester',
@@ -41,12 +41,40 @@ Contact.destroy_all
 )
 
 Note.create!(
-  content: 'this is a note',
+  date: Time.new.strftime('%d/%m/%Y'),
+  content: 'send thank you note to Lisa',
+  job_id: @google.id
+)
+
+Note.create!(
+  date: Time.new.strftime('%d/%m/%Y'),
+  content: 'follow up about technical interview by Friday',
+  job_id: @google.id
+)
+
+Note.create!(
+  date: Time.new.strftime('%d/%m/%Y'),
+  content: 'questions to ask interviewer: ask',
   job_id: @google.id
 )
 
 Contact.create!(
   email: 'john@g.com',
+  position: 'Team Lead',
   name: 'John',
+  job_id: @google.id
+)
+
+Contact.create!(
+  email: 'paul@g.com',
+  position: 'Hiring Manager',
+  name: 'Paul',
+  job_id: @google.id
+)
+
+Contact.create!(
+  email: 'lisa@g.com',
+  position: 'Hiring Manager',
+  name: 'Lisa',
   job_id: @google.id
 )

@@ -1,21 +1,49 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import ContactCard from '../../components/ContactCard/ContactCard'
 import JobEdit from '../../components/JobEdit/JobEdit'
+import editIcon from '../../assets/edit-icon.png'
+import deleteIcon from '../../assets/delete-icon.png'
+
 
 const DetailsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 20px;
+  width: 100vw;
+  height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 70%
+  }
 `
-const DetailsContacts = styled.div`
+
+const DetailsColumn = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 50px;
-  width: 65%;
+  align-items: center;
+  padding: 20px 20px 20px 50px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+`
+
+const NotesColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: start;
+  padding: 20px 20px 20px 50px;
   height: 100vh;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `
 const Details = styled.div`
   display: flex;
@@ -25,15 +53,18 @@ const Details = styled.div`
   margin-bottom: 20px;
   padding: 20px;
   height: 50%;
+  width: 100%;
 `
+
 const ContactsList = styled.div`
   display: flex;
-  flex-flow: row-wrap;
-  flex: 1
-  justify-content: center;
+  justify-content: start;
   background-color: #FFF4EE;
   border-radius: 5px;
   padding: 20px;
+  width: 100%;
+  height: 300px;
+  overflow-x: auto;
 `
 const NotesList = styled.div`
   display: flex;
@@ -41,22 +72,72 @@ const NotesList = styled.div`
   flex: 1;
   background-color: #FFF4EE;
   border-radius: 5px;
-  margin: 50px 50px 50px 0;
-  padding: 50px;
+  padding: 20px;
 `
-
-const Card = styled.div`
+const DetailsCard = styled.div`
   background-color: #FFFFFF;
-  width: 250px;
-  height: 150px;
+  height: 100%;
   margin: 20px;
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
   padding: 10px;
 `
+
+const NoteCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: #FFFFFF;
+  margin: 20px;
+  box-shadow: 2px 2px 3px grey;
+  border-radius: 5px;
+  padding: 0 20px 20px 20px;
+`
+
+const Title = styled.h5`
+  text-transform: uppercase;
+  color: #0F3875;
+  letter-spacing: 2.3px;
+  letter-spacing: .7em;
+`
+
+const TitleOrange = styled.h5`
+  text-transform: uppercase;
+  color: #E94D4D;
+  letter-spacing: .3em;
+`
+
+const DateOrange = styled.h6`
+  color: #E94D4D;
+`
+
 const DetailsText = styled.div`
   font-size: .7em;
   line-height: 1.7em;
+
+`
+
+const Icon = styled.img`
+  cursor: pointer;  
+  width: 20px;
+  margin: 0 5px;
+`
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: end;
+  
+`
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: #0F3875;
+  opacity: .5;
 `
 
 export default function JobDetail({ jobs, user, editJob, deleteJob }) {
@@ -82,54 +163,53 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
 
   return (
     <DetailsContainer>
-      <DetailsContacts>
+      <DetailsColumn>
+        <Title>Job Details</Title>
         <Details>
-          <h4>{job?.company}</h4>
-          <DetailsText>location: {job?.location}</DetailsText>
-          <DetailsText>salary: {job?.salary}</DetailsText>
-          {/* {job.url} */}
-          {/* {job.applied}
-          {job.interview}
-          {job.offer}
-          {job.offerSalary} */}
-          <div>
-            <button onClick={handleEdit}>
-              edit
-            </button>
-            <button onClick={handleDelete}>
-              delete
-            </button>
-          </div>
+          <DetailsCard>
+          <ButtonDiv>
+            <div onClick={handleEdit}><Icon src={editIcon} alt='update contact' /></div>
+            <div onClick={handleDelete}><Icon src={deleteIcon} alt='delete contact' /></div>
+          </ButtonDiv>
+          <TitleOrange>{job?.company}</TitleOrange>
+          <DetailsText><a href={job?.url}>Link to Post</a></DetailsText>
+          <DetailsText>Location: {job?.location}</DetailsText>
+          <DetailsText>Position: {job?.position}</DetailsText>
+          <DetailsText>Salary: {job?.salary}</DetailsText>
+          <DetailsText>Date Applied: {job?.applied}</DetailsText>
+          <DetailsText>Next Interview: {job?.interview}</DetailsText>
+          <DetailsText>Date of Offer: {job?.offer}</DetailsText>
+          <DetailsText>Salary Offered: {job?.offerSalary}</DetailsText>
+          </DetailsCard>
         </Details>
+        <Title>Contacts</Title>
         <ContactsList>
           {job?.contacts.map(contact => {
-            return (
-              <Card>
-                <h5>{contact.name}</h5>
-                <DetailsText>company: {job.company}</DetailsText>
-                <DetailsText>position: {contact.position}</DetailsText>
-                <DetailsText>email: {contact.email}</DetailsText>
-                <DetailsText>phone: {contact.phone}</DetailsText>
-              </Card>
-            )
+            return <ContactCard contact={contact} job={job} />
           })}
         </ContactsList>
-      </DetailsContacts>
-      <NotesList>
-        {job?.notes.map(note => {
-          return (
-            <Card>
-              <h5>{note.date}</h5>
-              <DetailsText>{note.content}</DetailsText>
-            </Card>
-          )
-        })}
-      </NotesList>
+      </DetailsColumn>
+      <NotesColumn>
+        <Title>Notes</Title>
+        <NotesList>
+          {job?.notes.map(note => {
+            return (
+              <NoteCard>
+                <DateOrange>{note.date}</DateOrange>
+                <DetailsText>{note.content}</DetailsText>
+              </NoteCard>
+            )
+          })}
+        </NotesList>
+      </NotesColumn>
       {showModal ? 
-        <JobEdit 
-          job={job} 
-          editJob={editJob} 
-          setShowModal={setShowModal}/> : ''}
+        <>
+          <Overlay></Overlay>
+          <JobEdit 
+            job={job} 
+            editJob={editJob} 
+            setShowModal={setShowModal}/> 
+        </>  : ''}
     </DetailsContainer>
   )
 }
