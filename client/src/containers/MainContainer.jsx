@@ -6,6 +6,7 @@ import Layout from '../layouts/Layout'
 import Jobs from '../screens/Jobs/Jobs'
 import Contacts from '../screens/Contacts/Contacts'
 import JobDetail from '../screens/JobDetail/JobDetail'
+import Board from '../screens/Board/Board'
 
 export default function MainContainer({ user, handleLogout }) {
   const [jobs, setJobs] = useState([])
@@ -54,6 +55,12 @@ export default function MainContainer({ user, handleLogout }) {
     <div>
       <Layout user={user} handleLogout={handleLogout}>
         <Switch>
+        <Route path='/jobs/all/board'>
+            <Board
+              jobs={jobs}
+              user={user}
+            />
+          </Route>
           <Route path='/jobs/all/contacts'>
             <Contacts
               jobs={jobs}

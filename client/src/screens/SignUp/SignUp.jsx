@@ -72,40 +72,45 @@ export default function SignUp({ handleRegister }) {
         e.preventDefault();
         handleRegister(formData);
       }} >
-        <label>Username</label>
-            <SignUpInput
+        <InputGroup>
+          <label>Username</label>
+          <SignUpInput
             name="username"
             type="text"
             value={username}
             onChange={handleChange}
           />
-        
-        <label>Email</label>
-            <SignUpInput
+        </InputGroup>
+        <InputGroup>
+          <label>Email</label>
+          <SignUpInput
             name="email"
             type="text"
             value={email}
             onChange={handleChange}
           />
-        
-        <label>Password</label>
-            <SignUpInput
+        </InputGroup>
+        <InputGroup>
+          <label>Password</label>
+          <SignUpInput
             name="password"
             type="password"
             value={password}
             onChange={handleChange}
           />
-        
-        <label>Confirm Password</label>
-            <SignUpInput
+        </InputGroup>
+        <InputGroup>
+          <label>Confirm Password</label>
+          <SignUpInput
             name="confirm_password"
             type="password"
             value={confirm_password}
             onChange={handleChange}
           />
+        </InputGroup>
         
         <Button>Login</Button>
-        <Link to="/signin">Sign In</Link>
+        <Link to="/">Sign In</Link>
       </SignUpForm>
     </Container>
   )

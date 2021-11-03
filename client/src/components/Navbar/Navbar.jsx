@@ -3,6 +3,7 @@ import styled from "styled-components"
 import jobsIcon from '../../assets/jobs-icon.png'
 import contactsIcon from '../../assets/contacts-icon.png'
 import accountIcon from '../../assets/account-icon.png'
+import boardIcon from '../../assets/board-icon.png'
 
 const Nav = styled.div`
   display: flex;
@@ -21,6 +22,10 @@ export default function Navbar({ user, handleLogout }) {
   return (
     <Nav>
       <div>
+        <Link to='/jobs/all/board' style={{ textDecoration:'none', color:'white' }}>
+          <img src={boardIcon} alt='' />
+          <LinkName>board</LinkName>
+        </Link>
         <Link to='/jobs' style={{ textDecoration:'none', color:'white' }}>
           <img src={jobsIcon} alt='' />
           <LinkName>jobs</LinkName>

@@ -52,7 +52,6 @@ const Details = styled.div`
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 20px;
-  height: 50%;
   width: 100%;
 `
 
@@ -143,6 +142,8 @@ const Overlay = styled.div`
 export default function JobDetail({ jobs, user, editJob, deleteJob }) {
   const [job, setJob] = useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [showContacts, setShowContacts] = useState(false)
+  const [showNotes, setShowNotes] = useState(false)
   const { id } = useParams()
   
   console.log(id)
@@ -159,6 +160,14 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
 
   const handleDelete = () => {
     deleteJob(id)
+  }
+
+  const toggleContacts = () => {
+    setShowContacts(prev => !prev)
+  }
+
+  const toggleNotes = () => {
+    setShowNotes(prev => !prev)
   }
 
   return (
@@ -182,7 +191,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
           <DetailsText>Salary Offered: {job?.offerSalary}</DetailsText>
           </DetailsCard>
         </Details>
-        <Title>Contacts</Title>
+        <Title style={{cursor: 'pointer'}} onClick={toggleContacts}>Contacts</Title>
         <ContactsList>
           {job?.contacts.map(contact => {
             return <ContactCard contact={contact} job={job} />
@@ -190,7 +199,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
         </ContactsList>
       </DetailsColumn>
       <NotesColumn>
-        <Title>Notes</Title>
+        <Title style={{cursor: 'pointer'}} onClick={toggleNotes}>Notes</Title>
         <NotesList>
           {job?.notes.map(note => {
             return (
@@ -200,7 +209,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
               </NoteCard>
             )
           })}
-        </NotesList>
+        </NotesList> 
       </NotesColumn>
       {showModal ? 
         <>
