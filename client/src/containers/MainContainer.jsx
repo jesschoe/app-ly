@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Switch, Route, useHistory } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
 import Layout from '../layouts/Layout'
 import Jobs from '../screens/Jobs/Jobs'
@@ -44,9 +44,10 @@ export default function MainContainer({ user, handleLogout }) {
     <div>
       <Layout user={user} handleLogout={handleLogout}>
         <Switch>
-          <Route path='/contacts'>
+          <Route path='/jobs/all/contacts'>
             <Contacts
               jobs={jobs}
+              user={user}
             />
           </Route>
           <Route path='/jobs/:id'>
@@ -57,7 +58,7 @@ export default function MainContainer({ user, handleLogout }) {
               deleteJob={deleteJob}
             />
           </Route>
-          <Route path='/jobs'>
+          <Route exact path='/jobs'>
             <Jobs
               user={user}
               jobs={jobs}

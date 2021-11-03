@@ -60,7 +60,7 @@ const DetailsText = styled.div`
 `
 
 export default function JobDetail({ jobs, user, editJob, deleteJob }) {
-  const [job, setJob] = useState({})
+  const [job, setJob] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const { id } = useParams()
   
@@ -84,9 +84,9 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
     <DetailsContainer>
       <DetailsContacts>
         <Details>
-          <h4>{job.company}</h4>
-          <DetailsText>location: {job.location}</DetailsText>
-          <DetailsText>salary: {job.salary}</DetailsText>
+          <h4>{job?.company}</h4>
+          <DetailsText>location: {job?.location}</DetailsText>
+          <DetailsText>salary: {job?.salary}</DetailsText>
           {/* {job.url} */}
           {/* {job.applied}
           {job.interview}
@@ -102,7 +102,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
           </div>
         </Details>
         <ContactsList>
-          {job.contacts?.map(contact => {
+          {job?.contacts.map(contact => {
             return (
               <Card>
                 <h5>{contact.name}</h5>
@@ -116,7 +116,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
         </ContactsList>
       </DetailsContacts>
       <NotesList>
-        {job.notes?.map(note => {
+        {job?.notes.map(note => {
           return (
             <Card>
               <h5>{note.date}</h5>

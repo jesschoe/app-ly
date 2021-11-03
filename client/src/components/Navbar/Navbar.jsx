@@ -24,7 +24,7 @@ export default function Navbar({ user, handleLogout }) {
           <img src={jobsIcon} alt='' />
           <LinkName>jobs</LinkName>
         </Link>
-        <Link to='/contacts' style={{ textDecoration:'none', color:'white' }}>
+        <Link to='/jobs/all/contacts' style={{ textDecoration:'none', color:'white' }}>
           <img src={contactsIcon} alt='' />
           <LinkName>contacts</LinkName>
         </Link>

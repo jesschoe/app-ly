@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { verifyUser, loginUser, registerUser, removeToken } from './services/auth';
 import MainContainer from './containers/MainContainer';
 import SignIn from './screens/SignIn/SignIn';
@@ -43,12 +43,11 @@ function App() {
         <Route path='/signup'>
           <SignUp handleRegister={handleRegister} />
         </Route>
-        <Route path='/signin'>
-          <SignIn handleLogin={handleLogin} />
-        </Route>
-        <Route path={!user ? '/signin' : '/jobs'}>
+        <Route path='/jobs'>
           <MainContainer user={user} handleLogout={handleLogout} />
-        
+        </Route>
+        <Route exact path='/'>
+          {!user? <SignIn handleLogin={handleLogin} /> : <Redirect to='/jobs'/>}
         </Route>
       </Switch>
     </div>
