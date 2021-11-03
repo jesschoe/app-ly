@@ -30,7 +30,7 @@ export default function Header({ user }) {
     <Container>
       <Logo>
         <Link 
-          to='/jobs' 
+          to='/jobs/all/board' 
           style={{ textDecoration: 'none', color: '#E94D4D', display: 'flex' }}
         >
           <div style={{ margin: '0 8px' }}>app</div><Slash></Slash><div>ly</div>

@@ -22,21 +22,37 @@
   position: 'Software Engineer III',
   salary: '$110,000+',
   url: 'https://www.google.com/search?q=software+engineering+jobs+in+new+york&oq=software+engineering+jobs+in+new+york&aqs=chrome..69i57j0i512l9.10935j1j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwi7rqbEp_PzAhWCFzQIHVImAsUQkd0GegQIDRAB#fpstate=tldetail&htivrt=jobs&htiq=software+engineering+jobs+in+new+york&htidocid=WHmdncWU6LNaEkvUAAAAAA%3D%3D&sxsrf=AOaemvKFFZq_-I9NKUcAsvDoaZRYjOMkkQ:1635637237758',
+  applied: Time.new.strftime('%d/%m/%Y'),
+  interview: Time.new.strftime('%d/%m/%Y'),
+  # offer: ,
+  # offer_salary: ,
+  # priority: ,
+  column: 'wishlist',
+  user_id: @tester.id
+)
+
+@microsoft = Job.create!(
+  company: 'Microsoft',
+  location: 'Seattle, WA',
+  position: 'Software Engineer',
+  salary: '$70,000',
+  url: 'www.microsoft.com',
   # applied: ,
   # interview: ,
   # offer: ,
   # offer_salary: ,
   # priority: ,
-  # column:
+  column: 'wishlist',
   user_id: @tester.id
 )
 
-@test = Job.create!(
-  company: 'tester',
+@facebook = Job.create!(
+  company: 'Facebook',
   location: 'remote',
   position: 'job',
   salary: '$15,000',
   url: 'www.www.com',
+  column: 'wishlist',
   user_id: @tester.id
 )
 
