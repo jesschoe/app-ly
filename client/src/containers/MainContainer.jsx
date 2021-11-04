@@ -52,12 +52,14 @@ export default function MainContainer({ user, handleLogout }) {
   }
 
   const editContact = async (job_id, id, formData) => {
-    // const updatedContact = await updateContact(user.id, job_id, id, formData);
-    // setJobs(prevState => prevState.find(job => {
-    //   return job.id === Number(job_id)}).contacts.find(contact => {
-    //     return contact.id === Number(id)}) = updatedContact
-    // )
-    // history.push(`/jobs/${id}/contacts`);
+    const updatedContact = await updateContact(user.id, job_id, id, formData);
+    setJobs(prevState => {
+      let job = prevState.find(job => {
+      return job.id === Number(job_id)})
+      let contact = job.contacts.find(contact => {
+        return contact.id === Number(id)})
+    })
+    history.push(`/jobs/all/contacts`);
   }
 
   return (
@@ -75,6 +77,7 @@ export default function MainContainer({ user, handleLogout }) {
             <Contacts
               jobs={jobs}
               user={user}
+              editContact={editContact}
             />
           </Route>
           <Route path='/jobs/:id'>

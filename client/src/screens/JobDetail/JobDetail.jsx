@@ -73,6 +73,11 @@ const NotesList = styled.div`
   border-radius: 5px;
   padding: 20px;
 `
+
+const NotesForm = styled.form`
+
+`
+
 const DetailsCard = styled.div`
   background-color: #FFFFFF;
   height: 100%;
@@ -93,11 +98,14 @@ const NoteCard = styled.div`
   padding: 0 20px 20px 20px;
 `
 
-const Title = styled.h5`
+const Title = styled.h4`
   text-transform: uppercase;
   color: #0F3875;
-  letter-spacing: 2.3px;
+  font-size: 1.1em;
+  font-weight: 300;
   letter-spacing: .7em;
+  align-self: start;
+  margin: 5px;
 `
 
 const TitleOrange = styled.h5`
@@ -143,6 +151,10 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
   const [showModal, setShowModal] = useState(false)
   const [showContacts, setShowContacts] = useState(false)
   const [showNotes, setShowNotes] = useState(false)
+  const [formData, setFormData] = useState({
+    date: '',
+    content: ''
+  })
   const { id } = useParams()
   
   console.log(id)
@@ -167,6 +179,14 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
 
   const toggleNotes = () => {
     setShowNotes(prev => !prev)
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+  }))
   }
 
   return (
@@ -209,6 +229,11 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
               </NoteCard>
             )
           })}
+          <NotesForm onSubmit={e => {
+            e.preventDefault()
+          }}>
+            <input type='text' name='content' value={formData.content} onChange={handleChange} />
+          </NotesForm>
         </NotesList> 
       </NotesColumn>
       {showModal ? 

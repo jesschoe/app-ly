@@ -36,21 +36,20 @@ const ButtonDiv = styled.div`
   justify-content: end;
 `
 
-const handleEdit = () => {
-
-}
-
-const handleDelete = () => {
-
-}
 
 
 
-export default function ContactCard({ job, contact, setShowModal }) {
+export default function ContactCard({ job, contact, handleEdit }) {
+
+  
+  const handleDelete = () => {
+  
+  }
+  
   return (
     <Card>
       <ButtonDiv>
-        <div onClick={setShowModal}><Icon src={editIcon} alt='update contact' /></div>
+        <div onClick={() => handleEdit(contact.id)}><Icon src={editIcon} alt='update contact' /></div>
         <div onClick={handleDelete}><Icon src={deleteIcon} alt='delete contact' /></div>
       </ButtonDiv>
       <TitleOrange>{contact.name}</TitleOrange>

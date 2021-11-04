@@ -24,6 +24,7 @@ const Slash = styled.div`
 const Title = styled.h4`
   text-transform: uppercase;
   color: #0F3875;
+  font-weight: 300;
 `
 export default function Header({ user }) {
   return (

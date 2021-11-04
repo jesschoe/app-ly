@@ -12,6 +12,7 @@ const Nav = styled.div`
   align-content: center;
   text-transform: uppercase;
   font-size: .6em;
+  letter-spacing: .2em;
 `
 
 const LinkName = styled.div`

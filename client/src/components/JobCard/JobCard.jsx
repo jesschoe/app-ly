@@ -7,12 +7,16 @@ const Card = styled.div`
   margin: 20px;
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px 20px;
 `
 
-const TitleOrange = styled.h4`
+const TitleOrange = styled.h5`
   color: #E94D4D;
   text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: .3em;
+  font-size: .9em;
+  margin: 20px 0;
 `
 
 const Details = styled.div`
