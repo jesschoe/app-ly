@@ -27,7 +27,7 @@
   # offer: ,
   # offer_salary: ,
   # priority: ,
-  column: 'wishlist',
+  column: 'interviews',
   user_id: @tester.id
 )
 
@@ -53,6 +53,16 @@
   salary: '$15,000',
   url: 'www.www.com',
   column: 'wishlist',
+  user_id: @tester.id
+)
+
+@ga = Job.create!(
+  company: 'General Assembly',
+  location: 'remote',
+  position: 'job',
+  salary: '$75,000',
+  url: 'www.ga.com',
+  column: 'applied',
   user_id: @tester.id
 )
 
