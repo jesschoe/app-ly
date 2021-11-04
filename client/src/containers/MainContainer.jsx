@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
+import { createContact, updateContact } from '../services/contacts'
 import Layout from '../layouts/Layout'
 import Jobs from '../screens/Jobs/Jobs'
 import Contacts from '../screens/Contacts/Contacts'
 import JobDetail from '../screens/JobDetail/JobDetail'
+import Board from '../screens/Board/Board'
 
 export default function MainContainer({ user, handleLogout }) {
   const [jobs, setJobs] = useState([])
@@ -32,6 +34,14 @@ export default function MainContainer({ user, handleLogout }) {
     history.push(`/jobs/${id}`);
   }
 
+  const saveBoard = async (id, formData) => {
+    const updatedJob = await updateJob(user.id, id, formData);
+    setJobs(prevState => prevState.map(job => {
+      return job.id === Number(id) ? updatedJob : job
+    }))
+    history.push(`/jobs/all/board`);
+  }
+
   const deleteJob = async (id) => {
     await destroyJob(user.id, id);
     setJobs(prevState => prevState.filter(job => {
@@ -40,10 +50,26 @@ export default function MainContainer({ user, handleLogout }) {
     history.push('/jobs');
   }
 
+  const editContact = async (job_id, id, formData) => {
+    // const updatedContact = await updateContact(user.id, job_id, id, formData);
+    // setJobs(prevState => prevState.find(job => {
+    //   return job.id === Number(job_id)}).contacts.find(contact => {
+    //     return contact.id === Number(id)}) = updatedContact
+    // )
+    // history.push(`/jobs/${id}/contacts`);
+  }
+
   return (
     <div>
       <Layout user={user} handleLogout={handleLogout}>
         <Switch>
+        <Route path='/jobs/all/board'>
+            <Board
+              jobs={jobs}
+              user={user}
+              saveBoard={saveBoard}
+            />
+          </Route>
           <Route path='/jobs/all/contacts'>
             <Contacts
               jobs={jobs}

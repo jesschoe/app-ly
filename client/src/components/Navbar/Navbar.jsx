@@ -3,23 +3,29 @@ import styled from "styled-components"
 import jobsIcon from '../../assets/jobs-icon.png'
 import contactsIcon from '../../assets/contacts-icon.png'
 import accountIcon from '../../assets/account-icon.png'
+import boardIcon from '../../assets/board-icon.png'
 
 const Nav = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-content: center;
+  text-transform: uppercase;
   font-size: .6em;
 `
 
 const LinkName = styled.div`
-  margin: 5px 0 40px 0;
+  margin: 5px 5px 40px 5px;
 `
 
 export default function Navbar({ user, handleLogout }) {
   return (
     <Nav>
       <div>
+        <Link to='/jobs/all/board' style={{ textDecoration:'none', color:'white' }}>
+          <img src={boardIcon} alt='' />
+          <LinkName>board</LinkName>
+        </Link>
         <Link to='/jobs' style={{ textDecoration:'none', color:'white' }}>
           <img src={jobsIcon} alt='' />
           <LinkName>jobs</LinkName>
@@ -29,7 +35,7 @@ export default function Navbar({ user, handleLogout }) {
           <LinkName>contacts</LinkName>
         </Link>
       </div>
-      <div onClick={handleLogout}>
+      <div style={{cursor: 'pointer'}}onClick={handleLogout}>
         <img src={accountIcon} alt='' />
         <LinkName>signout</LinkName>
       </div>

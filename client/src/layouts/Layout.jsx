@@ -7,8 +7,7 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   font-family: 'Open Sans', sans-serif;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  overflow: hidden;
 `
 
 const Main = styled.div`
@@ -29,6 +28,7 @@ const Nav = styled.div`
 const HeaderLinks = styled.div`
   border-bottom: 1px solid #E94D4D; 
   height: 45px;
+  letter-spacing: .5em;
 `
 
 const Content = styled.div`
@@ -37,6 +37,8 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  font-size: 1.2em;
+  letter-spacing: 1.5px;
 `
 
 export default function Layout({ children, user, handleLogout }) {
