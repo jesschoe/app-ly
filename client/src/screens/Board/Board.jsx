@@ -55,38 +55,6 @@ export default function Board({ jobs, user, saveBoard }) {
         itemId: uuid()
       })
     }))
-    
-    // useEffect(() => {
-    //   setItems(
-    //     jobs.map(job => {
-    //       return ({
-    //         ...job,
-    //         itemId: uuid()
-    //       })
-    //     })
-    //   )
-    // }, [jobs])
-
-  // let items= []
-
-  // // useEffect(() => {
-  // //   setItems(prev => {
-  // //     prev.map(job => {
-  // //       return ({
-  // //         ...job,
-  // //         itemId: uuid(),
-  // //       })
-  // //   })
-  // // }, [formData])}
-
-  // if (jobs) {
-  //   items = jobs.map(job => {
-  //     return ({
-  //       ...job,
-  //       itemId: uuid(),
-  //     })
-  //   })
-  // }
   
   const [columns, setColumns] = useState({
   '100000': {

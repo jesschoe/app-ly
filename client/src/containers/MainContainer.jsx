@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
-import { createContact, updateContact } from '../services/contacts'
+import { createContact, updateContact, createNote } from '../services/contacts'
 import Layout from '../layouts/Layout'
 import Jobs from '../screens/Jobs/Jobs'
 import Contacts from '../screens/Contacts/Contacts'
@@ -51,15 +51,33 @@ export default function MainContainer({ user, handleLogout }) {
     history.push('/jobs');
   }
 
+  const newContact = async (job_id, formData) => {
+    const newContact = await createContact(user.id, job_id, formData);
+    setJobs(prevState =>  {
+      prevState.map(job => {
+        return job.id === Number(job_id) ? job.contacts.push(newContact) : job})
+      })
+    history.push(`/jobs/${job_id}`);
+  }
+
   const editContact = async (job_id, id, formData) => {
     const updatedContact = await updateContact(user.id, job_id, id, formData);
     setJobs(prevState => {
       let job = prevState.find(job => {
-      return job.id === Number(job_id)})
+        return job.id === Number(job_id)})
       let contact = job.contacts.find(contact => {
         return contact.id === Number(id)})
     })
     history.push(`/jobs/all/contacts`);
+  }
+
+  const newNote = async (job_id, formData) => {
+    const newNote = await createNote(user.id, job_id, formData);
+    setJobs(prevState =>  {
+      prevState.map(job => {
+        return job.id === Number(job_id) ? job.notes.push(newNote) : job})
+      })
+    history.push(`/jobs/${job_id}`);
   }
 
   return (
@@ -86,6 +104,8 @@ export default function MainContainer({ user, handleLogout }) {
               user={user}
               editJob={editJob}
               deleteJob={deleteJob}
+              newNote={newNote}
+              newContact={newContact}
             />
           </Route>
           <Route exact path='/jobs'>

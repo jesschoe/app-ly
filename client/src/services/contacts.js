@@ -24,3 +24,8 @@ export const destroyContact = async (user_id, job_id, id) => {
   const resp = await api.delete(`users/${user_id}/jobs/${job_id}/contacts/${id}`)
   return resp.data
 }
+
+export const createNote = async (user_id, job_id, data) => {
+  const resp = await api.post(`/users/${user_id}/jobs/${job_id}/notes`, { note: data })
+  return resp.data
+}

@@ -146,18 +146,18 @@ const Overlay = styled.div`
   opacity: .5;
 `
 
-export default function JobDetail({ jobs, user, editJob, deleteJob }) {
+export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, newContact }) {
   const [job, setJob] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [showContacts, setShowContacts] = useState(false)
   const [showNotes, setShowNotes] = useState(false)
+  const { id } = useParams()
   const [formData, setFormData] = useState({
     date: '',
-    content: ''
+    content: '',
+    job_id: id
   })
-  const { id } = useParams()
   
-  console.log(id)
   useEffect(() => {
     if(jobs.length) {
       const job = jobs.find(job => job.id === Number(id))
@@ -231,8 +231,10 @@ export default function JobDetail({ jobs, user, editJob, deleteJob }) {
           })}
           <NotesForm onSubmit={e => {
             e.preventDefault()
+            newNote(job.id, formData)
           }}>
             <input type='text' name='content' value={formData.content} onChange={handleChange} />
+            <button type='submit'>add</button>
           </NotesForm>
         </NotesList> 
       </NotesColumn>
