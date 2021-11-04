@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
 import { createContact, updateContact } from '../services/contacts'
@@ -36,6 +36,7 @@ export default function MainContainer({ user, handleLogout }) {
 
   const saveBoard = async (id, formData) => {
     const updatedJob = await updateJob(user.id, id, formData);
+    console.log('api', updatedJob)
     setJobs(prevState => prevState.map(job => {
       return job.id === Number(id) ? updatedJob : job
     }))
