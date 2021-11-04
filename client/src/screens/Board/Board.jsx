@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid } from 'uuid';
 import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: start;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: auto;
+`
 
 const Title = styled.h5`
   text-transform: uppercase;
@@ -10,11 +18,20 @@ const Title = styled.h5`
   letter-spacing: .7em;
   margin: 30px 0 10px 0;
 `
-const DraggableItems = styled.div`
+
+const DroppableColumn = styled.div`
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 0 0 10px;
+  width: 250px;;
+  min-height: 500px;
+`
+
+const DraggableItem = styled.div`
   user-select: none;
   font-size: .8em;
   padding: 16px;
-  margin: 0 0 8px 0;
+  margin: 10px 0;
   minHeight: 50px;
   background-color: #FFFFFF;
   border: 1px solid #E94D4D;
@@ -23,40 +40,52 @@ const DraggableItems = styled.div`
   ...provided.draggableProps.style;
 `
 
-export default function Board({ jobs, user }) {
+const DetailsText = styled.div`
+  font-size: .7em;
+  line-height: 1.7em;
+`
+
+export default function Board({ jobs, user, saveBoard }) {
+  const [formData, setFormData] = useState({})
   let items = []
 
   if (jobs) {
     items = jobs.map(job => {
       return ({
         ...job,
-        id: uuid(),
-        content: job.company
+        itemId: uuid(),
       })
     })
   }
   
-  const [columns, setColumns] = useState({[uuid()]: {
-    name: "wishlist",
-    items: items
+  const [columns, setColumns] = useState({
+  '100000': {
+    name: 'wishlist',
+    items: items.filter(item => item.column === 'wishlist')
   },
-  [uuid()]: {
-    name: "applied",
-    items: []
+  '200000': {
+    name: 'applied',
+    items: items.filter(item => item.column === 'applied')
   },
-  [uuid()]: {
-    name: "interviews",
-    items: []
+  '300000': {
+    name: 'interviews',
+    items: items.filter(item => item.column === 'interviews')
   },
-  [uuid()]: {
-    name: "offers",
-    items: []
+  '400000': {
+    name: 'offers',
+    items: items.filter(item => item.column === 'offers')
   }});
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
-    const { source, destination } = result;
-  
+    const { source, destination, draggableId } = result;
+    let job = items.find(item => item.itemId === draggableId)
+
+    setFormData({
+      ...job,
+      column: destination.droppableId.name
+    })
+
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
@@ -90,12 +119,17 @@ export default function Board({ jobs, user }) {
     }
   };
 
+  useEffect(() => {
+    console.log(formData)
+    saveBoard(formData.id, formData)
+  }, [formData])
+
   const handleClick = () => {
     console.log('hi')
   }
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+    <Container>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
@@ -114,44 +148,40 @@ export default function Board({ jobs, user }) {
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
-                      <div
+                      <DroppableColumn
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
-                          borderRadius: 5,
                           background: snapshot.isDraggingOver
-                            ? "#FEDFCD"
-                            : "#FFF4EE",
-                          padding: 10,
-                          width: 250,
-                          minHeight: 500
-                        }}
-                      >{console.log(provided, snapshot)}
+                          ? "#FEDFCD"
+                          : "#FFF4EE"}}
+                      >
                         {column.items.map((item, index) => {
                           return (
                             <Draggable
-                              key={item.id}
-                              draggableId={item.id}
+                              key={item.itemId}
+                              draggableId={item.itemId}
                               index={index}
                             >
                               {(provided, snapshot) => {
                                 return (
-                                  <DraggableItems
+                                  <DraggableItem
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     onClick={handleClick}
                                     
                                   >
-                                    {item.content}
-                                  </DraggableItems>
+                                    <DetailsText>{item.company}</DetailsText>
+                                    <DetailsText>{item.position}</DetailsText>
+                                  </DraggableItem>
                                 );
                               }}
                             </Draggable>
                           );
                         })}
                         {provided.placeholder}
-                      </div>
+                      </DroppableColumn>
                     );
                   }}
                 </Droppable>
@@ -160,6 +190,6 @@ export default function Board({ jobs, user }) {
           );
         })}
       </DragDropContext>
-    </div>
+    </Container>
   )
 }

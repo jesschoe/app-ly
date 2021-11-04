@@ -34,6 +34,14 @@ export default function MainContainer({ user, handleLogout }) {
     history.push(`/jobs/${id}`);
   }
 
+  const saveBoard = async (id, formData) => {
+    const updatedJob = await updateJob(user.id, id, formData);
+    setJobs(prevState => prevState.map(job => {
+      return job.id === Number(id) ? updatedJob : job
+    }))
+    history.push(`/jobs/all/board`);
+  }
+
   const deleteJob = async (id) => {
     await destroyJob(user.id, id);
     setJobs(prevState => prevState.filter(job => {
@@ -59,6 +67,7 @@ export default function MainContainer({ user, handleLogout }) {
             <Board
               jobs={jobs}
               user={user}
+              saveBoard={saveBoard}
             />
           </Route>
           <Route path='/jobs/all/contacts'>
