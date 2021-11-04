@@ -11,7 +11,6 @@ const CardContainer = styled.div`
   border-radius: 5px;
   margin: 50px;
   width: 90%;
-  height: 90%;
 `
 
 export default function Contacts({ user, jobs }) {
@@ -23,19 +22,24 @@ export default function Contacts({ user, jobs }) {
 
   return (
     <CardContainer>
-      {jobs.map(job => {
+      {jobs?.map(job => {
         return (
           job.contacts.map(contact => {
             return(
-              <ContactCard job={job} contact={contact} />
+              <>
+                <ContactCard job={job} contact={contact} setShowModal={setShowModal} />
+            
+                {showModal ? 
+                  <ContactEdit 
+                    contact={contact}
+                    user={user} 
+                    setShowModal={setShowModal}/> : ''}
+                </>
             )
           })
         )
       })}
-    {showModal ? 
-      <ContactEdit 
-        user={user} 
-        setShowModal={setShowModal}/> : ''}
+    
     </CardContainer>
   )
 }
