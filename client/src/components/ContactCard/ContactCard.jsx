@@ -46,11 +46,11 @@ const handleDelete = () => {
 
 
 
-export default function ContactCard({ job, contact }) {
+export default function ContactCard({ job, contact, setShowModal }) {
   return (
     <Card>
       <ButtonDiv>
-        <div onClick={handleEdit}><Icon src={editIcon} alt='update contact' /></div>
+        <div onClick={setShowModal}><Icon src={editIcon} alt='update contact' /></div>
         <div onClick={handleDelete}><Icon src={deleteIcon} alt='delete contact' /></div>
       </ButtonDiv>
       <TitleOrange>{contact.name}</TitleOrange>
