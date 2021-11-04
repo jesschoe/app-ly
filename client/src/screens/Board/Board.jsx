@@ -46,17 +46,47 @@ const DetailsText = styled.div`
 `
 
 export default function Board({ jobs, user, saveBoard }) {
-  const [formData, setFormData] = useState({})
-  let items = []
-
-  if (jobs) {
-    items = jobs.map(job => {
+  const [formData, setFormData] = useState(null)
+  const [toggle, setToggle] = useState(false)
+  const [items, setItems] = useState(
+    jobs.map(job => {
       return ({
         ...job,
-        itemId: uuid(),
+        itemId: uuid()
       })
-    })
-  }
+    }))
+    
+    // useEffect(() => {
+    //   setItems(
+    //     jobs.map(job => {
+    //       return ({
+    //         ...job,
+    //         itemId: uuid()
+    //       })
+    //     })
+    //   )
+    // }, [jobs])
+
+  // let items= []
+
+  // // useEffect(() => {
+  // //   setItems(prev => {
+  // //     prev.map(job => {
+  // //       return ({
+  // //         ...job,
+  // //         itemId: uuid(),
+  // //       })
+  // //   })
+  // // }, [formData])}
+
+  // if (jobs) {
+  //   items = jobs.map(job => {
+  //     return ({
+  //       ...job,
+  //       itemId: uuid(),
+  //     })
+  //   })
+  // }
   
   const [columns, setColumns] = useState({
   '100000': {
@@ -83,8 +113,10 @@ export default function Board({ jobs, user, saveBoard }) {
 
     setFormData({
       ...job,
-      column: destination.droppableId.name
+      "column": columns[destination.droppableId].name
     })
+
+    setToggle(prev => !prev)
 
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
@@ -120,9 +152,13 @@ export default function Board({ jobs, user, saveBoard }) {
   };
 
   useEffect(() => {
-    console.log(formData)
-    saveBoard(formData.id, formData)
-  }, [formData])
+      // const updateColumn = async() => {
+        console.log(formData)
+        saveBoard(formData?.id, formData)
+      // }
+      // updateColumn()
+      
+  }, [formData, toggle])
 
   const handleClick = () => {
     console.log('hi')
