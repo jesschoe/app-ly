@@ -20,7 +20,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
+  overflow-y: auto;
 `
 
 const AddIcon = styled.img`

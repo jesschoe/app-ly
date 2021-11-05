@@ -3,8 +3,11 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import ContactCard from '../../components/ContactCard/ContactCard'
 import JobEdit from '../../components/JobEdit/JobEdit'
+import ContactCreate from '../../components/ContactCreate/ContactCreate'
+import ContactEdit from '../../components/ContactEdit/ContactEdit'
 import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
+import add from '../../assets/add-icon.svg'
 
 
 const DetailsContainer = styled.div`
@@ -57,14 +60,21 @@ const Details = styled.div`
 
 const ContactsList = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: start;
   background-color: #FFF4EE;
   border-radius: 5px;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   width: 100%;
   height: 300px;
+
+`
+
+const ContactCards = styled.div`
+  display: flex;
   overflow-x: auto;
 `
+
 const NotesList = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,6 +82,7 @@ const NotesList = styled.div`
   background-color: #FFF4EE;
   border-radius: 5px;
   padding: 20px;
+  overflow-y: auto;
 `
 
 const NotesForm = styled.form`
@@ -146,9 +157,20 @@ const Overlay = styled.div`
   opacity: .5;
 `
 
+const AddIcon = styled.img`
+  cursor: pointer;
+  width: 25px;
+`
+
+const IconDiv = styled.div`
+  justify-self: center;
+`
+
 export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, newContact }) {
   const [job, setJob] = useState(null)
-  const [showModal, setShowModal] = useState(false)
+  const [showEditJobModal, setShowEditJobModal] = useState(false)
+  const [showEditContactModal, setShowEditContactModal] = useState(false)
+  const [showAddContactModal, setShowAddContactModal] = useState(false)
   const [showContacts, setShowContacts] = useState(false)
   const [showNotes, setShowNotes] = useState(false)
   const { id } = useParams()
@@ -158,15 +180,14 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
     job_id: id
   })
   
+  
   useEffect(() => {
-    if(jobs.length) {
-      const job = jobs.find(job => job.id === Number(id))
+      const job = jobs?.find(job => job.id === Number(id))
       setJob(job)
-    }
   }, [jobs, id])
 
   const handleEdit = () => {
-    setShowModal(prev => !prev)
+    setShowEditJobModal(prev => !prev)
   }
 
   const handleDelete = () => {
@@ -189,8 +210,13 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
   }))
   }
 
+  const handleAdd = () => {
+    setShowAddContactModal(prev => !prev)
+  }
+
   return (
     <DetailsContainer>
+      {console.log(job)}
       <DetailsColumn>
         <Title>Job Details</Title>
         <Details>
@@ -213,9 +239,12 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
         </Details>
         <Title style={{cursor: 'pointer'}} onClick={toggleContacts}>Contacts</Title>
         <ContactsList>
-          {job?.contacts.map(contact => {
-            return <ContactCard contact={contact} job={job} />
-          })}
+          <IconDiv onClick={handleAdd}><AddIcon src={add} alt='add job' /></IconDiv>
+          <ContactCards>
+            {job?.contacts.map(contact => {
+              return <ContactCard contact={contact} job={job} />
+            })}
+          </ContactCards>
         </ContactsList>
       </DetailsColumn>
       <NotesColumn>
@@ -238,13 +267,29 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
           </NotesForm>
         </NotesList> 
       </NotesColumn>
-      {showModal ? 
+      {showEditJobModal ? 
         <>
           <Overlay></Overlay>
           <JobEdit 
             job={job} 
             editJob={editJob} 
-            setShowModal={setShowModal}/> 
+            setShowEditJobModal={setShowEditJobModal}/> 
+        </>  : ''}
+        {showAddContactModal ? 
+        <>
+          <Overlay></Overlay>
+          <ContactCreate
+            job={job} 
+            editJob={editJob} 
+            setShowAddContactModal={setShowAddContactModal}/> 
+        </>  : ''}
+        {showEditContactModal ? 
+        <>
+          <Overlay></Overlay>
+          <ContactEdit 
+            job={job} 
+            editJob={editJob} 
+            setShowEditContactModal={setShowEditContactModal}/> 
         </>  : ''}
     </DetailsContainer>
   )

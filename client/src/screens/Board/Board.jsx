@@ -9,8 +9,6 @@ const Container = styled.div`
   justify-content: start;
   height: 100vh;
   width: 100vw;
-  overflow-x: auto;
-  
 `
 
 const Title = styled.h5`
@@ -26,8 +24,8 @@ const DroppableColumn = styled.div`
   padding: 10px;
   margin: 0 0 0 10px;
   width: 250px;;
-  min-height: 500px;
-  
+  height: 600px;
+  overflow-y: auto;
 `
 
 const DraggableItem = styled.div`

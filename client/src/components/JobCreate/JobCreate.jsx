@@ -17,14 +17,18 @@ const Label = styled.label`
 `
 
 
-export default function JobCreate({ job, newJob, setShowModal }) {
+export default function JobCreate({ job, user, newJob, setShowModal }) {
   const [formData, setFormData] = useState({
     company: '',
     location: '',
     position: '',
     salary: '',
     url: '',
-    offer_salary: ''
+    offer_salary: '',
+    column: 'wishlist',
+    contacts: [],
+    notes: [],
+    user_id: user.id
   })
 
   const {company, location, position, salary, url, offer_salary} = formData

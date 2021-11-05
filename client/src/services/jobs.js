@@ -2,6 +2,7 @@ import api from './api-config';
 
 export const createJob = async (user_id, data) => {
   const resp = await api.post(`/users/${user_id}/jobs`, { job: data })
+  console.log(resp)
   return resp.data
 }
 
