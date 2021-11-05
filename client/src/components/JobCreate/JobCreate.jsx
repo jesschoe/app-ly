@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import deleteIcon from '../../assets/delete-icon.png'
 
 const CreateForm = styled.form`
+  color: #0F3875;
   display: flex;
   flex-direction: column;
   font-size: .6em;
@@ -26,10 +27,19 @@ const InputGroup = styled.div`
   flex-direction: column;
   align-items: start;
   margin: 0 20px;
+  
 `
 
 const EditInput = styled.input`
+  font-family: 'Raleway';
+  font-size: 1.1em;
   padding: 10px;
+  border: 1px solid #0F3875;
+  autofocus;
+  &:focus {
+    outline: none;
+    border: 1px solid #E94D4D;
+  }
 `
 
 const Button = styled.button`
@@ -45,11 +55,12 @@ const Button = styled.button`
 `
 
 const Title = styled.h5`
+  align-self: start;
   text-transform: uppercase;
   color: #E94D4D;
   letter-spacing: .5em;
   font-size: 1.2em;
-  margin: 20px 30px;
+  margin: 0 0 20px 30px;
 `
 
 const ButtonDiv = styled.div`
@@ -65,23 +76,29 @@ const Icon = styled.img`
 `
 
 
-
 export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
-  const [startDate, setStartDate] = useState(new Date())
+  const [appliedDate, setAppliedDate] = useState(new Date())
+  const [interviewDate, setInterviewDate] = useState(new Date())
+  const [offerDate, setOfferDate] = useState(new Date())
   const [formData, setFormData] = useState({
     company: '',
     location: '',
     position: '',
     salary: '',
+    description: '',
     url: '',
+    applied: '',
+    interview: '',
+    offer: '',
     offer_salary: '',
+    priority: '',
     column: 'wishlist',
     contacts: [],
     notes: [],
     user_id: user.id
   })
 
-  const {company, location, position, salary, url, offer_salary, applied} = formData
+  const {company, location, position, salary, url, offer_salary, applied, interview, offer} = formData
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -96,12 +113,15 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
   }
 
   const handleDate = (date, field) => {
-    setStartDate(date)
+    field === 'applied' ? setAppliedDate(date) : 
+    field === 'interview' ? setInterviewDate(date) : setOfferDate(date)
+
     setFormData(prev => ({
       ...prev,
       [field]: date
     }))
   }
+
 
   return (
     <div>
@@ -111,7 +131,7 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
         setShowAddJobModal(prev => !prev)
       }}>
         <ButtonDiv onClick={handleClose}>
-          <Icon src={deleteIcon} alt='delete contact' />
+          <Icon src={deleteIcon} alt='close add new job form' />
         </ButtonDiv>
         <Title>Add Job Opportunity</Title>
         <FormSection>
@@ -139,16 +159,31 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
             <label for='url'>Post URL</label>
             <EditInput type='text' id='url' name='url' value={url} onChange={handleChange}/>
           </InputGroup>
+        </FormSection>
         <FormSection>
           <InputGroup>
-            <label>Date Applied</label>
-            <DatePicker 
+            <label for='applied'>Date Applied</label>
+            <DatePicker
+              id='applied' 
               name='applied'
               value={applied}
-              selected={startDate} 
-              onChange={(date) => handleDate(date, 'applied')} />
+              selected={appliedDate} 
+              onChange={(date) => handleDate(date, 'applied')} 
+              // customInput={<CalendarInput/>}
+            />
+            <label>Next Interview</label>
+            <DatePicker 
+              name='interview'
+              value={interview}
+              selected={interviewDate} 
+              onChange={(date) => handleDate(date, 'interview')} />
+            <label>Offer Date</label>
+            <DatePicker 
+              name='offer'
+              value={offer}
+              selected={offerDate} 
+              onChange={(date) => handleDate(date, 'offer')} />
           </InputGroup>
-        </FormSection>
           <InputGroup>
             <label for='offer_salary'>Offer Salary</label>
             <EditInput type='text' id='offer_salary' name='offer_salary' value={offer_salary} onChange={handleChange}/>

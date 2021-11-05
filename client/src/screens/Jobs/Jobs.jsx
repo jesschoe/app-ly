@@ -28,6 +28,17 @@ const AddIcon = styled.img`
   width: 25px;
 `
 
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: #0F3875;
+  opacity: .5;
+`
+
 export default function Jobs({ user, jobs, newJob }) {
 
   const [showAddJobModal, setShowAddJobModal] = useState(false)
@@ -51,11 +62,14 @@ export default function Jobs({ user, jobs, newJob }) {
             </Link>
           )
         })}
-      {showAddJobModal ? 
-        <JobCreate 
-          user={user} 
-          newJob={newJob} 
-          setShowModal={setShowAddJobModal}/> : ''}
+      {showAddJobModal ? (
+        <>
+          <Overlay></Overlay>
+          <JobCreate 
+            user={user} 
+            newJob={newJob} 
+            setShowAddJobModal={setShowAddJobModal}/> 
+        </>): ''}
       </CardContainer>
     </Container>
   )

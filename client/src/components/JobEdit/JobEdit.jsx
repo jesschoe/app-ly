@@ -67,9 +67,12 @@ const Icon = styled.img`
 `
 
 export default function JobEdit({ job, editJob, setShowEditJobModal }) {
-  const [startDate, setStartDate] = useState(new Date())
+  const [appliedDate, setAppliedDate] = useState(new Date())
+  const [interviewDate, setInterviewDate] = useState(new Date())
+  const [offerDate, setOfferDate] = useState(new Date())
   const [formData, setFormData] = useState(job)
-  const {company, location, position, salary, url, offer_salary, applied} = formData
+
+  const {company, location, position, salary, url, offer_salary, applied, interview, offer} = formData
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -84,7 +87,9 @@ export default function JobEdit({ job, editJob, setShowEditJobModal }) {
   }
 
   const handleDate = (date, field) => {
-    setStartDate(date)
+    field === 'applied' ? setAppliedDate(date) : 
+    field === 'interview' ? setInterviewDate(date) : setOfferDate(date)
+
     setFormData(prev => ({
       ...prev,
       [field]: date
@@ -93,7 +98,6 @@ export default function JobEdit({ job, editJob, setShowEditJobModal }) {
 
   return (
     <div>
-      {console.log(startDate)}
       <EditForm onSubmit={e => {
         e.preventDefault()
         editJob(job.id, formData)
@@ -129,16 +133,35 @@ export default function JobEdit({ job, editJob, setShowEditJobModal }) {
             <label for='url'>Post URL</label>
             <EditInput type='text' id='url' name='url' value={url} onChange={handleChange}/>
           </InputGroup>
+        </FormSection>
         <FormSection>
           <InputGroup>
-            <label>Date Applied</label>
-            <DatePicker 
+            <label for='applied'>Date Applied</label>
+            <DatePicker
+              id='applied' 
               name='applied'
+              dateFormat="yyyy/MM/dd"
               value={applied}
-              selected={startDate} 
-              onChange={(date) => handleDate(date, 'applied')} />
+              selected={appliedDate} 
+              onChange={(date) => handleDate(date, 'applied')} 
+            />
+            <label for='interview'>Next Interview</label>
+            <DatePicker 
+              id='interview'
+              name='interview'
+              dateFormat="yyyy/MM/dd"
+              value={interview}
+              selected={interviewDate} 
+              onChange={(date) => handleDate(date, 'interview')} />
+            <label for='offer'>Offer Date</label>
+            <DatePicker 
+              id='offer'
+              name='offer'
+              dateFormat="yyyy/MM/dd"
+              value={offer}
+              selected={offerDate} 
+              onChange={(date) => handleDate(date, 'offer')} />
           </InputGroup>
-        </FormSection>
           <InputGroup>
             <label for='offer_salary'>Offer Salary</label>
             <EditInput type='text' id='offer_salary' name='offer_salary' value={offer_salary} onChange={handleChange}/>

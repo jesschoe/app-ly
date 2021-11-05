@@ -29,10 +29,7 @@ export default function MainContainer({ user, handleLogout }) {
 
   const editJob = async (id, formData) => {
     const updatedJob = await updateJob(user.id, id, formData);
-    setJobs(prevState => prevState.map(job => {
-      return job.id === Number(id) ? updatedJob : job
-    }))
-    history.push(`/jobs/${id}`);
+    setToggle(prev => !prev);
   }
 
   const saveBoard = async (id, formData) => {
@@ -91,8 +88,8 @@ export default function MainContainer({ user, handleLogout }) {
             <Contacts
               jobs={jobs}
               user={user}
-              editContact={editContact}
               deleteContact={deleteContact}
+              editContact={editContact}
             />
           </Route>
           <Route path='/jobs/:id'>

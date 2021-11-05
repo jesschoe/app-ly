@@ -264,7 +264,6 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
 
   return (
     <DetailsContainer>
-      {console.log(job)}
       <DetailsColumn>
         <Title>Job Details</Title>
         <Details>
@@ -282,7 +281,6 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
           <DetailsText>Next Interview: {job?.interview}</DetailsText>
           <DetailsText>Date of Offer: {job?.offer}</DetailsText>
           <DetailsText>Salary Offered: {job?.offerSalary}</DetailsText>
-          {console.log(job)}
           </DetailsCard>
         </Details>
         <Title style={{cursor: 'pointer'}} onClick={toggleContacts}>Contacts</Title>
