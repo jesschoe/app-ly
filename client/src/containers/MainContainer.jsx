@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
-import { createContact, updateContact, createNote } from '../services/contacts'
+import { createContact, updateContact, createNote, destroyContact, destroyNote } from '../services/contacts'
 import Layout from '../layouts/Layout'
 import Jobs from '../screens/Jobs/Jobs'
 import Contacts from '../screens/Contacts/Contacts'
@@ -10,6 +10,7 @@ import Board from '../screens/Board/Board'
 
 export default function MainContainer({ user, handleLogout }) {
   const [jobs, setJobs] = useState([])
+  const [toggle, setToggle] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
@@ -18,12 +19,12 @@ export default function MainContainer({ user, handleLogout }) {
       setJobs(jobs);
     }
     fetchJobs();
-  }, [])
+  }, [toggle])
 
   const newJob = async (formData) => {
     const newJob = await createJob(user.id, formData);
     setJobs(prevState => [...prevState, newJob]);
-    history.push('/jobs');
+    setToggle(prev => !prev)
   }
 
   const editJob = async (id, formData) => {
@@ -35,7 +36,7 @@ export default function MainContainer({ user, handleLogout }) {
   }
 
   const saveBoard = async (id, formData) => {
-    const updatedJob = await updateJob(user.id, id, formData);
+    const updatedJob = await updateJob(user?.id, id, formData);
     console.log('api', updatedJob)
     setJobs(prevState => prevState.map(job => {
       return job.id === Number(id) ? updatedJob : job
@@ -52,32 +53,28 @@ export default function MainContainer({ user, handleLogout }) {
   }
 
   const newContact = async (job_id, formData) => {
-    const newContact = await createContact(user.id, job_id, formData);
-    setJobs(prevState =>  {
-      prevState.map(job => {
-        return job.id === Number(job_id) ? job.contacts.push(newContact) : job})
-      })
-    history.push(`/jobs/${job_id}`);
+    await createContact(user.id, job_id, formData)
+    setToggle(prev => !prev)
   }
 
   const editContact = async (job_id, id, formData) => {
-    const updatedContact = await updateContact(user.id, job_id, id, formData);
-    setJobs(prevState => {
-      let job = prevState.find(job => {
-        return job.id === Number(job_id)})
-      let contact = job.contacts.find(contact => {
-        return contact.id === Number(id)})
-    })
-    history.push(`/jobs/all/contacts`);
+    await updateContact(user.id, job_id, id, formData)
+    setToggle(prev => !prev)
+  }
+
+  const deleteContact = async (job_id, id) => {
+    await destroyContact(user.id, job_id, id)
+    setToggle(prev => !prev)
   }
 
   const newNote = async (job_id, formData) => {
-    const newNote = await createNote(user.id, job_id, formData);
-    setJobs(prevState =>  {
-      prevState.map(job => {
-        return job.id === Number(job_id) ? job.notes.push(newNote) : job})
-      })
-    history.push(`/jobs/${job_id}`);
+    await createNote(user.id, job_id, formData)
+    setToggle(prev => !prev);
+  }
+
+  const deleteNote = async (job_id, id) => {
+    await destroyNote(user.id, job_id, id);
+    setToggle(prev => !prev)
   }
 
   return (
@@ -89,6 +86,7 @@ export default function MainContainer({ user, handleLogout }) {
               jobs={jobs}
               user={user}
               saveBoard={saveBoard}
+              newJob={newJob}
             />
           </Route>
           <Route path='/jobs/all/contacts'>
@@ -96,6 +94,7 @@ export default function MainContainer({ user, handleLogout }) {
               jobs={jobs}
               user={user}
               editContact={editContact}
+              deleteContact={deleteContact}
             />
           </Route>
           <Route path='/jobs/:id'>
@@ -105,7 +104,10 @@ export default function MainContainer({ user, handleLogout }) {
               editJob={editJob}
               deleteJob={deleteJob}
               newNote={newNote}
+              deleteNote={deleteNote}
               newContact={newContact}
+              editContact={editContact}
+              deleteContact={deleteContact}
             />
           </Route>
           <Route exact path='/jobs'>

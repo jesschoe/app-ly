@@ -30,10 +30,10 @@ const AddIcon = styled.img`
 
 export default function Jobs({ user, jobs, newJob }) {
 
-  const [showModal, setShowModal] = useState(false)
+  const [showAddJobModal, setShowAddJobModal] = useState(false)
 
   const handleAdd = () => {
-    setShowModal(prev => !prev)
+    setShowAddJobModal(prev => !prev)
   }
 
   return (
@@ -51,11 +51,11 @@ export default function Jobs({ user, jobs, newJob }) {
             </Link>
           )
         })}
-      {showModal ? 
+      {showAddJobModal ? 
         <JobCreate 
           user={user} 
           newJob={newJob} 
-          setShowModal={setShowModal}/> : ''}
+          setShowModal={setShowAddJobModal}/> : ''}
       </CardContainer>
     </Container>
   )

@@ -61,9 +61,8 @@ const Icon = styled.img`
   text-align: right;
 `
 
-export default function ContactEdit({ id, contact, user, editContact, setShowModal }) {
+export default function ContactEdit({ id, contact, user, editContact, setShowEditContactModal }) {
   const [formData, setFormData] = useState(contact)
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -74,7 +73,7 @@ export default function ContactEdit({ id, contact, user, editContact, setShowMod
   }
 
   const handleClose = () => {
-    setShowModal(prev => !prev)
+    setShowEditContactModal(prev => !prev)
   }
 
   console.log(contact)
@@ -83,7 +82,8 @@ export default function ContactEdit({ id, contact, user, editContact, setShowMod
       <EditForm onSubmit={e => {
         e.preventDefault()
         editContact(formData.job_id, id, formData)
-        setShowModal(prev => !prev)
+        setShowEditContactModal(prev => !prev)
+
       }}>
         <ButtonDiv onClick={handleClose}>
           <Icon src={deleteIcon} alt='delete contact' />

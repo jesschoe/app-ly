@@ -24,13 +24,13 @@ const Overlay = styled.div`
   opacity: .5;
 `
 
-export default function Contacts({ user, jobs, editContact }) {
-  const [showModal, setShowModal] = useState(false)
+export default function Contacts({ user, jobs, editContact, newContact, deleteContact }) {
+  const [showEditContactModal, setShowEditContactModal] = useState(false)
   const [contactId, setContactId] = useState(null)
   const [contact, setContact] = useState(null)
 
-  const handleEdit = (id) => {
-    setShowModal(prev =>! prev)
+  const handleContactEdit = (id) => {
+    setShowEditContactModal(prev =>! prev)
     setContact((jobs.find(job => {
       return (
         job.contacts.find(contact => contact.id === Number(id))
@@ -50,13 +50,14 @@ export default function Contacts({ user, jobs, editContact }) {
                 <ContactCard 
                   job={job} 
                   contact={contact} 
-                  handleEdit={handleEdit} />
+                  handleContactEdit={handleContactEdit}
+                  deleteContact={deleteContact} />
               </div>
             )
           })
         )
       })}
-    {showModal ? 
+    {showEditContactModal ? 
       <>
         <Overlay></Overlay>
         <ContactEdit 
@@ -64,7 +65,7 @@ export default function Contacts({ user, jobs, editContact }) {
           contact={contact}
           user={user} 
           editContact={editContact}
-          setShowModal={setShowModal}/> 
+          setShowEditContactModal={setShowEditContactModal}/> 
       </> : ''
     }
     </CardContainer>

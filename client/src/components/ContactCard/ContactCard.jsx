@@ -39,18 +39,18 @@ const ButtonDiv = styled.div`
 
 
 
-export default function ContactCard({ job, contact, handleEdit }) {
+export default function ContactCard({ job, contact, deleteContact, handleContactEdit }) {
 
   
-  const handleDelete = () => {
-  
+  const handleDelete = (id) => {
+    deleteContact(job.id, id)
   }
   
   return (
     <Card>
       <ButtonDiv>
-        <div onClick={() => handleEdit(contact.id)}><Icon src={editIcon} alt='update contact' /></div>
-        <div onClick={handleDelete}><Icon src={deleteIcon} alt='delete contact' /></div>
+        <div onClick={() => handleContactEdit(contact.id)}><Icon src={editIcon} alt='update contact' /></div>
+        <div onClick={() => handleDelete(contact.id)}><Icon src={deleteIcon} alt='delete contact' /></div>
       </ButtonDiv>
       <TitleOrange>{contact.name}</TitleOrange>
       <DetailsText>company: {job.company}</DetailsText>

@@ -86,7 +86,19 @@ const NotesList = styled.div`
 `
 
 const NotesForm = styled.form`
+  display: flex;
+  margin: 20px;
+`
 
+const NoteInput = styled.input`
+  padding: 5px 10px;
+  width: 100%;
+  border: none;
+  autofocus;
+  &:focus {
+    outline: none;
+    border: 1px solid #E94D4D;
+  }
 `
 
 const DetailsCard = styled.div`
@@ -106,7 +118,7 @@ const NoteCard = styled.div`
   margin: 20px;
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
-  padding: 0 20px 20px 20px;
+  padding: 10px;
 `
 
 const Title = styled.h4`
@@ -127,11 +139,13 @@ const TitleOrange = styled.h5`
 
 const DateOrange = styled.h6`
   color: #E94D4D;
+  margin: 5px 10px;
 `
 
 const DetailsText = styled.div`
   font-size: .7em;
   line-height: 1.7em;
+  margin: 5px 10px;
 `
 
 const Icon = styled.img`
@@ -143,7 +157,7 @@ const Icon = styled.img`
 const ButtonDiv = styled.div`
   display: flex;
   justify-content: end;
-  
+  align-self: end;
 `
 
 const Overlay = styled.div`
@@ -166,16 +180,31 @@ const IconDiv = styled.div`
   justify-self: center;
 `
 
-export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, newContact }) {
+const Button = styled.button`
+  background-color: #E94D4D;
+  border: none;
+  color: #FFFFFF;
+  font-size: .5em;
+  padding: 7px 20px;
+  text-transform: uppercase;
+  align-self: center;
+  margin: 0 0 0 10px;
+  cursor: pointer;
+`
+
+export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, deleteNote, newContact, editContact, deleteContact }) {
   const [job, setJob] = useState(null)
   const [showEditJobModal, setShowEditJobModal] = useState(false)
   const [showEditContactModal, setShowEditContactModal] = useState(false)
   const [showAddContactModal, setShowAddContactModal] = useState(false)
   const [showContacts, setShowContacts] = useState(false)
   const [showNotes, setShowNotes] = useState(false)
+  const [contacts, setContacts] = useState(null)
+  const [contactId, setContactId] = useState(null)
+  const [contact, setContact] = useState(null)
   const { id } = useParams()
   const [formData, setFormData] = useState({
-    date: '',
+    date: new Date(),
     content: '',
     job_id: id
   })
@@ -198,6 +227,16 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
     setShowContacts(prev => !prev)
   }
 
+  const handleContactEdit = (id) => {
+    setShowEditContactModal(prev =>! prev)
+    setContact((jobs.find(job => {
+      return (
+        job.contacts.find(contact => contact.id === Number(id))
+      )})).contacts.find(contact => contact.id === Number(id))
+    )
+    setContactId(id)
+  }
+
   const toggleNotes = () => {
     setShowNotes(prev => !prev)
   }
@@ -214,6 +253,10 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
     setShowAddContactModal(prev => !prev)
   }
 
+  const handleNoteDelete =  (job_id, id) => {
+    deleteNote(job_id, id)
+  }
+
   return (
     <DetailsContainer>
       {console.log(job)}
@@ -222,8 +265,8 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
         <Details>
           <DetailsCard>
           <ButtonDiv>
-            <div onClick={handleEdit}><Icon src={editIcon} alt='update contact' /></div>
-            <div onClick={handleDelete}><Icon src={deleteIcon} alt='delete contact' /></div>
+            <div onClick={handleEdit}><Icon src={editIcon} alt='update job' /></div>
+            <div onClick={handleDelete}><Icon src={deleteIcon} alt='delete job' /></div>
           </ButtonDiv>
           <TitleOrange>{job?.company}</TitleOrange>
           <DetailsText><a href={job?.url}>Link to Post</a></DetailsText>
@@ -242,7 +285,12 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
           <IconDiv onClick={handleAdd}><AddIcon src={add} alt='add job' /></IconDiv>
           <ContactCards>
             {job?.contacts.map(contact => {
-              return <ContactCard contact={contact} job={job} />
+              return <ContactCard 
+                setShowEditContactModal={setShowEditContactModal} 
+                contact={contact} 
+                handleContactEdit={handleContactEdit}
+                deleteContact={deleteContact}
+                job={job} />
             })}
           </ContactCards>
         </ContactsList>
@@ -250,21 +298,29 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
       <NotesColumn>
         <Title style={{cursor: 'pointer'}} onClick={toggleNotes}>Notes</Title>
         <NotesList>
-          {job?.notes.map(note => {
+          <NotesForm onSubmit={e => {
+            e.preventDefault()
+            newNote(job.id, formData)
+            setFormData({    
+              date: new Date(),
+              content: '',
+              job_id: id
+            })
+          }}>
+            <NoteInput type='text' name='content' value={formData.content} onChange={handleChange} />
+            <Button type='submit'>add</Button>
+          </NotesForm>
+          {job?.notes.slice(0).reverse().map(note => {
             return (
-              <NoteCard>
+              <NoteCard key={note.id}>
+                <ButtonDiv onClick={() => handleNoteDelete(note.job_id, note.id)}>
+                  <Icon src={deleteIcon} alt='delete note' />
+                </ButtonDiv>
                 <DateOrange>{note.date}</DateOrange>
                 <DetailsText>{note.content}</DetailsText>
               </NoteCard>
             )
           })}
-          <NotesForm onSubmit={e => {
-            e.preventDefault()
-            newNote(job.id, formData)
-          }}>
-            <input type='text' name='content' value={formData.content} onChange={handleChange} />
-            <button type='submit'>add</button>
-          </NotesForm>
         </NotesList> 
       </NotesColumn>
       {showEditJobModal ? 
@@ -280,15 +336,17 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, new
           <Overlay></Overlay>
           <ContactCreate
             job={job} 
-            editJob={editJob} 
+            newContact={newContact} 
             setShowAddContactModal={setShowAddContactModal}/> 
         </>  : ''}
         {showEditContactModal ? 
         <>
           <Overlay></Overlay>
           <ContactEdit 
-            job={job} 
-            editJob={editJob} 
+            id={contactId}
+            contact={contact}
+            user={user} 
+            editContact={editContact}
             setShowEditContactModal={setShowEditContactModal}/> 
         </>  : ''}
     </DetailsContainer>

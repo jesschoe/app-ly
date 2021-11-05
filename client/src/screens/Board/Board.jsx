@@ -3,12 +3,14 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid } from 'uuid';
 import styled from "styled-components";
 import add from '../../assets/add-icon.svg'
+import JobCreate from "../../components/JobCreate/JobCreate";
 
 const Container = styled.div`
   display: flex;
   justify-content: start;
   height: 100vh;
   width: 100vw;
+  overflow-x: auto;
 `
 
 const Title = styled.h5`
@@ -51,36 +53,71 @@ const AddIcon = styled.img`
   width: 25px;
 `
 
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: #0F3875;
+  opacity: .5;
+`
 
-export default function Board({ jobs, user, saveBoard }) {
+export default function Board({ jobs, user, saveBoard, newJob }) {
   const [formData, setFormData] = useState(null)
-  const [showModal, setShowModal] = useState(false)
+  const [showAddJobModal, setShowAddJobModal] = useState(false)
   const [toggle, setToggle] = useState(false)
-  const [items, setItems] = useState(
-    jobs.map(job => {
+  const [items, setItems] = useState(null)
+
+  useEffect(() => {
+    setItems(jobs?.map(job => {
       return ({
         ...job,
         itemId: uuid()
       })
     }))
+  }, [jobs])
+
   
   const [columns, setColumns] = useState({
   '100000': {
     name: 'wishlist',
-    items: items.filter(item => item.column === 'wishlist')
+    items: items?.filter(item => item.column === 'wishlist')
   },
   '200000': {
     name: 'applied',
-    items: items.filter(item => item.column === 'applied')
+    items: items?.filter(item => item.column === 'applied')
   },
   '300000': {
     name: 'interviews',
-    items: items.filter(item => item.column === 'interviews')
+    items: items?.filter(item => item.column === 'interviews')
   },
   '400000': {
     name: 'offers',
-    items: items.filter(item => item.column === 'offers')
+    items: items?.filter(item => item.column === 'offers')
   }});
+
+  useEffect(() => {
+    setColumns({
+      '100000': {
+        name: 'wishlist',
+        items: items?.filter(item => item.column === 'wishlist')
+      },
+      '200000': {
+        name: 'applied',
+        items: items?.filter(item => item.column === 'applied')
+      },
+      '300000': {
+        name: 'interviews',
+        items: items?.filter(item => item.column === 'interviews')
+      },
+      '400000': {
+        name: 'offers',
+        items: items?.filter(item => item.column === 'offers')
+      }})
+  }, [items])
+  
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
@@ -134,14 +171,14 @@ export default function Board({ jobs, user, saveBoard }) {
       // }
       // updateColumn()
       
-  }, [formData, toggle])
+  }, [formData, user, toggle])
 
   const handleClick = () => {
     console.log('hi')
   }
 
   const handleAdd = () => {
-    setShowModal(prev => !prev)
+    setShowAddJobModal(prev => !prev)
   }
 
   return (
@@ -174,7 +211,7 @@ export default function Board({ jobs, user, saveBoard }) {
                           : "#FFF4EE"}}
                       >
                         <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
-                        {column.items.map((item, index) => {
+                        {column.items?.map((item, index) => {
                           return (
                             <Draggable
                               key={item.itemId}
@@ -208,6 +245,14 @@ export default function Board({ jobs, user, saveBoard }) {
           );
         })}
       </DragDropContext>}
+      {showAddJobModal ? (
+        <>
+          <Overlay>/</Overlay>
+          <JobCreate 
+            user={user} 
+            newJob={newJob} 
+            setShowAddJobModal={setShowAddJobModal}/>
+        </>) : ''}
     </Container>
   )
 }
