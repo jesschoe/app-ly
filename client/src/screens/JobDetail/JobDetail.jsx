@@ -5,6 +5,7 @@ import ContactCard from '../../components/ContactCard/ContactCard'
 import JobEdit from '../../components/JobEdit/JobEdit'
 import ContactCreate from '../../components/ContactCreate/ContactCreate'
 import ContactEdit from '../../components/ContactEdit/ContactEdit'
+import DeleteAlert from '../../components/DeleteAlert/DeleteAlert'
 import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
 import add from '../../assets/add-icon.svg'
@@ -197,9 +198,9 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
   const [showEditJobModal, setShowEditJobModal] = useState(false)
   const [showEditContactModal, setShowEditContactModal] = useState(false)
   const [showAddContactModal, setShowAddContactModal] = useState(false)
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false)
   const [showContacts, setShowContacts] = useState(false)
   const [showNotes, setShowNotes] = useState(false)
-  const [contacts, setContacts] = useState(null)
   const [contactId, setContactId] = useState(null)
   const [contact, setContact] = useState(null)
   const { id } = useParams()
@@ -221,6 +222,10 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
 
   const handleDelete = () => {
     deleteJob(id)
+  }
+
+  const confirmDelete = () => {
+    setShowDeleteAlert(prev => !prev)
   }
 
   const toggleContacts = () => {
@@ -266,7 +271,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
           <DetailsCard>
           <ButtonDiv>
             <div onClick={handleEdit}><Icon src={editIcon} alt='update job' /></div>
-            <div onClick={handleDelete}><Icon src={deleteIcon} alt='delete job' /></div>
+            <div onClick={confirmDelete}><Icon src={deleteIcon} alt='delete job' /></div>
           </ButtonDiv>
           <TitleOrange>{job?.company}</TitleOrange>
           <DetailsText><a href={job?.url}>Link to Post</a></DetailsText>
@@ -348,6 +353,14 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
             user={user} 
             editContact={editContact}
             setShowEditContactModal={setShowEditContactModal}/> 
+        </>  : ''}
+        {showDeleteAlert ? 
+        <>
+          <Overlay></Overlay>
+          <DeleteAlert 
+            job={job}
+            deleteJob={deleteJob}
+            setShowDeleteAlert={setShowDeleteAlert} />
         </>  : ''}
     </DetailsContainer>
   )
