@@ -1,0 +1,10 @@
+<svg width="42" height="40" viewBox="0 0 42 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="4.02942" y="0.5" width="31.9412" height="39" rx="2.5" stroke="white"/>
+<ellipse cx="21.1764" cy="15.2941" rx="3.52941" ry="4.70588" fill="white"/>
+<line x1="15.7941" y1="32.4412" x2="26.5588" y2="32.4412" stroke="white" stroke-linecap="round"/>
+<rect x="0.5" y="6.38232" width="7.23529" height="3.70588" rx="1.85294" stroke="white"/>
+<rect x="0.5" y="18.1471" width="7.23529" height="3.70588" rx="1.85294" stroke="white"/>
+<rect x="0.5" y="28.7354" width="7.23529" height="3.70588" rx="1.85294" stroke="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15 40H38.1765C39.8333 40 41.1765 38.6569 41.1765 37V3C41.1765 1.34315 39.8333 0 38.1765 0H15V1H38.1765C39.281 1 40.1765 1.89543 40.1765 3V37C40.1765 38.1046 39.281 39 38.1765 39H15V40Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M30.9871 29C30.9957 28.8344 31 28.6677 31 28.5C31 23.2533 26.7467 19 21.5 19C16.2533 19 12 23.2533 12 28.5C12 28.6677 12.0043 28.8344 12.0129 29H30.9871Z" fill="white"/>
+</svg>

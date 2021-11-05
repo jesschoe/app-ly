@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid } from 'uuid';
 import styled from "styled-components";
+import add from '../../assets/add-icon.svg'
 
 const Container = styled.div`
   display: flex;
@@ -9,6 +10,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   overflow-x: auto;
+  
 `
 
 const Title = styled.h5`
@@ -25,6 +27,7 @@ const DroppableColumn = styled.div`
   margin: 0 0 0 10px;
   width: 250px;;
   min-height: 500px;
+  
 `
 
 const DraggableItem = styled.div`
@@ -45,8 +48,15 @@ const DetailsText = styled.div`
   line-height: 1.7em;
 `
 
+const AddIcon = styled.img`
+  cursor: pointer;
+  width: 25px;
+`
+
+
 export default function Board({ jobs, user, saveBoard }) {
   const [formData, setFormData] = useState(null)
+  const [showModal, setShowModal] = useState(false)
   const [toggle, setToggle] = useState(false)
   const [items, setItems] = useState(
     jobs.map(job => {
@@ -132,8 +142,13 @@ export default function Board({ jobs, user, saveBoard }) {
     console.log('hi')
   }
 
+  const handleAdd = () => {
+    setShowModal(prev => !prev)
+  }
+
   return (
     <Container>
+      {!jobs ? 'Loading...' :
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
@@ -160,6 +175,7 @@ export default function Board({ jobs, user, saveBoard }) {
                           ? "#FEDFCD"
                           : "#FFF4EE"}}
                       >
+                        <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
                         {column.items.map((item, index) => {
                           return (
                             <Draggable
@@ -193,7 +209,7 @@ export default function Board({ jobs, user, saveBoard }) {
             </div>
           );
         })}
-      </DragDropContext>
+      </DragDropContext>}
     </Container>
   )
 }

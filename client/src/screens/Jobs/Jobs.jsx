@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import JobCard from '../../components/JobCard/JobCard'
 import styled from 'styled-components'
 import JobCreate from '../../components/JobCreate/JobCreate'
-import add from '../../assets/add-icon.png'
+import add from '../../assets/add-icon.svg'
 
 const Container = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const CardContainer = styled.div`
 
 const AddIcon = styled.img`
   cursor: pointer;
-  width: 30px;
+  width: 25px;
 `
 
 export default function Jobs({ user, jobs, newJob }) {

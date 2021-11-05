@@ -8,6 +8,7 @@ const Container = styled.div`
   height: 100vh;
   font-family: 'Open Sans', sans-serif;
   overflow: hidden;
+  font-family: 'Raleway';
 `
 
 const Main = styled.div`
@@ -19,7 +20,6 @@ const Main = styled.div`
 const Nav = styled.div`
   display: flex;
   justify-content: center;
-  width: 90px;
   background-color: #0F3875;
   color: white;
   height: 100vh;
