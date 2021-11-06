@@ -8,6 +8,15 @@ const Card = styled.div`
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
   padding: 5px 20px;
+
+  @media (max-width: 920px) {
+    width: 200px;
+  }
+
+  @media (max-width: 375px) {
+    width: 180px;
+    margin: 10px;
+  }
 `
 
 const TitleOrange = styled.h5`
@@ -17,6 +26,10 @@ const TitleOrange = styled.h5`
   letter-spacing: .3em;
   font-size: .9em;
   margin: 20px 0;
+
+  @media (max-width: 375px) {
+    font-size: .8em;
+  }
 `
 
 const Details = styled.div`

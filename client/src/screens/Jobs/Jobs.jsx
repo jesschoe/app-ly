@@ -8,11 +8,16 @@ import add from '../../assets/add-icon.svg'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
+  justify-items: center;
   overflow: hidden;
   width: 90%;
   height: 90%;
   padding: 20px;
+
+  @media (max-width: 375px) {
+    padding: 5px;
+  }
 `
 
 const CardTop = styled.div`
@@ -22,8 +27,15 @@ const CardTop = styled.div`
   border-radius: 5px;
   padding: 20px;
   height: 85%;
-  width: 85%;
-  margin: 30px;
+  width: 80%;
+  margin: 20px;
+
+  @media (max-width: 375px) {
+    width: 90%;
+    margin: 20px 10px;
+    background-color: #0F3875;
+    padding: 10px;
+  }
 `
 
 const CardContainer = styled.div`

@@ -10,13 +10,18 @@ import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
 import add from '../../assets/add-icon.svg'
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const DetailsContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-gap: 20px;
-  width: 100vw;
-  height: 100vh;
+  grid-gap: 5px;
+  width: 90vw;
+  height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -28,6 +33,7 @@ const DetailsContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 5px;
+    width: 90%;
   }
 `
 
@@ -43,7 +49,7 @@ const DetailsColumn = styled.div`
 
   @media (max-width: 375px) {
     padding: 10px;
-    width: 350px;
+    max-width: 350px;
     margin: 5px;
     align-items: start;
   }
@@ -53,12 +59,13 @@ const NotesColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding: 20px 20px 20px 50px;
-  height: 100vh;
+  padding: 20px 20px 0 50px;
+  height: 740px;
 
   @media (max-width: 1024px) {
-    width: 100vw;
+    width: 100%;
     align-items: cener;
+    padding-left: 30px;
   }
 
   @media (max-width: 375px) {
@@ -78,6 +85,7 @@ const Details = styled.div`
 
   @media (max-width: 375px) {
     padding: 5px;
+    width: 90%;
   }
 `
 
@@ -89,10 +97,11 @@ const ContactsList = styled.div`
   border-radius: 5px;
   padding: 20px 20px 0 20px;
   width: 100%;
-  height: 300px;
+
   
   @media (max-width: 375px) {
     padding: 5px;
+    width: 90%;
   }
 
 `
@@ -111,8 +120,13 @@ const NotesList = styled.div`
   padding: 20px;
   overflow-y: auto;
 
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+
   @media (max-width: 375px) {
     padding: 5px;
+    width: 90%;
   }
 `
 
@@ -146,7 +160,7 @@ const NoteCard = styled.div`
   flex-direction: column;
   align-items: start;
   background-color: #FFFFFF;
-  margin: 20px;
+  margin: 10px;
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
   padding: 10px;
@@ -160,6 +174,10 @@ const Title = styled.h4`
   letter-spacing: .7em;
   align-self: start;
   margin: 5px;
+
+  @media (max-width: 375px) {
+    font-size: .9em;
+  }
 `
 
 const TitleOrange = styled.h5`
@@ -167,17 +185,25 @@ const TitleOrange = styled.h5`
   color: #E94D4D;
   letter-spacing: .3em;
   margin: 5px 0 15px 0;
+
+  @media (max-width: 375px) {
+    font-size: .7em;
+  }
 `
 
 const DateOrange = styled.h6`
   color: #E94D4D;
-  margin: 5px 10px;
+  margin: -10px 10px 5px 10px;
 `
 
 const DetailsText = styled.div`
   font-size: .7em;
   line-height: 1.7em;
   margin: 5px 10px;
+
+  @media (max-width: 375px) {
+    font-size: .6em;
+  }
 `
 
 const Icon = styled.img`
@@ -210,6 +236,7 @@ const AddIcon = styled.img`
 
 const IconDiv = styled.div`
   justify-self: center;
+  margin-top: 5px;
 `
 
 const Button = styled.button`
@@ -290,6 +317,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
   }
 
   return (
+    <Container>
     <DetailsContainer>
       <DetailsColumn>
         <Title>Job Details</Title>
@@ -388,5 +416,6 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
             setShowDeleteAlert={setShowDeleteAlert} />
         </>  : ''}
     </DetailsContainer>
+    </Container>
   )
 }

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import accountIcon from '../../assets/account-blue.svg'
 
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,12 @@ const LinkName = styled.div`
   }
 `
 
+const Icon = styled.img`
+  width: 25px;
+  margin-left: 10px;
+  margin-right: -10px;
+`
+
 
 export default function Header({ user }) {
   return (
@@ -70,6 +77,9 @@ export default function Header({ user }) {
         </Link>
         <Link to='/jobs/all/contacts' style={{ textDecoration:'none', color:'white' }}>
           <LinkName>contacts</LinkName>
+        </Link>
+        <Link to='/signout' style={{ textDecoration:'none', color:'white' }}>
+          <Icon src={accountIcon} alt='account icon' />
         </Link>
       </MobileNav>
     </Container>

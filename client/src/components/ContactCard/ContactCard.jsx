@@ -12,6 +12,10 @@ const Card = styled.div`
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
   padding: 10px 10px 20px 0;
+
+  @media (max-width: 375px) {
+    width: 240px;
+  }
 `
 
 const TitleOrange = styled.h5`
@@ -19,11 +23,19 @@ const TitleOrange = styled.h5`
   color: #E94D4D;
   letter-spacing: .3em;
   margin: 0 0 5px 0;
+
+  @media (max-width: 375px) {
+    font-size: .7em;
+  }
 `
 
 const DetailsText = styled.div`
   font-size: .7em;
   line-height: 1.7em;
+
+  @media (max-width: 375px) {
+    font-size: .6em;
+  }
 `
 
 const Icon = styled.img`

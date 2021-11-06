@@ -22,6 +22,10 @@ const CardContainer = styled.div`
   margin: 20px;
   width: 90%;
   overflow-y: auto;
+
+  @media (max-width: 375px) {
+    background-color: #0F3875;
+  }
 `
 const Title = styled.h4`
   text-transform: uppercase;

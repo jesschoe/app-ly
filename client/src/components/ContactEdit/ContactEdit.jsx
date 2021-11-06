@@ -7,7 +7,7 @@ const EditForm = styled.form`
   box-shadow: 2px 2px 4px #000000;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   font-size: .6em;
   position: absolute;
   background: #FFFFFF;
@@ -22,14 +22,14 @@ const Title = styled.h5`
   color: #E94D4D;
   letter-spacing: .5em;
   font-size: 1.2em;
-  margin: 20px 30px;
+  margin: 10px 30px 30px 30px;
 `
 
 const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin: 0 20px;
+  margin: 0 0 0 -20px;
 `
 
 const Button = styled.button`
@@ -45,8 +45,17 @@ const Button = styled.button`
 `
 
 const EditInput = styled.input`
+  font-family: 'Raleway';
+  font-size: 1.1em;
   padding: 10px;
-
+  border: 1px solid #0F3875;
+  width: 100%;
+  margin-bottom: 10px;
+  autofocus;
+  &:focus {
+    outline: none;
+    border: 1px solid #E94D4D;
+  }
 `
 
 const ButtonDiv = styled.div`
