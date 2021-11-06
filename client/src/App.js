@@ -21,7 +21,6 @@ function App() {
 
   const handleLogin = async (formData) => {
     const user = await loginUser(formData);
-    console.log(user)
     setUser(user);
     history.push('/jobs/all/board')
   }
