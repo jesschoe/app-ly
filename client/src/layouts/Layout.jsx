@@ -50,8 +50,6 @@ const Content = styled.div`
 export default function Layout({ children, user, handleLogout }) {
   return (
     <Container>
-      {user && (
-        <>
         <Nav>
           <Navbar user={user} handleLogout={handleLogout}/>
         </Nav>
@@ -63,8 +61,6 @@ export default function Layout({ children, user, handleLogout }) {
             {children}
           </Content>
         </Main>
-      </>
-      )}
     </Container>
   )
 }
