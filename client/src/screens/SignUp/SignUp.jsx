@@ -5,13 +5,21 @@ import styled from 'styled-components'
 const Container = styled.div`
   background-color: #FFF4EE;
   display: flex;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: .7em;
   justify-content: center;
   letter-spacing: 1.5px;
   align-items: center;
   width: 100vw;
   height: 100vh;
+
+  @media (max-width: 940px) {
+    flex-direction: column;
+  }
+
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
 ` 
 
 const SignUpForm = styled.form`
@@ -23,6 +31,10 @@ const SignUpForm = styled.form`
   border-radius: 5px;
   padding: 20px;
   width: 400px;
+
+  @media (max-width: 400px) {
+    width: 275px;
+  }
 `
 
   const InputGroup = styled.div`
@@ -49,6 +61,90 @@ const Button = styled.button`
   cursor: pointer;
 `
 
+const LogoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0px 50px 0 50px;
+  width: 350px;
+
+  @media (max-width: 400px) {
+    width: 275px;
+  }
+`
+
+const Title = styled.h4`
+  align-self: start;
+  text-transform: uppercase;
+  color: #0F3875;
+  font-weight: 300;
+  font-size: 32px;
+  margin: 0;
+  letter-spacing: .1em;
+
+  @media (max-width: 400px) {
+    font-size: 24px;
+  }
+`
+const Title2 = styled.h4`
+  align-self: start;
+  text-transform: uppercase;
+  color: #0F3875;
+  font-weight: 300;
+  font-size: 32px;
+  margin: 0;
+  letter-spacing: 0;
+
+  @media (max-width: 400px) {
+    font-size: 24px;
+  }
+`
+
+const SmallTitle = styled.div`
+  align-self: start;
+  text-transform: uppercase;
+  color: #0F3875;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin: 0;
+  letter-spacing: .2em;
+
+  @media (max-width: 400px) {
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+`
+
+const FormTitle = styled.div`
+  text-transform: uppercase;
+  color: #E94D4D;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin: 0 0 10px 0;
+  letter-spacing: .2em;
+
+  @media (max-width: 400px) {
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+`
+
+const Logo = styled.div`
+  display: flex;
+  align-self: end;
+  font-family: 'Ephesis', cursive;
+  font-size: 84px;
+  color: #E94D4D;
+  margin: -30px 0 30px 0;
+  text-transform: none;
+  letter-spacing: 0;
+`
+const Slash = styled.div`
+  border-left: 1px solid #E94D4D;
+  height: 80px;
+  transform: skew(-35deg);
+  margin: 10px 0 0 20px;
+`
+
 export default function SignUp({ handleRegister }) {
   const [formData, setFormData] = useState({
     username: '',
@@ -68,10 +164,21 @@ export default function SignUp({ handleRegister }) {
 
   return (
     <Container>
+      <LogoDiv>
+        <Title2>keep track of your</Title2>
+        <Title>job applications</Title>
+        <SmallTitle>from start to offer with</SmallTitle>
+        <Logo>
+          <div>app</div><Slash></Slash><div>ly</div>
+        </Logo>
+      </LogoDiv>
       <SignUpForm onSubmit={(e) => {
         e.preventDefault();
         handleRegister(formData);
       }} >
+        <FormTitle>
+          Create your app/ly account
+        </FormTitle>
         <InputGroup>
           <label>Username</label>
           <SignUpInput
@@ -110,7 +217,7 @@ export default function SignUp({ handleRegister }) {
         </InputGroup>
         
         <Button>Submit</Button>
-        <Link to="/">Sign In</Link>
+          Already have an account? <Link style={{textDecoration:'none', color:'##E94D4D'}} to="/">Sign In</Link>
       </SignUpForm>
     </Container>
   )
