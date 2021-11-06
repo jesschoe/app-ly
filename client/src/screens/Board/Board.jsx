@@ -47,7 +47,6 @@ const DroppableColumn = styled.div`
   margin: 0 0 0 10px;
   width: 250px;;
   height: 600px;
-  overflow-y: auto;
 `
 
 const ShowMore = styled.ul`
@@ -218,7 +217,7 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
     if(formData) {
       saveBoard(formData?.id, formData)
     }
-  }, [formData, saveBoard])
+  }, [formData])
 
   const handleClick = (id) => {
     setShowMore(prev => !prev)
