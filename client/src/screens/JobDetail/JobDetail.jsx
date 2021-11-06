@@ -333,12 +333,15 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
           <IconDiv onClick={handleAdd}><AddIcon src={add} alt='add job' /></IconDiv>
           <ContactCards>
             {job?.contacts.map(contact => {
-              return <ContactCard 
-                setShowEditContactModal={setShowEditContactModal} 
-                contact={contact} 
-                handleContactEdit={handleContactEdit}
-                deleteContact={deleteContact}
-                job={job} />
+              return (
+                <ContactCard 
+                  key={contact.id}
+                  setShowEditContactModal={setShowEditContactModal} 
+                  contact={contact} 
+                  handleContactEdit={handleContactEdit}
+                  deleteContact={deleteContact}
+                  job={job} />
+              )
             })}
           </ContactCards>
         </ContactsList>

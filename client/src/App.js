@@ -8,7 +8,7 @@ import SignUp from './screens/SignUp/SignUp';
 import './App.css';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const history = useHistory();
 
   useEffect(() => {

@@ -80,7 +80,7 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
         <CardContainer>
           {jobs?.map(job => {
             return (
-              job.contacts.map(contact => {
+              job?.contacts.map(contact => {
                 return(
                   <div key={contact.id}>
                     <ContactCard 

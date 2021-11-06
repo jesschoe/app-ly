@@ -50,17 +50,21 @@ const Content = styled.div`
 export default function Layout({ children, user, handleLogout }) {
   return (
     <Container>
-      <Nav>
-        <Navbar user={user} handleLogout={handleLogout}/>
-      </Nav>
-      <Main>
-        <HeaderLinks>
-          <Header user={user}/>
-        </HeaderLinks>
-        <Content>
-          {children}
-        </Content>
-      </Main>
+      {user ? (
+        <>
+        <Nav>
+          <Navbar user={user} handleLogout={handleLogout}/>
+        </Nav>
+        <Main>
+          <HeaderLinks>
+            <Header user={user}/>
+          </HeaderLinks>
+          <Content>
+            {children}
+          </Content>
+        </Main>
+      </>
+      ) : 'Loading...'}
     </Container>
   )
 }

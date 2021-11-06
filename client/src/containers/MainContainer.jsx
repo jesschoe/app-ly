@@ -15,8 +15,9 @@ export default function MainContainer({ user, handleLogout }) {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const jobs = await readAllJobs(user?.id);
-      setJobs(jobs);
+      console.log(user?.id)
+      const res = await readAllJobs(user?.id);
+      setJobs(res);
     }
     fetchJobs();
   }, [toggle, user])
