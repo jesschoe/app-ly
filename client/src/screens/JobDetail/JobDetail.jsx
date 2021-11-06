@@ -257,8 +257,6 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
   const [showEditContactModal, setShowEditContactModal] = useState(false)
   const [showAddContactModal, setShowAddContactModal] = useState(false)
   const [showDeleteAlert, setShowDeleteAlert] = useState(false)
-  const [showContacts, setShowContacts] = useState(false)
-  const [showNotes, setShowNotes] = useState(false)
   const [contactId, setContactId] = useState(null)
   const [contact, setContact] = useState(null)
   const { id } = useParams()
@@ -280,14 +278,6 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
 
   const confirmDelete = () => {
     setShowDeleteAlert(prev => !prev)
-  }
-
-  const toggleContacts = () => {
-    setShowContacts(prev => !prev)
-  }
-
-  const toggleNotes = () => {
-    setShowNotes(prev => !prev)
   }
 
   const handleContactEdit = (id) => {
@@ -338,7 +328,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
           <DetailsText>Salary Offered: {job?.offerSalary}</DetailsText>
           </DetailsCard>
         </Details>
-        <Title style={{cursor: 'pointer'}} onClick={toggleContacts}>Contacts</Title>
+        <Title>Contacts</Title>
         <ContactsList>
           <IconDiv onClick={handleAdd}><AddIcon src={add} alt='add job' /></IconDiv>
           <ContactCards>
@@ -354,7 +344,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
         </ContactsList>
       </DetailsColumn>
       <NotesColumn>
-        <Title style={{cursor: 'pointer'}} onClick={toggleNotes}>Notes</Title>
+        <Title>Notes</Title>
         <NotesList>
           <NotesForm onSubmit={e => {
             e.preventDefault()

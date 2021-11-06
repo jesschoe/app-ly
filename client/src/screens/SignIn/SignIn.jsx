@@ -130,7 +130,7 @@ export default function SignIn({ handleLogin }) {
             Sign in to app/ly
           </FormTitle>
           <InputGroup>
-            <label for='username'>Username</label>
+            <label htmlFor='username'>Username</label>
             <SignInInput
               id='username'
               name="username"
@@ -140,7 +140,7 @@ export default function SignIn({ handleLogin }) {
             />
           </InputGroup>
           <InputGroup>
-            <label for='password'>Password</label>
+            <label htmlFor='password'>Password</label>
             <SignInInput
               id='password'
               name="password"

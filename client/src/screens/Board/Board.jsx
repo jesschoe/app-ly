@@ -5,13 +5,6 @@ import styled from "styled-components";
 import add from '../../assets/add-icon.svg'
 import JobCreate from "../../components/JobCreate/JobCreate";
 
-const Container = styled.div`
-  display: flex;
-  height: 90%;
-  width: 90%;
-  overflow: hidden;
-`
-
 const BoardContainer = styled.div`
   display: flex;
   padding: 0 20px;
@@ -97,6 +90,26 @@ const Overlay = styled.div`
   opacity: .5;
 `
 
+const DraggableItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  font-size: .8em;
+  padding: 16px;
+  margin: 10px 0;
+  minHeight: 50px;
+  background-color: #FFFFFF;
+  background-image: ${props => props.priority === '3' ? 'linear-gradient(90deg, #E94D4D 2%, #FFFFFF 0)' :
+    props.priority === '2' ? 'linear-gradient(90deg, #F4C78E 2%, #FFFFFF 0)' : 
+    'linear-gradient(90deg, #0F3875 2%, #FFFFFF 0)'};
+  border: ${props => props.priority === '3' ? '1px solid #E94D4D' :
+    props.priority === '2' ? '1px solid #F4C78E' : 
+    '1px solid #0F3875'};
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #B9B9B9;
+  ...provided.draggableProps.style;
+`
+
 export default function Board({ jobs, user, saveBoard, newJob }) {
   const [formData, setFormData] = useState(null)
   const [showAddJobModal, setShowAddJobModal] = useState(false)
@@ -105,25 +118,7 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
   const [items, setItems] = useState(null)
   const [detailsId, setDetailsId] = useState(null)
 
-  const DraggableItem = styled.div`
-    display: flex;
-    flex-direction: column;
-    user-select: none;
-    font-size: .8em;
-    padding: 16px;
-    margin: 10px 0;
-    minHeight: 50px;
-    background-color: #FFFFFF;
-    background-image: ${props => props.priority === '3' ? 'linear-gradient(90deg, #E94D4D 2%, #FFFFFF 0)' :
-      props.priority === '2' ? 'linear-gradient(90deg, #F4C78E 2%, #FFFFFF 0)' : 
-      'linear-gradient(90deg, #0F3875 2%, #FFFFFF 0)'};
-    border: ${props => props.priority === '3' ? '1px solid #E94D4D' :
-      props.priority === '2' ? '1px solid #F4C78E' : 
-      '1px solid #0F3875'};
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px #B9B9B9;
-    ...provided.draggableProps.style;
-  `
+
 
   useEffect(() => {
     setItems(jobs?.map(job => {
@@ -132,7 +127,7 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
         itemId: uuid()
       })
     }))
-  }, [jobs])
+  }, [jobs, saveBoard])
 
   
   const [columns, setColumns] = useState({
@@ -220,8 +215,10 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
   };
 
   useEffect(() => {
-    saveBoard(formData?.id, formData)
-  }, [formData])
+    if(formData) {
+      saveBoard(formData?.id, formData)
+    }
+  }, [formData, saveBoard])
 
   const handleClick = (id) => {
     setShowMore(prev => !prev)
@@ -238,8 +235,7 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
     <>
       <PageTitle>All Jobs</PageTitle>
       <HelperText>drag items, click to see details</HelperText>
-      <Container>
-        <BoardContainer>
+      <BoardContainer>
         {!jobs ? 'Loading...' :
         <DragDropContext
           onDragEnd={result => onDragEnd(result, columns, setColumns)}
@@ -341,7 +337,6 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
               columnId={columnId}/>
           </>) : ''}
       </BoardContainer>
-      </Container>
     </>
   )
 }

@@ -189,8 +189,9 @@ export default function SignUp({ handleRegister }) {
           />
         </InputGroup>
         <InputGroup>
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <SignUpInput
+            id="email"
             name="email"
             type="text"
             value={email}
@@ -198,8 +199,9 @@ export default function SignUp({ handleRegister }) {
           />
         </InputGroup>
         <InputGroup>
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <SignUpInput
+            id="password"
             name="password"
             type="password"
             value={password}
@@ -207,8 +209,9 @@ export default function SignUp({ handleRegister }) {
           />
         </InputGroup>
         <InputGroup>
-          <label>Confirm Password</label>
+          <label htmlFor="confirm_password">Confirm Password</label>
           <SignUpInput
+            id="confirm_password"
             name="confirm_password"
             type="password"
             value={confirm_password}
