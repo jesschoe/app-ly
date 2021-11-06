@@ -24,7 +24,7 @@ const Nav = styled.div`
   color: white;
   height: 100vh;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     display: none;
   }
 `
@@ -38,8 +38,8 @@ const HeaderLinks = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -51,11 +51,11 @@ export default function Layout({ children, user, handleLogout }) {
   return (
     <Container>
         <Nav>
-          <Navbar user={user} handleLogout={handleLogout}/>
+          <Navbar user={user} handleLogout={handleLogout} />
         </Nav>
         <Main>
           <HeaderLinks>
-            <Header user={user}/>
+            <Header user={user} handleLogout={handleLogout} />
           </HeaderLinks>
           <Content>
             {children}

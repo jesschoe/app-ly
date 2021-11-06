@@ -19,7 +19,7 @@
 
 ## Overview
 
-_**App/ly** is a job application tracking app that will help organize information and contacts for users during their job search. Users can start by creating an account, and then start adding information about any job openings that they're interested in. Once added to the user's database, they can go back to view the details, update important dates and information as they progress in the application process, and even leave notes and add contacts for each job posting._
+_**App/ly** is a job application tracking app that organizes job posts and contacts for users during their job search. Users can start by creating an account, and then start adding information about any job openings that they're interested in. Once added to the user's database, they can go back to view the details, update important dates and information as they progress in the application process, and even leave notes and add contacts for each job posting. They can also move items around on the job tracking board according to where they are in the application process._
 
 <br>
 
@@ -52,6 +52,8 @@ _The **App/ly** MVP is a full CRUD, full stack application with a Rails back end
 |       bcrypt        | _Password hashing function_                                                                    |
 |         jwt         | _Securely transmits information between parties as a JSON object_                              |
 |        cors         | _Allows a server to indicate any origins from which a browser should permit loading resources_ |
+|        uuid         | _Creates unique identifiers_                                                                   |
+|  Styled-Components  | _Create components for styling_                                                                |
 
 <br>
 
@@ -97,17 +99,22 @@ src
       |__ images
       |__ mockups
 |__ components/
+      |__ ContactCard.jsx
       |__ ContactCreate.jsx
       |__ ContactEdit.jsx
+      |__ DeleteAlert.jsx
       |__ Header.jsx
+      |__ JobCard.jsx
       |__ JobCreate.jsx
       |__ JobEdit.jsx
+      |__ JobForm.jsx
       |__ Navbar.jsx
 |__ containers/
       |__ MainContainer.jsx
 |__ layouts/
       |__ Layout.jsx
 |__ screens/
+      |__ Board.jsx
       |__ Contacts.jsx
       |__ Jobs.jsx
       |__ JobDetail.jsx
@@ -116,6 +123,7 @@ src
 |__ services/
       |__ api_config.js
       |__ auth.js
+      |__ contacts.js
       |__ jobs.js
 
 ```
@@ -125,21 +133,21 @@ src
 | Task                              | Priority | Estimated Time | Time Invested | Actual Time |
 | --------------------------------- | :------: | :------------: | :-----------: | :---------: |
 | Wireframes, ERD, Component Tree   |    H     |     3 hrs      |     3 hrs     |    3 hrs    |
-| Set up and test CRUD on back end  |    H     |     2 hrs      |     2 hrs     |     TBD     |
-| Set up React App                  |    H     |      1 hr      |     1 hr      |     TBD     |
-| Create file structure             |    H     |      1 hr      |     1 hr      |     TBD     |
-| Create and test CRUD on front end |    H     |     3 hrs      |      hr       |     TBD     |
-| Create layout components          |    H     |     3 hrs      |      hr       |     TBD     |
-| Create sign in/sign up screens    |    H     |     3 hrs      |      hr       |     TBD     |
-| Create jobs screen                |    H     |     3 hrs      |      hr       |     TBD     |
-| Create job detail screen          |    H     |     3 hrs      |      hr       |     TBD     |
-| Create form components            |    H     |     3 hrs      |      hr       |     TBD     |
-| Create contacts screen            |    H     |     3 hrs      |      hr       |     TBD     |
-| Basic styling                     |    H     |     5 hrs      |      hr       |     TBD     |
-| Test and clean up code            |    H     |     3 hrs      |      hr       |     TBD     |
-| Advanced Styling and finetuning   |    M     |     6 hrs      |      hr       |     TBD     |
-| Post MVP                          |    L     |     6 hrs      |      hr       |     TBD     |
-| TOTAL                             |          |     49 hrs     |     7 hrs     |     TBD     |
+| Set up and test CRUD on back end  |    H     |     2 hrs      |     2 hrs     |    2 hrs    |
+| Set up React App                  |    H     |      1 hr      |     1 hr      |    1 hr     |
+| Create file structure             |    H     |      1 hr      |     1 hr      |    1 hr     |
+| Create and test CRUD on front end |    H     |     3 hrs      |     3 hrs     |    3 hrs    |
+| Create layout components          |    H     |     3 hrs      |     2 hrs     |    2 hrs    |
+| Create sign in/sign up screens    |    H     |     3 hrs      |     4 hrs     |    4 hrs    |
+| Create jobs screen                |    H     |     5 hrs      |     5 hrs     |    5 hrs    |
+| Create job detail screen          |    H     |     3 hrs      |     5 hrs     |    5 hrs    |
+| Create form components            |    H     |     3 hrs      |     3 hrs     |    3 hrs    |
+| Create contacts screen            |    H     |     3 hrs      |     3 hrs     |    3 hrs    |
+| Basic styling                     |    H     |     5 hrs      |     5 hrs     |    5 hrs    |
+| Test and clean up code            |    H     |     3 hrs      |     6 hrs     |    6 hrs    |
+| Advanced Styling and finetuning   |    M     |     6 hrs      |     6 hrs     |    6 hrs    |
+| Post MVP                          |    L     |     6 hrs      |     8 hrs     |     TBD     |
+| TOTAL                             |          |     51 hrs     |    57 hrs     |     TBD     |
 
 <br>
 

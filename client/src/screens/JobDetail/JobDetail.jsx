@@ -29,7 +29,7 @@ const DetailsContainer = styled.div`
     grid-template-columns: 70%
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -47,7 +47,7 @@ const DetailsColumn = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     padding: 10px;
     max-width: 350px;
     margin: 5px;
@@ -68,7 +68,7 @@ const NotesColumn = styled.div`
     padding-left: 30px;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     padding: 10px;
     width: 100%;
     margin: 5px;
@@ -83,7 +83,7 @@ const Details = styled.div`
   padding: 20px;
   width: 100%;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     padding: 5px;
     width: 90%;
   }
@@ -99,7 +99,7 @@ const ContactsList = styled.div`
   width: 100%;
 
   
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     padding: 5px;
     width: 90%;
   }
@@ -124,7 +124,7 @@ const NotesList = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     padding: 5px;
     width: 90%;
   }
@@ -175,7 +175,7 @@ const Title = styled.h4`
   align-self: start;
   margin: 5px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     font-size: .9em;
   }
 `
@@ -186,7 +186,7 @@ const TitleOrange = styled.h5`
   letter-spacing: .3em;
   margin: 5px 0 15px 0;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     font-size: .7em;
   }
 `
@@ -201,7 +201,7 @@ const DetailsText = styled.div`
   line-height: 1.7em;
   margin: 5px 10px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     font-size: .6em;
   }
 `

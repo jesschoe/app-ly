@@ -75,7 +75,7 @@ const FormTitle = styled.div`
   margin: 0 0 10px 0;
   letter-spacing: .2em;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     font-size: 16px;
     letter-spacing: 0;
   }

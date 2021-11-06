@@ -126,7 +126,7 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
         itemId: uuid()
       })
     }))
-  }, [jobs, saveBoard])
+  }, [jobs])
 
   
   const [columns, setColumns] = useState({
@@ -214,9 +214,7 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
   };
 
   useEffect(() => {
-    if(formData) {
       saveBoard(formData?.id, formData)
-    }
   }, [formData])
 
   const handleClick = (id) => {

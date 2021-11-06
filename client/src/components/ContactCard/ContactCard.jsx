@@ -13,7 +13,7 @@ const Card = styled.div`
   border-radius: 5px;
   padding: 10px 10px 20px 0;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     width: 240px;
   }
 `
@@ -24,7 +24,7 @@ const TitleOrange = styled.h5`
   letter-spacing: .3em;
   margin: 0 0 5px 0;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     font-size: .7em;
   }
 `
@@ -33,7 +33,7 @@ const DetailsText = styled.div`
   font-size: .7em;
   line-height: 1.7em;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     font-size: .6em;
   }
 `

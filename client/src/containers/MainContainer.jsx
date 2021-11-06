@@ -15,7 +15,6 @@ export default function MainContainer({ user, handleLogout }) {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      console.log(user?.id)
       const res = await readAllJobs(user?.id);
       setJobs(res);
     }

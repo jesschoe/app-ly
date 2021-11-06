@@ -15,7 +15,7 @@ const Container = styled.div`
   height: 90%;
   padding: 20px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     padding: 5px;
   }
 `
@@ -30,7 +30,7 @@ const CardTop = styled.div`
   width: 80%;
   margin: 20px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     width: 90%;
     margin: 20px 10px;
     background-color: #0F3875;

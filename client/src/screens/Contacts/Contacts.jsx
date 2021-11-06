@@ -23,7 +23,7 @@ const CardContainer = styled.div`
   width: 90%;
   overflow-y: auto;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     background-color: #0F3875;
   }
 `

@@ -13,7 +13,7 @@ const Card = styled.div`
     width: 200px;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     width: 180px;
     margin: 10px;
   }
@@ -27,7 +27,7 @@ const TitleOrange = styled.h5`
   font-size: .9em;
   margin: 20px 0;
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     font-size: .8em;
   }
 `

@@ -47,7 +47,7 @@ function App() {
           <MainContainer user={user} handleLogout={handleLogout} />
         </Route>
         <Route exact path='/'>
-          {!user? <SignIn handleLogin={handleLogin} /> : <Redirect to='/jobs/all/board'/>}
+          {!!user? <SignIn handleLogin={handleLogin} /> : <Redirect to='/jobs/all/board'/>}
         </Route>
       </Switch>
     </div>

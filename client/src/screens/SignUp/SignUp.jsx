@@ -17,7 +17,7 @@ const Container = styled.div`
     flex-direction: column;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 425px) {
     flex-direction: column;
   }
 ` 
@@ -32,7 +32,7 @@ const SignUpForm = styled.form`
   padding: 20px;
   width: 400px;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 275px;
   }
 `
@@ -67,7 +67,7 @@ const LogoDiv = styled.div`
   margin: 0px 50px 0 50px;
   width: 350px;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     width: 275px;
   }
 `
@@ -81,7 +81,7 @@ const Title = styled.h4`
   margin: 0;
   letter-spacing: .1em;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     font-size: 24px;
   }
 `
@@ -94,7 +94,7 @@ const Title2 = styled.h4`
   margin: 0;
   letter-spacing: 0;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     font-size: 24px;
   }
 `
@@ -108,7 +108,7 @@ const SmallTitle = styled.div`
   margin: 0;
   letter-spacing: .2em;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     font-size: 16px;
     letter-spacing: 0;
   }
@@ -122,7 +122,7 @@ const FormTitle = styled.div`
   margin: 0 0 10px 0;
   letter-spacing: .2em;
 
-  @media (max-width: 400px) {
+  @media (max-width: 425px) {
     font-size: 16px;
     letter-spacing: 0;
   }
