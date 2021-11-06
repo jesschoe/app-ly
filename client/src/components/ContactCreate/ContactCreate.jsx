@@ -97,19 +97,19 @@ export default function ContactCreate({ job, contact, user, newContact, setShowA
         <Title>Add Contact</Title>
 
         <InputGroup>
-          <label for='name'>Name</label>
+          <label htmlFor='name'>Name</label>
           <EditInput type='text' id='name' name='name' value={formData?.name} onChange={handleChange}/>
         </InputGroup>
         <InputGroup>
-          <label for='position'>Position</label>
+          <label htmlFor='position'>Position</label>
           <EditInput type='text' id='position' name='position' value={formData?.position} onChange={handleChange}/>
         </InputGroup>
         <InputGroup>
-          <label for='email'>Email</label>
+          <label htmlFor='email'>Email</label>
           <EditInput type='text' id='email' name='email' value={formData?.email} onChange={handleChange}/>
         </InputGroup>
         <InputGroup>
-          <label for='phone'>Phone</label>
+          <label htmlFor='phone'>Phone</label>
           <EditInput type='text' id='phone' name='phone' value={formData?.phone} onChange={handleChange}/>
         </InputGroup>
         <Button type='submit'>

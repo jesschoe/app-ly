@@ -23,6 +23,12 @@ const DetailsContainer = styled.div`
   @media (max-width: 1024px) {
     grid-template-columns: 70%
   }
+
+  @media (max-width: 375px) {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
 `
 
 const DetailsColumn = styled.div`
@@ -34,19 +40,31 @@ const DetailsColumn = styled.div`
   @media (max-width: 1024px) {
     width: 100%;
   }
+
+  @media (max-width: 375px) {
+    padding: 10px;
+    width: 350px;
+    margin: 5px;
+    align-items: start;
+  }
 `
 
 const NotesColumn = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
   align-items: start;
   padding: 20px 20px 20px 50px;
   height: 100vh;
-  width: 100%;
 
   @media (max-width: 1024px) {
+    width: 100vw;
+    align-items: cener;
+  }
+
+  @media (max-width: 375px) {
+    padding: 10px;
     width: 100%;
+    margin: 5px;
   }
 `
 const Details = styled.div`
@@ -57,6 +75,10 @@ const Details = styled.div`
   margin-bottom: 20px;
   padding: 20px;
   width: 100%;
+
+  @media (max-width: 375px) {
+    padding: 5px;
+  }
 `
 
 const ContactsList = styled.div`
@@ -68,6 +90,10 @@ const ContactsList = styled.div`
   padding: 20px 20px 0 20px;
   width: 100%;
   height: 300px;
+  
+  @media (max-width: 375px) {
+    padding: 5px;
+  }
 
 `
 
@@ -84,6 +110,10 @@ const NotesList = styled.div`
   border-radius: 5px;
   padding: 20px;
   overflow-y: auto;
+
+  @media (max-width: 375px) {
+    padding: 5px;
+  }
 `
 
 const NotesForm = styled.form`
@@ -108,7 +138,7 @@ const DetailsCard = styled.div`
   margin: 20px;
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 10px 20px 10px;
 `
 
 const NoteCard = styled.div`
@@ -136,6 +166,7 @@ const TitleOrange = styled.h5`
   text-transform: uppercase;
   color: #E94D4D;
   letter-spacing: .3em;
+  margin: 5px 0 15px 0;
 `
 
 const DateOrange = styled.h6`
@@ -220,16 +251,16 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
     setShowEditJobModal(prev => !prev)
   }
 
-  const handleDelete = () => {
-    deleteJob(id)
-  }
-
   const confirmDelete = () => {
     setShowDeleteAlert(prev => !prev)
   }
 
   const toggleContacts = () => {
     setShowContacts(prev => !prev)
+  }
+
+  const toggleNotes = () => {
+    setShowNotes(prev => !prev)
   }
 
   const handleContactEdit = (id) => {
@@ -240,10 +271,6 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
       )})).contacts.find(contact => contact.id === Number(id))
     )
     setContactId(id)
-  }
-
-  const toggleNotes = () => {
-    setShowNotes(prev => !prev)
   }
 
   const handleChange = (e) => {

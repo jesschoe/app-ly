@@ -109,7 +109,7 @@ export default function SignUp({ handleRegister }) {
           />
         </InputGroup>
         
-        <Button>Login</Button>
+        <Button>Submit</Button>
         <Link to="/">Sign In</Link>
       </SignUpForm>
     </Container>

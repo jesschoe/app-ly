@@ -14,7 +14,7 @@ const CreateForm = styled.form`
   background: #FFFFFF;
   padding: 20px;
   top: 20%;
-  left: 20%;
+  left: 30%;
   z-index: 20;
 `
 const FormSection = styled.div`
@@ -40,6 +40,22 @@ const EditInput = styled.input`
     outline: none;
     border: 1px solid #E94D4D;
   }
+`
+
+const Dropdown = styled.select`
+  font-family: 'Raleway';
+  font-size: 1.1em;
+  padding: 10px;
+  border: 1px solid #0F3875;
+  autofocus;
+  &:focus {
+    outline: none;
+    border: 1px solid #E94D4D;
+  }
+`
+
+const Calendar = styled.div`
+  margin-bottom: 10px;
 `
 
 const Button = styled.button`
@@ -75,8 +91,7 @@ const Icon = styled.img`
   text-align: right;
 `
 
-
-export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
+export default function JobCreate({ job, user, newJob, setShowAddJobModal, columnId }) {
   const [appliedDate, setAppliedDate] = useState(new Date())
   const [interviewDate, setInterviewDate] = useState(new Date())
   const [offerDate, setOfferDate] = useState(new Date())
@@ -91,8 +106,8 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
     interview: '',
     offer: '',
     offer_salary: '',
-    priority: '',
-    column: 'wishlist',
+    priority: '3',
+    column: `${columnId ? columnId :'wishlist'}`,
     contacts: [],
     notes: [],
     user_id: user.id
@@ -136,47 +151,58 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
         <Title>Add Job Opportunity</Title>
         <FormSection>
           <InputGroup>
-            <label for='company'>Company</label>
+            <label htmlFor='company'>Company</label>
             <EditInput type='text' id='company' name='company' value={company} onChange={handleChange}/>
           </InputGroup>
           <InputGroup>
-            <label for='position'>Position</label>
+            <label htmlFor='priority'>Priority</label>
+            <Dropdown id='priority' name='priority' onChange={handleChange}>
+              <option value='3'>High</option>
+              <option value='2'>Medium</option>
+              <option value='1'>Low</option>
+            </Dropdown>
+          </InputGroup>
+        </FormSection>
+        <FormSection>
+          <InputGroup>
+            <label htmlFor='position'>Position</label>
             <EditInput type='text' id='position' name='position' value={position} onChange={handleChange}/>
           </InputGroup>
-        </FormSection>
-        <FormSection>
           <InputGroup>
-            <label for='location'>Location</label>
+            <label htmlFor='location'>Location</label>
             <EditInput type='text' id='location' name='location' value={location} onChange={handleChange}/>
           </InputGroup>
-          <InputGroup>
-            <label for='salary'>Salary</label>
-            <EditInput type='text' id='salary' name='salary' value={salary} onChange={handleChange}/>
-          </InputGroup>
         </FormSection>
         <FormSection>
           <InputGroup>
-            <label for='url'>Post URL</label>
+            <label htmlFor='salary'>Salary</label>
+            <EditInput type='text' id='salary' name='salary' value={salary} onChange={handleChange}/>
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor='url'>Post URL</label>
             <EditInput type='text' id='url' name='url' value={url} onChange={handleChange}/>
           </InputGroup>
         </FormSection>
         <FormSection>
           <InputGroup>
-            <label for='applied'>Date Applied</label>
-            <DatePicker
-              id='applied' 
-              name='applied'
-              value={applied}
-              selected={appliedDate} 
-              onChange={(date) => handleDate(date, 'applied')} 
-              // customInput={<CalendarInput/>}
-            />
+            <label htmlFor='applied'>Date Applied</label>
+            <Calendar>
+              <DatePicker
+                id='applied' 
+                name='applied'
+                value={applied}
+                selected={appliedDate} 
+                onChange={(date) => handleDate(date, 'applied')} 
+              />
+            </Calendar>
             <label>Next Interview</label>
-            <DatePicker 
-              name='interview'
-              value={interview}
-              selected={interviewDate} 
-              onChange={(date) => handleDate(date, 'interview')} />
+            <Calendar>
+              <DatePicker 
+                name='interview'
+                value={interview}
+                selected={interviewDate} 
+                onChange={(date) => handleDate(date, 'interview')} />
+            </Calendar>
             <label>Offer Date</label>
             <DatePicker 
               name='offer'
@@ -185,11 +211,10 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal }) {
               onChange={(date) => handleDate(date, 'offer')} />
           </InputGroup>
           <InputGroup>
-            <label for='offer_salary'>Offer Salary</label>
+            <label htmlFor='offer_salary'>Offer Salary</label>
             <EditInput type='text' id='offer_salary' name='offer_salary' value={offer_salary} onChange={handleChange}/>
           </InputGroup>
         </FormSection>
-        
         <Button type='submit'>
           submit
         </Button>

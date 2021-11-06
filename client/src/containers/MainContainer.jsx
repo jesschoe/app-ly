@@ -15,26 +15,25 @@ export default function MainContainer({ user, handleLogout }) {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const jobs = await readAllJobs(1);
+      const jobs = await readAllJobs(user?.id);
       setJobs(jobs);
     }
     fetchJobs();
-  }, [toggle])
+  }, [toggle, user])
 
   const newJob = async (formData) => {
-    const newJob = await createJob(user.id, formData);
+    const newJob = await createJob(user?.id, formData);
     setJobs(prevState => [...prevState, newJob]);
     setToggle(prev => !prev)
   }
 
   const editJob = async (id, formData) => {
-    const updatedJob = await updateJob(user.id, id, formData);
+    await updateJob(user.id, id, formData);
     setToggle(prev => !prev);
   }
 
   const saveBoard = async (id, formData) => {
     const updatedJob = await updateJob(user?.id, id, formData);
-    console.log('api', updatedJob)
     setJobs(prevState => prevState.map(job => {
       return job.id === Number(id) ? updatedJob : job
     }))
@@ -42,7 +41,7 @@ export default function MainContainer({ user, handleLogout }) {
   }
 
   const deleteJob = async (id) => {
-    await destroyJob(user.id, id);
+    await destroyJob(user?.id, id);
     setToggle(prev => !prev)
     history.push(`/jobs`)
   }

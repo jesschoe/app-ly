@@ -5,7 +5,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-content: center;
-  width: 90%;
+  width: 90vw;
 `
 const Logo = styled.div`
   font-family: 'Ephesis', cursive;
@@ -25,7 +25,31 @@ const Title = styled.h4`
   text-transform: uppercase;
   color: #0F3875;
   font-weight: 300;
+
+  @media (max-width: 375px) {
+    display: none;
+  }
 `
+
+const MobileNav = styled.div`
+  display: none;
+  align-self: center;
+
+@media (max-width: 375px) {
+  display: flex;
+}
+`
+
+const LinkName = styled.div`
+  margin: 5px;
+  color: #0F3875;
+  letter-spacing: .1em;
+
+  &:hover {color: #E94D4D;
+  }
+`
+
+
 export default function Header({ user }) {
   return (
     <Container>
@@ -40,6 +64,14 @@ export default function Header({ user }) {
       <div>
         <Title>{user?.username}'s jobs</Title>
       </div>
+      <MobileNav>
+        <Link to='/jobs' style={{ textDecoration:'none', color:'white' }}>
+          <LinkName>jobs</LinkName>
+        </Link>
+        <Link to='/jobs/all/contacts' style={{ textDecoration:'none', color:'white' }}>
+          <LinkName>contacts</LinkName>
+        </Link>
+      </MobileNav>
     </Container>
   )
 }

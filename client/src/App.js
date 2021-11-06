@@ -22,13 +22,13 @@ function App() {
   const handleLogin = async (formData) => {
     const user = await loginUser(formData);
     setUser(user);
-    history.push('/jobs')
+    history.push('/jobs/all/board')
   }
 
   const handleRegister = async (formData) => {
     const user = await registerUser(formData);
     setUser(user);
-    history.push('/')
+    history.push('/jobs/all/board')
   }
 
   const handleLogout = () => {

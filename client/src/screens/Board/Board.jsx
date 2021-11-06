@@ -7,9 +7,17 @@ import JobCreate from "../../components/JobCreate/JobCreate";
 
 const Container = styled.div`
   display: flex;
-  justify-content: start;
-  height: 100vh;
-  width: 100vw;
+  height: 90%;
+  width: 90%;
+  overflow: hidden;
+`
+
+const BoardContainer = styled.div`
+  display: flex;
+  padding: 0 20px;
+  height: 90%;
+  width: 90%;
+  margin: 10px;
   overflow-x: auto;
 `
 
@@ -21,6 +29,25 @@ const Title = styled.h5`
   margin: 30px 0 10px 0;
 `
 
+const PageTitle = styled.h4`
+  text-transform: uppercase;
+  justify-self: start;
+  color: #0F3875;
+  font-size: 1.1em;
+  font-weight: 300;
+  letter-spacing: .7em;
+  align-self: start;
+  margin: 20px 0 0 20px;
+`
+
+const HelperText = styled.div`
+  align-self: start;
+  font-style: italic;
+  font-size: .7em;
+  color: #0F3875;
+  margin-left: 20px;
+`
+
 const DroppableColumn = styled.div`
   border-radius: 5px;
   padding: 10px;
@@ -30,20 +57,26 @@ const DroppableColumn = styled.div`
   overflow-y: auto;
 `
 
-const DraggableItem = styled.div`
-  user-select: none;
-  font-size: .8em;
-  padding: 16px;
-  margin: 10px 0;
-  minHeight: 50px;
-  background-color: #FFFFFF;
-  border: 1px solid #E94D4D;
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px #B9B9B9;
-  ...provided.draggableProps.style;
+const ShowMore = styled.ul`
+  margin: 5px 0 0 0;
+`
+
+const DetailsDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 const DetailsText = styled.div`
+  text-align: left;
+  font-size: .7em;
+  line-height: 1.7em;
+`
+
+const DetailsTitle = styled.div`
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .3em;
+  text-align: left;
   font-size: .7em;
   line-height: 1.7em;
 `
@@ -67,8 +100,30 @@ const Overlay = styled.div`
 export default function Board({ jobs, user, saveBoard, newJob }) {
   const [formData, setFormData] = useState(null)
   const [showAddJobModal, setShowAddJobModal] = useState(false)
-  const [toggle, setToggle] = useState(false)
+  const [columnId, setColumnId] = useState(null)
+  const [showMore, setShowMore] = useState(false)
   const [items, setItems] = useState(null)
+  const [detailsId, setDetailsId] = useState(null)
+
+  const DraggableItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    font-size: .8em;
+    padding: 16px;
+    margin: 10px 0;
+    minHeight: 50px;
+    background-color: #FFFFFF;
+    background-image: ${props => props.priority === '3' ? 'linear-gradient(90deg, #E94D4D 2%, #FFFFFF 0)' :
+      props.priority === '2' ? 'linear-gradient(90deg, #F4C78E 2%, #FFFFFF 0)' : 
+      'linear-gradient(90deg, #0F3875 2%, #FFFFFF 0)'};
+    border: ${props => props.priority === '3' ? '1px solid #E94D4D' :
+      props.priority === '2' ? '1px solid #F4C78E' : 
+      '1px solid #0F3875'};
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #B9B9B9;
+    ...provided.draggableProps.style;
+  `
 
   useEffect(() => {
     setItems(jobs?.map(job => {
@@ -129,7 +184,7 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
       "column": columns[destination.droppableId].name
     })
 
-    setToggle(prev => !prev)
+    
 
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
@@ -165,94 +220,128 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
   };
 
   useEffect(() => {
-      // const updateColumn = async() => {
-        console.log(formData)
-        saveBoard(formData?.id, formData)
-      // }
-      // updateColumn()
-      
-  }, [formData, user, toggle])
+    saveBoard(formData?.id, formData)
+  }, [formData])
 
-  const handleClick = () => {
-    console.log('hi')
+  const handleClick = (id) => {
+    setShowMore(prev => !prev)
+    setDetailsId(id)
   }
 
-  const handleAdd = () => {
+  const handleAdd = (id) => {
+    let columnName = columns?.[id].name
+    setColumnId(columnName)
     setShowAddJobModal(prev => !prev)
   }
 
   return (
-    <Container>
-      {!jobs ? 'Loading...' :
-      <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
-      >
-        {Object.entries(columns).map(([columnId, column], index) => {
-          return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center"
-              }}
-              key={columnId}
-            >
-              <Title>{column.name}</Title>
-              <div style={{ margin: "0px 8px" }}>
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided, snapshot) => {
-                    return (
-                      <DroppableColumn
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver
-                          ? "#FEDFCD"
-                          : "#FFF4EE"}}
-                      >
-                        <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
-                        {column.items?.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.itemId}
-                              draggableId={item.itemId}
-                              index={index}
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                  <DraggableItem
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    onClick={handleClick}
-                                    
-                                  >
-                                    <DetailsText>{item.company}</DetailsText>
-                                    <DetailsText>{item.position}</DetailsText>
-                                  </DraggableItem>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </DroppableColumn>
-                    );
-                  }}
-                </Droppable>
+    <>
+      <PageTitle>All Jobs</PageTitle>
+      <HelperText>drag items, click to see details</HelperText>
+      <Container>
+        <BoardContainer>
+        {!jobs ? 'Loading...' :
+        <DragDropContext
+          onDragEnd={result => onDragEnd(result, columns, setColumns)}
+        >
+          {Object.entries(columns).map(([columnId, column], index) => {
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}
+                key={columnId}
+              >
+                <Title>{column.name}</Title>
+                <div style={{ margin: "0px 8px" }}>
+                  <Droppable droppableId={columnId} key={columnId}>
+                    {(provided, snapshot) => {
+                      return (
+                        <DroppableColumn
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          style={{
+                            background: snapshot.isDraggingOver
+                            ? "#FEDFCD"
+                            : "#FFF4EE"}}
+                        >
+                          <div onClick={() => handleAdd(columnId)}><AddIcon src={add} alt='add job' /></div>
+                          {column.items?.map((item, index) => {
+                            return (
+                              <Draggable
+                                key={item.itemId}
+                                draggableId={item.itemId}
+                                index={index}
+                              >
+                                {(provided, snapshot) => {
+                                  return (
+                                    <DraggableItem
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      onClick={() => handleClick(item.id)}
+                                      priority={item.priority}
+                                    >
+                                      <DetailsDiv>
+                                        <DetailsTitle>{item.company}</DetailsTitle>
+                                        <DetailsText>{column.name==='applied' ? item.applied :
+                                          column.name==='interview' ? item.interview :
+                                          column.name==='offer' ? item.offer :
+                                          ''}  
+                                        </DetailsText>
+                                      </DetailsDiv>
+                                      <DetailsDiv>
+                                        <DetailsText>{item.position}</DetailsText>
+                                      </DetailsDiv>
+                                        {showMore && detailsId === item.id ? (
+                                          <ShowMore>
+
+                                            <DetailsText>Location: {item.location}</DetailsText>
+                                            <DetailsText>Salary: {item.salary}</DetailsText>
+                                            
+                                            <DetailsText>
+                                              {column.name==='interviews' ? (
+                                                <>
+                                                  Applied: {item.applied} </>) :
+                                                column.name==='offers' ? (
+                                                  <>
+                                                    Applied: {item.applied}<br/>
+                                                    Interviewed: {item.interview}
+                                                  </>) :
+                                                ''}  
+                                            </DetailsText>
+                                          </ShowMore>
+                                          
+                                        ) : ''}
+                                    </DraggableItem>
+                                  );
+                                }}
+                              </Draggable>
+                            );
+                          })}
+                          {provided.placeholder}
+                        </DroppableColumn>
+                      );
+                    }}
+                  </Droppable>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </DragDropContext>}
-      {showAddJobModal ? (
-        <>
-          <Overlay>/</Overlay>
-          <JobCreate 
-            user={user} 
-            newJob={newJob} 
-            setShowAddJobModal={setShowAddJobModal}/>
-        </>) : ''}
-    </Container>
+            );
+          })}
+        </DragDropContext>}
+        {showAddJobModal ? (
+          <>
+            <Overlay>/</Overlay>
+            <JobCreate 
+              user={user} 
+              newJob={newJob} 
+              setShowAddJobModal={setShowAddJobModal}
+              columnId={columnId}/>
+          </>) : ''}
+      </BoardContainer>
+      </Container>
+    </>
   )
 }

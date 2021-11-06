@@ -8,19 +8,48 @@ import add from '../../assets/add-icon.svg'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #FFF4EE;
-  border-radius: 5px;
-  margin: 50px;
-  padding: 20px;
+  align-content: center;
+  overflow: hidden;
   width: 90%;
   height: 90%;
+  padding: 20px;
+`
+
+const CardTop = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF4EE;
+  border-radius: 5px;
+  padding: 20px;
+  height: 85%;
+  width: 85%;
+  margin: 30px;
 `
 
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow-y: auto;
+  overflow: auto;
+`
+
+const Title = styled.h4`
+  text-transform: uppercase;
+  justify-self: start;
+  color: #0F3875;
+  font-size: 1.1em;
+  font-weight: 300;
+  letter-spacing: .7em;
+  align-self: start;
+  margin: 20px 0 0 20px;
+`
+
+const HelperText = styled.div`
+  align-self: start;
+  font-style: italic;
+  font-size: .7em;
+  color: #0F3875;
+  margin-left: 20px;
 `
 
 const AddIcon = styled.img`
@@ -48,29 +77,36 @@ export default function Jobs({ user, jobs, newJob }) {
   }
 
   return (
-    <Container>
-      <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
-      <CardContainer>
-        {jobs.map(job => {
-          return (
-            <Link 
-              to={`/jobs/${job.id}`} 
-              key={job.id}
-              style={{textDecoration:'none', color:'#0F3875'}}
-            >
-              <JobCard job={job} />
-            </Link>
-          )
-        })}
-      {showAddJobModal ? (
-        <>
-          <Overlay></Overlay>
-          <JobCreate 
-            user={user} 
-            newJob={newJob} 
-            setShowAddJobModal={setShowAddJobModal}/> 
-        </>): ''}
-      </CardContainer>
-    </Container>
+    <>
+      <Title>All Jobs</Title>
+      <HelperText>click to see details</HelperText>
+      <Container>
+        
+        <CardTop>
+          <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
+          <CardContainer>
+            {jobs.map(job => {
+              return (
+                <Link 
+                  to={`/jobs/${job.id}`} 
+                  key={job.id}
+                  style={{textDecoration:'none', color:'#0F3875'}}
+                >
+                  <JobCard job={job} />
+                </Link>
+              )
+            })}
+          {showAddJobModal ? (
+            <>
+              <Overlay></Overlay>
+              <JobCreate 
+                user={user} 
+                newJob={newJob} 
+                setShowAddJobModal={setShowAddJobModal}/> 
+            </>): ''}
+          </CardContainer>
+        </CardTop>
+      </Container>
+    </>
   )
 }

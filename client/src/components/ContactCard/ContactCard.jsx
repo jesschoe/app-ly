@@ -11,14 +11,14 @@ const Card = styled.div`
   margin: 20px;
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 10px 20px 0;
 `
 
 const TitleOrange = styled.h5`
   text-transform: uppercase;
   color: #E94D4D;
   letter-spacing: .3em;
-  margin-top: -5px;
+  margin: 0 0 5px 0;
 `
 
 const DetailsText = styled.div`
@@ -29,6 +29,7 @@ const DetailsText = styled.div`
 const Icon = styled.img`
   cursor: pointer;
   width: 20px;
+  margin: 0 5px;
 `
 
 const ButtonDiv = styled.div`

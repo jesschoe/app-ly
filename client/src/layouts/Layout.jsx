@@ -23,6 +23,10 @@ const Nav = styled.div`
   background-color: #0F3875;
   color: white;
   height: 100vh;
+
+  @media (max-width: 375px) {
+    display: none;
+  }
 `
 
 const HeaderLinks = styled.div`
@@ -34,8 +38,10 @@ const HeaderLinks = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center;
+  // align-items: center;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   font-size: 1.2em;
   letter-spacing: 1.5px;
