@@ -24,9 +24,9 @@
   url: 'https://www.google.com/search?q=software+engineering+jobs+in+new+york&oq=software+engineering+jobs+in+new+york&aqs=chrome..69i57j0i512l9.10935j1j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwi7rqbEp_PzAhWCFzQIHVImAsUQkd0GegQIDRAB#fpstate=tldetail&htivrt=jobs&htiq=software+engineering+jobs+in+new+york&htidocid=WHmdncWU6LNaEkvUAAAAAA%3D%3D&sxsrf=AOaemvKFFZq_-I9NKUcAsvDoaZRYjOMkkQ:1635637237758',
   applied: Time.new.strftime('%d/%m/%Y'),
   interview: Time.new.strftime('%d/%m/%Y'),
-  # offer: ,
-  # offer_salary: ,
-  # priority: ,
+  offer: '',
+  offer_salary: '',
+  priority: '3',
   column: 'interviews',
   user_id: @tester.id
 )
@@ -37,11 +37,11 @@
   position: 'Software Engineer',
   salary: '$70,000',
   url: 'www.microsoft.com',
-  # applied: ,
-  # interview: ,
-  # offer: ,
-  # offer_salary: ,
-  # priority: ,
+  applied: '',
+  interview: '',
+  offer: '',
+  offer_salary: '',
+  priority: '2',
   column: 'wishlist',
   user_id: @tester.id
 )
@@ -49,9 +49,14 @@
 @facebook = Job.create!(
   company: 'Facebook',
   location: 'remote',
-  position: 'job',
-  salary: '$15,000',
-  url: 'www.www.com',
+  position: 'developer',
+  salary: '$150,000',
+  url: 'www.facebook.com',
+  applied: '',
+  interview: '',
+  offer: '',
+  offer_salary: '',
+  priority: '1',
   column: 'wishlist',
   user_id: @tester.id
 )
@@ -62,13 +67,18 @@
   position: 'job',
   salary: '$75,000',
   url: 'www.ga.com',
-  column: 'applied',
+  applied: '',
+  interview: '',
+  offer: '',
+  offer_salary: '',
+  priority: '3',
+  column: 'wishlist',
   user_id: @tester.id
 )
 
 Note.create!(
   date: Time.new.strftime('%d/%m/%Y'),
-  content: 'send thank you note to Lisa',
+  content: 'interview will be take home- review linked lists',
   job_id: @google.id
 )
 
@@ -80,27 +90,30 @@ Note.create!(
 
 Note.create!(
   date: Time.new.strftime('%d/%m/%Y'),
-  content: 'questions to ask interviewer: ask',
+  content: 'questions to ask interviewer: what should I ask the interviewer?',
   job_id: @google.id
 )
 
 Contact.create!(
-  email: 'john@g.com',
+  email: 'd@g.com',
+  phone: '',
   position: 'Team Lead',
-  name: 'John',
+  name: 'Dwight Schrute',
   job_id: @google.id
 )
 
 Contact.create!(
-  email: 'paul@g.com',
+  email: 'mike@g.com',
+  phone: '',
   position: 'Hiring Manager',
-  name: 'Paul',
+  name: 'Michael Scott',
   job_id: @google.id
 )
 
 Contact.create!(
-  email: 'lisa@g.com',
-  position: 'Hiring Manager',
-  name: 'Lisa',
+  email: 'jim@g.com',
+  phone: '',
+  position: '?',
+  name: 'Jim Halpert',
   job_id: @google.id
 )
