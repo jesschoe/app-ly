@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Container = styled.div`
   display: flex;
   height: 100vh;
-  font-family: 'Raleway';
+  font-family: 'Raleway', sans-serif;
   overflow: hidden;
   width: 100vw;
 `

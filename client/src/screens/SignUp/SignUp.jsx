@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
+  align-items: center;
   background-color: #FFF4EE;
   display: flex;
   font-family: 'Raleway', sans-serif;
   font-size: .7em;
   justify-content: center;
   letter-spacing: 1.5px;
-  align-items: center;
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
 
   @media (max-width: 940px) {
     flex-direction: column;
@@ -25,47 +25,42 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-
 const SignUpForm = styled.form`
+  align-items: center;
   background-color: #FFFFFF;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border-radius: 5px;
+  margin-bottom: 20px;
   padding: 20px 0 10px 0;
   width: 400px;
-  margin-bottom: 20px;
 
   @media (max-width: 425px) {
     width: 275px;
   }
 `
-
   const InputGroup = styled.div`
+  align-items: start;
   display: flex;
   flex-direction: column;
-  align-items: start;
   margin: 10px 20px;
 `
-
 const SignUpInput = styled.input`
   padding: 10px;
   width: 200px;
 `
-
 const Button = styled.button`
+  align-self: center;
   background-color: #E94D4D;
   border: none;
   color: #FFFFFF;
+  cursor: pointer;
   font-size: 1em;
+  margin: 20px;
   padding: 7px 20px;
   text-transform: uppercase;
-  align-self: center;
-  margin: 20px;
-  cursor: pointer;
 `
-
 const LogoDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,15 +71,14 @@ const LogoDiv = styled.div`
     width: 275px;
   }
 `
-
 const Title = styled.h4`
   align-self: start;
-  text-transform: uppercase;
   color: #0F3875;
-  font-weight: 300;
   font-size: 32px;
-  margin: 0;
+  font-weight: 300;
   letter-spacing: .1em;
+  margin: 0;
+  text-transform: uppercase;
 
   @media (max-width: 425px) {
     font-size: 24px;
@@ -92,67 +86,64 @@ const Title = styled.h4`
 `
 const Title2 = styled.h4`
   align-self: start;
-  text-transform: uppercase;
   color: #0F3875;
-  font-weight: 300;
   font-size: 32px;
-  margin: 0;
+  font-weight: 300;
   letter-spacing: 0;
+  margin: 0;
+  text-transform: uppercase;
 
   @media (max-width: 425px) {
     font-size: 24px;
   }
 `
-
 const SmallTitle = styled.div`
   align-self: start;
-  text-transform: uppercase;
   color: #0F3875;
-  font-weight: 300;
   font-size: 1.5em;
+  font-weight: 300;
+  letter-spacing: .2em;
   margin: 0;
-  letter-spacing: .2em;
-
-  @media (max-width: 425px) {
-    font-size: 16px;
-    letter-spacing: 0;
-  }
-`
-
-const FormTitle = styled.div`
   text-transform: uppercase;
-  color: #E94D4D;
-  font-weight: 300;
-  font-size: 1.5em;
-  margin: 0 0 10px 0;
-  letter-spacing: .2em;
 
   @media (max-width: 425px) {
     font-size: 16px;
     letter-spacing: 0;
   }
 `
+const FormTitle = styled.div`
+  color: #E94D4D;
+  font-size: 1.5em;
+  font-weight: 300;
+  letter-spacing: .2em;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
 
+  @media (max-width: 425px) {
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+`
 const Logo = styled.div`
-  display: flex;
   align-self: end;
+  color: #E94D4D;
+  display: flex;
   font-family: 'Ephesis', cursive;
   font-size: 84px;
-  color: #E94D4D;
+  letter-spacing: 0;
   margin: -30px 0 30px 0;
   text-transform: none;
-  letter-spacing: 0;
 `
 const Slash = styled.div`
   border-left: 1px solid #E94D4D;
   height: 80px;
-  transform: skew(-35deg);
   margin: 10px 0 0 20px;
+  transform: skew(-35deg);
 `
 
 const ErrorMsg = styled.h4`
-  font-style: italic;
   color: #E94D4D;
+  font-style: italic;
 `
 
 export default function SignUp({ handleRegister, renderError }) {
@@ -233,7 +224,8 @@ export default function SignUp({ handleRegister, renderError }) {
           <ErrorMsg>{renderError()}</ErrorMsg>
           <Button>Submit</Button>
         </SignUpForm>
-        Already have an account? <Link style={{textDecoration:'none', color:'##E94D4D'}} to="/">Sign In</Link>
+        Already have an account? 
+        <Link style={{textDecoration:'none', color:'##E94D4D'}} to="/">Sign In</Link>
       </FormContainer>
     </Container>
   )
