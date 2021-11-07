@@ -2,17 +2,15 @@ import styled from "styled-components"
 import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
 
-
-
 const Card = styled.div`
-  flex-shrink: 0;
   background-color: #FFFFFF;
-  width: 300px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px grey;
+  flex-shrink: 0;
   height: 150px;
   margin: 20px;
-  box-shadow: 2px 2px 3px grey;
-  border-radius: 5px;
   padding: 10px 10px 20px 0;
+  width: 300px;
 
   @media (max-width: 425px) {
     width: 240px;
@@ -20,10 +18,10 @@ const Card = styled.div`
 `
 
 const TitleOrange = styled.h5`
-  text-transform: uppercase;
   color: #E94D4D;
   letter-spacing: .3em;
   margin: 0 0 5px 0;
+  text-transform: uppercase;
 
   @media (max-width: 425px) {
     font-size: .7em;
@@ -41,8 +39,8 @@ const DetailsText = styled.div`
 
 const Icon = styled.img`
   cursor: pointer;
-  width: 20px;
   margin: 0 5px;
+  width: 20px;
 `
 
 const ButtonDiv = styled.div`
@@ -50,12 +48,7 @@ const ButtonDiv = styled.div`
   justify-content: end;
 `
 
-
-
-
 export default function ContactCard({ job, contact, deleteContact, handleContactEdit }) {
-
-  
   const handleDelete = (id) => {
     deleteContact(job.id, id)
   }

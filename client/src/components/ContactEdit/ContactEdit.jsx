@@ -3,55 +3,55 @@ import styled from 'styled-components'
 import deleteIcon from '../../assets/delete-icon.png'
 
 const EditForm = styled.form`
+  align-items: center;
+  display: flex;
+  background: #FFFFFF;
   border-radius: 5px;
   box-shadow: 2px 2px 4px #000000;
-  display: flex;
   flex-direction: column;
-  align-items: center;
   font-size: .6em;
-  position: absolute;
-  background: #FFFFFF;
-  padding: 10px;
-  top: 25%;
   left: 40%;
+  padding: 10px;
+  position: absolute;
+  top: 25%;
   z-index: 20;
 `
 
 const Title = styled.h5`
-  text-transform: uppercase;
   color: #E94D4D;
-  letter-spacing: .5em;
   font-size: 1.2em;
+  letter-spacing: .5em;
   margin: 10px 30px 30px 30px;
+  text-transform: uppercase;
 `
 
 const InputGroup = styled.div`
+  align-items: start;
   display: flex;
   flex-direction: column;
-  align-items: start;
   margin: 0 0 0 -20px;
 `
 
 const Button = styled.button`
+  align-self: center;
   background-color: #E94D4D;
   border: none;
   color: #FFFFFF;
+  cursor: pointer;
   font-size: .9em;
+  margin: 20px;
   padding: 7px 20px;
   text-transform: uppercase;
-  align-self: center;
-  margin: 20px;
-  cursor: pointer;
 `
 
 const EditInput = styled.input`
+  autofocus;
+  border: 1px solid #0F3875;
   font-family: 'Raleway';
   font-size: 1.1em;
-  padding: 10px;
-  border: 1px solid #0F3875;
-  width: 100%;
   margin-bottom: 10px;
-  autofocus;
+  padding: 10px;
+  width: 100%;
   &:focus {
     outline: none;
     border: 1px solid #E94D4D;
@@ -59,15 +59,15 @@ const EditInput = styled.input`
 `
 
 const ButtonDiv = styled.div`
-  display: flex;
   align-self: end;
   cursor: pointer;
+  display: flex;
 `
 
 const Icon = styled.img`
-  width: 20px;
   margin: 0 5px;
   text-align: right;
+  width: 20px;
 `
 
 export default function ContactEdit({ id, contact, user, editContact, setShowEditContactModal }) {
@@ -96,27 +96,49 @@ export default function ContactEdit({ id, contact, user, editContact, setShowEdi
           <Icon src={deleteIcon} alt='delete contact' />
         </ButtonDiv>
         <Title>Update Contact</Title>
-
         <InputGroup>
           <label htmlFor='name'>Name</label>
-          <EditInput type='text' id='name' name='name' value={formData?.name} onChange={handleChange}/>
+          <EditInput 
+            type='text' 
+            id='name' 
+            name='name' 
+            value={formData?.name} 
+            onChange={handleChange} 
+          />
         </InputGroup>
         <InputGroup>
           <label htmlFor='position'>Position</label>
-          <EditInput type='text' id='position' name='position' value={formData?.position} onChange={handleChange}/>
+          <EditInput 
+            type='text' 
+            id='position' 
+            name='position' 
+            value={formData?.position} 
+            onChange={handleChange}
+          />
         </InputGroup>
         <InputGroup>
           <label htmlFor='email'>Email</label>
-          <EditInput type='text' id='email' name='email' value={formData?.email} onChange={handleChange}/>
+          <EditInput 
+            type='text' 
+            id='email' 
+            name='email' 
+            value={formData?.email} 
+            onChange={handleChange}
+          />
         </InputGroup>
         <InputGroup>
           <label htmlFor='phone'>Phone</label>
-          <EditInput type='text' id='phone' name='phone' value={formData?.phone} onChange={handleChange}/>
+          <EditInput 
+            type='text' 
+            id='phone' 
+            name='phone' 
+            value={formData?.phone} 
+            onChange={handleChange}
+          />
         </InputGroup>
         <Button type='submit'>
           update
         </Button>
-
       </EditForm>
     </div>
   )

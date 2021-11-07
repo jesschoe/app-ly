@@ -98,13 +98,11 @@ export default function ContactCreate({ job, contact, user, newContact, setShowA
         e.preventDefault()
         newContact(formData.job_id, formData)
         setShowAddContactModal(prev => !prev)
-
       }}>
         <ButtonDiv onClick={handleClose}>
           <Icon src={deleteIcon} alt='delete contact' />
         </ButtonDiv>
         <Title>Add Contact</Title>
-
         <InputGroup>
           <label htmlFor='name'>Name</label>
           <EditInput type='text' id='name' name='name' value={formData?.name} onChange={handleChange}/>
@@ -124,7 +122,6 @@ export default function ContactCreate({ job, contact, user, newContact, setShowA
         <Button type='submit'>
           submit
         </Button>
-
       </EditForm>
     </div>
   )
