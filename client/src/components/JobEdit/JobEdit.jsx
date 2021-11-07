@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import deleteIcon from '../../assets/delete-icon.png'
 
 const EditForm = styled.form`
+  color: #0F3875;
   border-radius: 5px;
   box-shadow: 2px 2px 4px #000000;
   display: flex;
@@ -14,7 +15,7 @@ const EditForm = styled.form`
   position: absolute;
   background: #FFFFFF;
   padding: 10px;
-  top: 25%;
+  top: 20%;
   left: 25%;
   z-index: 20;
 
@@ -30,10 +31,12 @@ const EditForm = styled.form`
 const FormSection = styled.div`
   display: flex;
   margin: 10px;
+  
 
   @media (max-width: 425px) {
     flex-direction: column;
     margin: 0;
+    width: 180px;
   }
 `
 
@@ -44,15 +47,26 @@ const InputGroup = styled.div`
   margin: 0 20px;
 
   @media (max-width: 425px) {
-    margin: 5px;
+    margin: 5px 0 5px -10px;
+    width: 100%;
   }
 `
 
 const EditInput = styled.input`
+  font-family: 'Raleway';
+  font-size: 1.1em;
   padding: 10px;
+  border: 1px solid #0F3875;
+  autofocus;
 
+  &:focus {
+    outline: none;
+    border: 1px solid #E94D4D;
+  }
+  
   @media (max-width: 425px) {
     padding: 5px;
+    width: 100%;
   }
 `
 
@@ -207,16 +221,23 @@ export default function JobEdit({ job, editJob, setShowEditJobModal }) {
                 selected={interviewDate} 
                 onChange={(date) => handleDate(date, 'interview')} />
             </Calendar>
-            <label>Offer Date</label>
-            <DatePicker 
-              name='offer'
-              value={offer}
-              selected={offerDate} 
-              onChange={(date) => handleDate(date, 'offer')} />
+
           </InputGroup>
           <InputGroup>
             <label htmlFor='offer_salary'>Offer Salary</label>
             <EditInput type='text' id='offer_salary' name='offer_salary' value={offer_salary} onChange={handleChange}/>
+          </InputGroup>
+        </FormSection>
+        <FormSection style={{marginTop:'-5px'}}>
+          <InputGroup>
+              <label>Offer Date</label>
+            <Calendar>
+              <DatePicker 
+                name='offer'
+                value={offer}
+                selected={offerDate} 
+                onChange={(date) => handleDate(date, 'offer')} />
+            </Calendar>
           </InputGroup>
         </FormSection>
         <Button type='submit'>

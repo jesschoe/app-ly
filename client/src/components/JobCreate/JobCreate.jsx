@@ -6,20 +6,36 @@ import deleteIcon from '../../assets/delete-icon.png'
 
 const CreateForm = styled.form`
   color: #0F3875;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #000000;
   display: flex;
   flex-direction: column;
+  align-items: start;
   font-size: .6em;
-  box-shadow: 2px 2px 4px #000000;
   position: absolute;
   background: #FFFFFF;
-  padding: 20px;
+  padding: 10px;
   top: 20%;
-  left: 30%;
+  left: 25%;
   z-index: 20;
+
+  @media (max-width: 425px) {
+    align-items: center;
+    width: 70%;
+    font-size: .5em;
+    top: 12%;
+    left: 15%;
+  }
 `
 const FormSection = styled.div`
   display: flex;
   margin: 10px;
+
+  @media (max-width: 425px) {
+    flex-direction: column;
+    margin: 0;
+    width: 180px;
+  }
 `
 
 const InputGroup = styled.div`
@@ -28,6 +44,10 @@ const InputGroup = styled.div`
   align-items: start;
   margin: 0 20px;
   
+  @media (max-width: 425px) {
+    margin: 5px 0 5px -10px;
+    width: 100%;
+  }
 `
 
 const EditInput = styled.input`
@@ -40,6 +60,11 @@ const EditInput = styled.input`
     outline: none;
     border: 1px solid #E94D4D;
   }
+
+  @media (max-width: 425px) {
+    padding: 5px;
+    width: 100%;
+  }
 `
 
 const Dropdown = styled.select`
@@ -51,6 +76,10 @@ const Dropdown = styled.select`
   &:focus {
     outline: none;
     border: 1px solid #E94D4D;
+  }
+
+  @media (max-width: 425px) {
+    padding: 5px;
   }
 `
 
@@ -77,6 +106,10 @@ const Title = styled.h5`
   letter-spacing: .5em;
   font-size: 1.2em;
   margin: 0 0 20px 30px;
+
+  @media (max-width: 425px) {
+    margin: 5px;
+  }
 `
 
 const ButtonDiv = styled.div`
@@ -203,18 +236,24 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
                 selected={interviewDate} 
                 onChange={(date) => handleDate(date, 'interview')} />
             </Calendar>
-            <label>Offer Date</label>
-            <DatePicker 
-              name='offer'
-              value={offer}
-              selected={offerDate} 
-              onChange={(date) => handleDate(date, 'offer')} />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor='offer_salary'>Offer Salary</label>
-            <EditInput type='text' id='offer_salary' name='offer_salary' value={offer_salary} onChange={handleChange}/>
-          </InputGroup>
-        </FormSection>
+            </InputGroup>
+            <InputGroup>
+              <label htmlFor='offer_salary'>Offer Salary</label>
+              <EditInput type='text' id='offer_salary' name='offer_salary' value={offer_salary} onChange={handleChange}/>
+            </InputGroup>
+          </FormSection>
+          <FormSection style={{marginTop:'-5px'}}>
+            <InputGroup>
+                <label>Offer Date</label>
+              <Calendar>
+                <DatePicker 
+                  name='offer'
+                  value={offer}
+                  selected={offerDate} 
+                  onChange={(date) => handleDate(date, 'offer')} />
+              </Calendar>
+            </InputGroup>
+          </FormSection>
         <Button type='submit'>
           submit
         </Button>
