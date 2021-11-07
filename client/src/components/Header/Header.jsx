@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import accountIcon from '../../assets/account-blue.svg'
 
 const Container = styled.div`
-  align-content: center;
+  align-content: start;
   display: flex;
   justify-content: space-between;
   width: 90vw;
@@ -65,7 +65,7 @@ export default function Header({ user, handleLogout }) {
         </Link>
       </Logo>
       <div>
-        <Title>{user?.username}'s jobs</Title>
+        <Title>Welcome, {user?.username}!</Title>
       </div>
       <MobileNav>
         <Link 

@@ -63,7 +63,7 @@ const DroppableColumn = styled.div`
 `
 
 const ShowMore = styled.div`
-  margin-left: 15px;
+  margin: 10px 0 0 15px;
 `
 
 const DetailsDiv = styled.div`
@@ -123,14 +123,13 @@ const DraggableItem = styled.div`
   user-select: none;
   ...provided.draggableProps.style;
 `
-
 const DetailsLink = styled.div`
   display: flex;
   justify-content: end;
   font-size: .7em;
   line-height: 1.7em;
   text-align: right;
-  margin-top: 5px;
+  margin: 5px 0 -5px 0;
   color: #E94D4D;
 `
 
