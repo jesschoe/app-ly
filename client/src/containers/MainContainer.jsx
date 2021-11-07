@@ -81,6 +81,7 @@ export default function MainContainer({ user, handleLogout }) {
               user={user}
               saveBoard={saveBoard}
               newJob={newJob}
+              editJob={editJob}
             />
           </Route>
           <Route path='/jobs/all/contacts'>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid } from 'uuid';
 import styled from "styled-components";
 import JobCreate from "../../components/JobCreate/JobCreate";
+import JobEdit from "../../components/JobEdit/JobEdit";
 import add from '../../assets/add-icon.svg'
 
 const BoardContainer = styled.div`
@@ -122,9 +124,20 @@ const DraggableItem = styled.div`
   ...provided.draggableProps.style;
 `
 
-export default function Board({ jobs, user, saveBoard, newJob }) {
+const DetailsLink = styled.div`
+  display: flex;
+  justify-content: end;
+  font-size: .7em;
+  line-height: 1.7em;
+  text-align: right;
+  margin-top: 5px;
+`
+
+export default function Board({ jobs, user, saveBoard, newJob, editJob }) {
   const [formData, setFormData] = useState(null)
   const [showAddJobModal, setShowAddJobModal] = useState(false)
+  const [showEditJobModal, setShowEditJobModal] = useState(false)
+  const [job, setJob] = useState(null)
   const [columnId, setColumnId] = useState(null)
   const [showMore, setShowMore] = useState(false)
   const [items, setItems] = useState(null)
@@ -239,6 +252,11 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
     setShowAddJobModal(prev => !prev)
   }
 
+  const handleEdit = (job) => {
+    setJob(job)
+    setShowEditJobModal(prev => !prev)
+  }
+
   return (
     <>
       <PageTitle>All Jobs</PageTitle>
@@ -288,11 +306,12 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
                                       onClick={() => handleClick(item.id)}
                                       priority={item.priority}
                                     >
+                                      <div>
                                       <DetailsDiv>
                                         <DetailsTitle>{item.company}</DetailsTitle>
                                         <DetailsText>{column.name==='applied' ? item.applied :
-                                          column.name==='interview' ? item.interview :
-                                          column.name==='offer' ? item.offer :
+                                          column.name==='interviews' ? item.interview :
+                                          column.name==='offers' ? item.offer :
                                           ''}  
                                         </DetailsText>
                                       </DetailsDiv>
@@ -314,8 +333,13 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
                                                   </>) :
                                                 ''}  
                                             </DetailsText>
+                                            <DetailsLink>
+                                              <Link style={{textDecoration:'none', marginRight:'5px'}} to={`/jobs/${item.id}`}>details</Link>
+                                              <div style={{cursor:'pointer'}} onClick={() => handleEdit(item)}>edit</div>
+                                            </DetailsLink>
                                           </ShowMore>
                                         ) : ''}
+                                      </div>
                                     </DraggableItem>
                                   );
                                 }}
@@ -341,6 +365,14 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
               setShowAddJobModal={setShowAddJobModal}
               columnId={columnId}/>
           </>) : ''}
+        {showEditJobModal ? 
+        <>
+          <Overlay></Overlay>
+          <JobEdit 
+            job={job} 
+            editJob={editJob} 
+            setShowEditJobModal={setShowEditJobModal}/> 
+        </>  : ''}
       </BoardContainer>
     </>
   )
