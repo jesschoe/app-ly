@@ -62,8 +62,8 @@ const DroppableColumn = styled.div`
   }
 `
 
-const ShowMore = styled.ul`
-  margin: 5px 0 0 0;
+const ShowMore = styled.div`
+  margin-left: 15px;
 `
 
 const DetailsDiv = styled.div`
@@ -131,6 +131,7 @@ const DetailsLink = styled.div`
   line-height: 1.7em;
   text-align: right;
   margin-top: 5px;
+  color: #E94D4D;
 `
 
 export default function Board({ jobs, user, saveBoard, newJob, editJob }) {
@@ -328,13 +329,14 @@ export default function Board({ jobs, user, saveBoard, newJob, editJob }) {
                                                   Applied: {item.applied} </>) :
                                                 column.name==='offers' ? (
                                                   <>
-                                                    Applied: {item.applied}<br/>
-                                                    Interviewed: {item.interview}
+                                                    Applied: {item.applied}<br />
+                                                    Interviewed: {item.interview}<br />
+                                                    Offer: {item.offer_salary}
                                                   </>) :
                                                 ''}  
                                             </DetailsText>
                                             <DetailsLink>
-                                              <Link style={{textDecoration:'none', marginRight:'5px'}} to={`/jobs/${item.id}`}>details</Link>
+                                              <Link style={{textDecoration:'none', color:'#E94D4D', marginRight:'5px', }} to={`/jobs/${item.id}`}>details</Link>
                                               <div style={{cursor:'pointer'}} onClick={() => handleEdit(item)}>edit</div>
                                             </DetailsLink>
                                           </ShowMore>
