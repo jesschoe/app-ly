@@ -8,6 +8,7 @@ const Card = styled.div`
   flex-shrink: 0;
   background-color: #FFFFFF;
   width: 300px;
+  height: 150px;
   margin: 20px;
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
@@ -66,10 +67,10 @@ export default function ContactCard({ job, contact, deleteContact, handleContact
         <div onClick={() => handleDelete(contact.id)}><Icon src={deleteIcon} alt='delete contact' /></div>
       </ButtonDiv>
       <TitleOrange>{contact.name}</TitleOrange>
-      <DetailsText>company: {job.company}</DetailsText>
-      <DetailsText>position: {contact.position}</DetailsText>
-      <DetailsText>email: {contact.email}</DetailsText>
-      <DetailsText>phone: {contact.phone}</DetailsText>
+      <DetailsText>Company: {job.company}</DetailsText>
+      <DetailsText>Position: {contact.position}</DetailsText>
+      <DetailsText>Email: {contact.email}</DetailsText>
+      <DetailsText>Phone: {contact.phone}</DetailsText>
     </Card>
   )
 }

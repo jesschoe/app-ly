@@ -85,14 +85,12 @@ export default function ContactEdit({ id, contact, user, editContact, setShowEdi
     setShowEditContactModal(prev => !prev)
   }
 
-  console.log(contact)
   return (
     <div>
       <EditForm onSubmit={e => {
         e.preventDefault()
         editContact(formData.job_id, id, formData)
         setShowEditContactModal(prev => !prev)
-
       }}>
         <ButtonDiv onClick={handleClose}>
           <Icon src={deleteIcon} alt='delete contact' />
