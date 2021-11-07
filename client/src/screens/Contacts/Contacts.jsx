@@ -63,7 +63,7 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
 
   const handleContactEdit = (id) => {
     setShowEditContactModal(prev =>! prev)
-    setContact((jobs.find(job => {
+    setContact((jobs?.find(job => {
       return (
         job.contacts.find(contact => contact.id === Number(id))
       )})).contacts.find(contact => contact.id === Number(id))
