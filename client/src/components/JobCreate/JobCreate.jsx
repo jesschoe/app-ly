@@ -5,26 +5,26 @@ import 'react-datepicker/dist/react-datepicker.css'
 import deleteIcon from '../../assets/delete-icon.png'
 
 const CreateForm = styled.form`
-  color: #0F3875;
+  align-items: start;
+  background: #FFFFFF;
   border-radius: 5px;
   box-shadow: 2px 2px 4px #000000;
+  color: #0F3875;
   display: flex;
   flex-direction: column;
-  align-items: start;
   font-size: .6em;
-  position: absolute;
-  background: #FFFFFF;
-  padding: 10px;
-  top: 20%;
   left: 25%;
+  padding: 10px;
+  position: absolute;
+  top: 20%;
   z-index: 20;
 
   @media (max-width: 425px) {
     align-items: center;
-    width: 70%;
     font-size: .5em;
-    top: 12%;
     left: 15%;
+    top: 12%;
+    width: 70%;
   }
 `
 const FormSection = styled.div`
@@ -37,11 +37,10 @@ const FormSection = styled.div`
     width: 180px;
   }
 `
-
 const InputGroup = styled.div`
+  align-items: start;
   display: flex;
   flex-direction: column;
-  align-items: start;
   margin: 0 20px;
   
   @media (max-width: 425px) {
@@ -49,16 +48,15 @@ const InputGroup = styled.div`
     width: 100%;
   }
 `
-
 const EditInput = styled.input`
+  autofocus;
+  border: 1px solid #0F3875;
   font-family: 'Raleway';
   font-size: 1.1em;
   padding: 10px;
-  border: 1px solid #0F3875;
-  autofocus;
   &:focus {
-    outline: none;
     border: 1px solid #E94D4D;
+    outline: none;
   }
 
   @media (max-width: 425px) {
@@ -66,13 +64,12 @@ const EditInput = styled.input`
     width: 100%;
   }
 `
-
 const Dropdown = styled.select`
+  autofocus;
+  border: 1px solid #0F3875;
   font-family: 'Raleway';
   font-size: 1.1em;
   padding: 10px;
-  border: 1px solid #0F3875;
-  autofocus;
   &:focus {
     outline: none;
     border: 1px solid #E94D4D;
@@ -82,46 +79,41 @@ const Dropdown = styled.select`
     padding: 5px;
   }
 `
-
 const Calendar = styled.div`
   margin-bottom: 10px;
 `
-
 const Button = styled.button`
+  align-self: center;
   background-color: #E94D4D;
   border: none;
   color: #FFFFFF;
+  cursor: pointer;
   font-size: .9em;
+  margin: 20px;
   padding: 7px 20px;
   text-transform: uppercase;
-  align-self: center;
-  margin: 20px;
-  cursor: pointer;
 `
-
 const Title = styled.h5`
   align-self: start;
-  text-transform: uppercase;
   color: #E94D4D;
-  letter-spacing: .5em;
   font-size: 1.2em;
+  letter-spacing: .5em;
   margin: 0 0 20px 30px;
+  text-transform: uppercase;
 
   @media (max-width: 425px) {
     margin: 5px;
   }
 `
-
 const ButtonDiv = styled.div`
-  display: flex;
   align-self: end;
   cursor: pointer;
+  display: flex;
 `
-
 const Icon = styled.img`
-  width: 20px;
   margin: 0 5px;
   text-align: right;
+  width: 20px;
 `
 
 export default function JobCreate({ job, user, newJob, setShowAddJobModal, columnId }) {
@@ -145,8 +137,15 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
     notes: [],
     user_id: user?.id
   })
-
-  const {company, location, position, salary, url, offer_salary, applied, interview, offer} = formData
+  const {company, 
+    location, 
+    position, 
+    salary, 
+    url, 
+    offer_salary, 
+    applied, 
+    interview, 
+    offer} = formData
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -170,7 +169,6 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
     }))
   }
 
-
   return (
     <div>
       <CreateForm onSubmit={e => {
@@ -185,7 +183,12 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
         <FormSection>
           <InputGroup>
             <label htmlFor='company'>Company</label>
-            <EditInput type='text' id='company' name='company' value={company} onChange={handleChange}/>
+            <EditInput 
+              type='text' 
+              id='company' 
+              name='company' 
+              value={company} 
+              onChange={handleChange} />
           </InputGroup>
           <InputGroup>
             <label htmlFor='priority'>Priority</label>
@@ -199,21 +202,41 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
         <FormSection>
           <InputGroup>
             <label htmlFor='position'>Position</label>
-            <EditInput type='text' id='position' name='position' value={position} onChange={handleChange}/>
+            <EditInput 
+              type='text' 
+              id='position' 
+              name='position' 
+              value={position} 
+              onChange={handleChange} />
           </InputGroup>
           <InputGroup>
             <label htmlFor='location'>Location</label>
-            <EditInput type='text' id='location' name='location' value={location} onChange={handleChange}/>
+            <EditInput 
+              type='text' 
+              id='location' 
+              name='location' 
+              value={location} 
+              onChange={handleChange} />
           </InputGroup>
         </FormSection>
         <FormSection>
           <InputGroup>
             <label htmlFor='salary'>Salary</label>
-            <EditInput type='text' id='salary' name='salary' value={salary} onChange={handleChange}/>
+            <EditInput 
+              type='text' 
+              id='salary' 
+              name='salary' 
+              value={salary} 
+              onChange={handleChange} />
           </InputGroup>
           <InputGroup>
             <label htmlFor='url'>Post URL</label>
-            <EditInput type='text' id='url' name='url' value={url} onChange={handleChange}/>
+            <EditInput 
+              type='text' 
+              id='url' 
+              name='url' 
+              value={url} 
+              onChange={handleChange} />
           </InputGroup>
         </FormSection>
         <FormSection>
@@ -239,7 +262,12 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
             </InputGroup>
             <InputGroup>
               <label htmlFor='offer_salary'>Offer Salary</label>
-              <EditInput type='text' id='offer_salary' name='offer_salary' value={offer_salary} onChange={handleChange}/>
+              <EditInput 
+                type='text' 
+                id='offer_salary' 
+                name='offer_salary' 
+                value={offer_salary} 
+                onChange={handleChange} />
             </InputGroup>
           </FormSection>
           <FormSection style={{marginTop:'-5px'}}>
@@ -257,9 +285,7 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
         <Button type='submit'>
           submit
         </Button>
-
       </CreateForm>
-
     </div>
   )
 }
