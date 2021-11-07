@@ -6,15 +6,14 @@ import accountIcon from '../../assets/account-icon.svg'
 import boardIcon from '../../assets/board-icon.svg'
 
 const Nav = styled.div`
-  display: flex;
+align-content: center;
+display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-content: center;
-  text-transform: uppercase;
   font-size: .6em;
+  justify-content: space-around;
   letter-spacing: .1em;
+  text-transform: uppercase;
 `
-
 const LinkName = styled.div`
   margin: 5px 4px 30px 4px;
 `

@@ -4,45 +4,40 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   display: flex;
-  width: 100vw;
   height: 100vh;
-  font-family: 'Open Sans', sans-serif;
-  overflow: hidden;
   font-family: 'Raleway';
+  overflow: hidden;
+  width: 100vw;
 `
-
 const Main = styled.div`
   display: flex;
-  flex-direction: column;
   flex: 1;
+  flex-direction: column;
 `
-
 const Nav = styled.div`
-  display: flex;
-  justify-content: center;
   background-color: #0F3875;
   color: white;
+  display: flex;
   height: 100vh;
+  justify-content: center;
 
   @media (max-width: 425px) {
     display: none;
   }
 `
-
 const HeaderLinks = styled.div`
   border-bottom: 1px solid #E94D4D; 
   height: 45px;
   letter-spacing: .5em;
 `
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   font-size: 1.2em;
+  height: 100vh;
   letter-spacing: 1.5px;
+  overflow: hidden;
+  width: 100vw;
 `
 
 export default function Layout({ children, user, handleLogout }) {

@@ -3,25 +3,24 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
+  align-items: center;
   background-color: #FFF4EE;
   display: flex;
   flex-direction: column;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: .7em;
+  height: 100vh;
   justify-content: center;
   letter-spacing: 1.5px;
-  align-items: center;
   width: 100vw;
-  height: 100vh;
 ` 
-
 const SignInForm = styled.form`
+  align-items: center;
   background-color: #FFFFFF;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border-radius: 5px;
   padding: 20px;
   width: 400px;
 
@@ -29,82 +28,73 @@ const SignInForm = styled.form`
     width: 300px;
   }
 `
-
 const InputGroup = styled.div`
+  align-items: start;
   display: flex;
   flex-direction: column;
-  align-items: start;
   margin: 10px 20px;
 `
-
 const SignInInput = styled.input`
   padding: 10px;
   width: 200px;
 `
-
 const Button = styled.button`
+  align-self: center;
   background-color: #E94D4D;
   border: none;
   color: #FFFFFF;
+  cursor: pointer;
   font-size: 1em;
+  margin: 20px;
   padding: 7px 20px;
   text-transform: uppercase;
-  align-self: center;
-  margin: 20px;
-  cursor: pointer;
 `
-
 const LogoDiv = styled.div`
+  align-self: start;
   display: flex;
   flex-direction: column;
-  align-self: start;
   margin: -50px 50px 0 50px;
   width: 280px;
 `
-
 const Title = styled.h4`
   align-self: start;
-  font-family: 'Raleway';
-  text-transform: uppercase;
   color: #0F3875;
-  font-weight: 300;
   font-size: 2em;
-`
-
-const FormTitle = styled.div`
-  text-transform: uppercase;
-  color: #E94D4D;
   font-weight: 300;
+  text-transform: uppercase;
+`
+const FormTitle = styled.div`
+  color: #E94D4D;
   font-size: 1.5em;
-  margin: 0 0 10px 0;
+  font-weight: 300;
   letter-spacing: .2em;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
 
   @media (max-width: 425px) {
     font-size: 16px;
     letter-spacing: 0;
   }
 `
-
 const Logo = styled.div`
-  display: flex;
   align-self: end;
+  color: #E94D4D;
+  display: flex;
   font-family: 'Ephesis', cursive;
   font-size: 84px;
-  color: #E94D4D;
+  letter-spacing: 0;
   margin: -70px 0 30px 0;
   text-transform: none;
-  letter-spacing: 0;
 `
 const Slash = styled.div`
   border-left: 1px solid #E94D4D;
   height: 80px;
-  transform: skew(-35deg);
   margin: 10px 0 0 20px;
+  transform: skew(-35deg);
 `
-
 const ErrorMsg = styled.h4`
-  font-style: italic;
   color: #E94D4D;
+  font-style: italic;
 `
 
 export default function SignIn({ handleLogin, renderError }) {
@@ -161,7 +151,10 @@ export default function SignIn({ handleLogin, renderError }) {
           <ErrorMsg>{renderError()}</ErrorMsg>
           <Button>Sign In</Button>
         </SignInForm>
-          <Link style={{margin:'20px', textDecoration:'none', color:'##E94D4D'}} to="/signup">Create an account</Link>
+          <Link 
+            style={{margin:'20px', textDecoration:'none', color:'##E94D4D'}} 
+            to="/signup"
+          >Create an account</Link>
       </Container>
     </>
   )

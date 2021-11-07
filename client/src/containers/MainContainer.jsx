@@ -3,10 +3,10 @@ import { Route, Switch, useHistory } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
 import { createContact, updateContact, createNote, destroyContact, destroyNote } from '../services/contacts'
 import Layout from '../layouts/Layout'
-import Jobs from '../screens/Jobs/Jobs'
+import Board from '../screens/Board/Board'
 import Contacts from '../screens/Contacts/Contacts'
 import JobDetail from '../screens/JobDetail/JobDetail'
-import Board from '../screens/Board/Board'
+import Jobs from '../screens/Jobs/Jobs'
 
 export default function MainContainer({ user, handleLogout }) {
   const [jobs, setJobs] = useState([])

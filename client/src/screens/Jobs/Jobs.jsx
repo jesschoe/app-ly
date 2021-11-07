@@ -1,87 +1,80 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import JobCard from '../../components/JobCard/JobCard'
 import styled from 'styled-components'
+import JobCard from '../../components/JobCard/JobCard'
 import JobCreate from '../../components/JobCreate/JobCreate'
 import add from '../../assets/add-icon.svg'
 
 const Container = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 90%;
   justify-items: center;
   overflow: hidden;
-  width: 90%;
-  height: 90%;
   padding: 20px;
+  width: 90%;
 
   @media (max-width: 425px) {
     padding: 5px;
   }
 `
-
 const CardTop = styled.div`
-  display: flex;
-  flex-direction: column;
   background-color: #FFF4EE;
   border-radius: 5px;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
   height: 85%;
-  width: 80%;
   margin: 20px;
+  padding: 20px;
+  width: 80%;
 
   @media (max-width: 425px) {
-    width: 90%;
-    margin: 20px 10px;
     background-color: #0F3875;
+    margin: 20px 10px;
     padding: 10px;
+    width: 90%;
   }
 `
-
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   overflow: auto;
 `
-
 const Title = styled.h4`
-  text-transform: uppercase;
-  justify-self: start;
+  align-self: start;
   color: #0F3875;
   font-size: 1.1em;
   font-weight: 300;
+  justify-self: start;
   letter-spacing: .7em;
-  align-self: start;
   margin: 20px 0 0 20px;
+  text-transform: uppercase;
 `
-
 const HelperText = styled.div`
   align-self: start;
-  font-style: italic;
-  font-size: .7em;
   color: #0F3875;
+  font-size: .7em;
+  font-style: italic;
   margin-left: 20px;
 `
-
 const AddIcon = styled.img`
   cursor: pointer;
   width: 25px;
 `
-
 const Overlay = styled.div`
+  background-color: #0F3875;
+  height: 100%;
+  left: 0;
+  opacity: .5;
   position: fixed;
   top: 0;
-  left: 0;
-  height: 100%;
   width: 100%;
   z-index: 10;
-  background-color: #0F3875;
-  opacity: .5;
 `
 
 export default function Jobs({ user, jobs, newJob }) {
-
   const [showAddJobModal, setShowAddJobModal] = useState(false)
 
   const handleAdd = () => {
@@ -93,7 +86,6 @@ export default function Jobs({ user, jobs, newJob }) {
       <Title>All Jobs</Title>
       <HelperText>click to see details</HelperText>
       <Container>
-        
         <CardTop>
           <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
           <CardContainer>

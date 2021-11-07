@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import ContactCard from '../../components/ContactCard/ContactCard'
-import JobEdit from '../../components/JobEdit/JobEdit'
 import ContactCreate from '../../components/ContactCreate/ContactCreate'
 import ContactEdit from '../../components/ContactEdit/ContactEdit'
 import DeleteAlert from '../../components/DeleteAlert/DeleteAlert'
+import JobEdit from '../../components/JobEdit/JobEdit'
 import NoteCard from '../../components/NoteCard/NoteCard'
 import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
@@ -16,7 +16,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `
-
 const DetailsContainer = styled.div`
   display: grid;
   grid-gap: 5px;
@@ -37,7 +36,6 @@ const DetailsContainer = styled.div`
     width: 90%;
   }
 `
-
 const DetailsColumn = styled.div`
   align-items: center;
   display: flex;
@@ -55,7 +53,6 @@ const DetailsColumn = styled.div`
     padding: 10px;
   }
 `
-
 const NotesColumn = styled.div`
   align-items: start;
   display: flex;
@@ -89,7 +86,6 @@ const Details = styled.div`
     width: 90%;
   }
 `
-
 const ContactsList = styled.div`
   background-color: #FFF4EE;
   border-radius: 5px;
@@ -99,19 +95,16 @@ const ContactsList = styled.div`
   padding: 20px 20px 0 20px;
   width: 100%;
 
-  
   @media (max-width: 425px) {
     padding: 5px;
     width: 90%;
   }
 
 `
-
 const ContactCards = styled.div`
   display: flex;
   overflow-x: auto;
 `
-
 const NotesList = styled.div`
   display: flex;
   flex-direction: column;
@@ -130,7 +123,6 @@ const NotesList = styled.div`
     width: 90%;
   }
 `
-
 const DetailsCard = styled.div`
   background-color: #FFFFFF;
   border-radius: 5px;
@@ -139,7 +131,6 @@ const DetailsCard = styled.div`
   margin: 20px;
   padding: 10px 10px 20px 10px;
 `
-
 const Title = styled.h4`
   align-self: start;
   color: #0F3875;
@@ -153,7 +144,6 @@ const Title = styled.h4`
     font-size: .9em;
   }
 `
-
 const TitleOrange = styled.h5`
   color: #E94D4D;
   letter-spacing: .3em;
@@ -164,12 +154,10 @@ const TitleOrange = styled.h5`
     font-size: .7em;
   }
 `
-
 const DateOrange = styled.h6`
   color: #E94D4D;
   margin: -10px 10px 5px 10px;
 `
-
 const DetailsText = styled.div`
   font-size: .7em;
   line-height: 1.7em;
@@ -179,19 +167,16 @@ const DetailsText = styled.div`
     font-size: .6em;
   }
 `
-
 const Icon = styled.img`
   cursor: pointer;  
   margin: 0 5px;
   width: 20px;
 `
-
 const ButtonDiv = styled.div`
   align-self: end;
   display: flex;
   justify-content: end;
 `
-
 const Overlay = styled.div`
   background-color: #0F3875;
   height: 100%;
@@ -202,17 +187,14 @@ const Overlay = styled.div`
   width: 100%;
   z-index: 10;
 `
-
 const AddIcon = styled.img`
   cursor: pointer;
   width: 25px;
 `
-
 const IconDiv = styled.div`
   justify-self: center;
   margin-top: 5px;
 `
-
 
 export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, deleteNote, newContact, editContact, deleteContact }) {
   const [job, setJob] = useState(null)
