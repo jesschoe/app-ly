@@ -1,42 +1,40 @@
 import styled from "styled-components"
 
-
 const Alert = styled.div`
+  align-items: start;
+  background: #FFFFFF;
   border-radius: 5px;
   box-shadow: 2px 2px 4px #000000;
   display: flex;
   flex-direction: column;
-  align-items: start;
   font-size: .6em;
-  position: absolute;
-  background: #FFFFFF;
-  padding: 20px 10px 10px 10px;
-  top: 30%;
   left: 40%;
+  padding: 20px 10px 10px 10px;
+  position: absolute;
+  top: 30%;
   width: 200px;
   z-index: 20;
 `
 
 const ButtonDiv = styled.div`
-  display: flex;
   align-self: center;
   cursor: pointer;
+  display: flex;
 `
 
 const Button = styled.button`
+  align-self: center;
   background-color: #E94D4D;
   border: none;
   color: #FFFFFF;
+  cursor: pointer;
   font-size: .9em;
+  margin: 20px;
   padding: 7px 20px;
   text-transform: uppercase;
-  align-self: center;
-  margin: 20px;
-  cursor: pointer;
 `
 
-export default function DeleteAlert({ job, deleteJob, setShowDeleteAlert}) {
-
+export default function DeleteAlert({ job, deleteJob, setShowDeleteAlert }) {
   const handleDelete = () => {
     deleteJob(job?.id)
     setShowDeleteAlert(prev => !prev)
