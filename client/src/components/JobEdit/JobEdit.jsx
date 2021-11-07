@@ -14,14 +14,16 @@ const EditForm = styled.form`
   position: absolute;
   background: #FFFFFF;
   padding: 10px;
-  top: 15%;
-  left: 15%;
+  top: 25%;
+  left: 25%;
   z-index: 20;
 
   @media (max-width: 425px) {
     align-items: center;
     width: 70%;
     font-size: .5em;
+    top: 12%;
+    left: 15%;
   }
 `
 

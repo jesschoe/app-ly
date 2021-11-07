@@ -24,6 +24,10 @@ const SignInForm = styled.form`
   border-radius: 5px;
   padding: 20px;
   width: 400px;
+
+  @media (max-width: 425px) {
+    width: 300px;
+  }
 `
 
 const InputGroup = styled.div`
@@ -98,7 +102,12 @@ const Slash = styled.div`
   margin: 10px 0 0 20px;
 `
 
-export default function SignIn({ handleLogin }) {
+const ErrorMsg = styled.h4`
+  font-style: italic;
+  color: #E94D4D;
+`
+
+export default function SignIn({ handleLogin, renderError }) {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -149,10 +158,10 @@ export default function SignIn({ handleLogin }) {
               onChange={handleChange}
             />
           </InputGroup>
-          
+          <ErrorMsg>{renderError()}</ErrorMsg>
           <Button>Sign In</Button>
-          <Link style={{textDecoration:'none', color:'##E94D4D'}} to="/signup">Create an account</Link>
         </SignInForm>
+          <Link style={{margin:'20px', textDecoration:'none', color:'##E94D4D'}} to="/signup">Create an account</Link>
       </Container>
     </>
   )

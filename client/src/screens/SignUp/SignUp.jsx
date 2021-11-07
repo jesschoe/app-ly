@@ -21,6 +21,10 @@ const Container = styled.div`
     flex-direction: column;
   }
 ` 
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const SignUpForm = styled.form`
   background-color: #FFFFFF;
@@ -29,8 +33,9 @@ const SignUpForm = styled.form`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  padding: 20px;
+  padding: 20px 0 10px 0;
   width: 400px;
+  margin-bottom: 20px;
 
   @media (max-width: 425px) {
     width: 275px;
@@ -145,12 +150,18 @@ const Slash = styled.div`
   margin: 10px 0 0 20px;
 `
 
-export default function SignUp({ handleRegister }) {
+const ErrorMsg = styled.h4`
+  font-style: italic;
+  color: #E94D4D;
+`
+
+export default function SignUp({ handleRegister, renderError }) {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    confirm_password: ''
+    confirm_password: '',
+    errorMsg: ''
   })
   const { username, email, password, confirm_password } = formData
 
@@ -172,56 +183,58 @@ export default function SignUp({ handleRegister }) {
           <div>app</div><Slash></Slash><div>ly</div>
         </Logo>
       </LogoDiv>
-      <SignUpForm onSubmit={(e) => {
-        e.preventDefault();
-        handleRegister(formData);
-      }} >
-        <FormTitle>
-          Create your app/ly account
-        </FormTitle>
-        <InputGroup>
-          <label>Username</label>
-          <SignUpInput
-            name="username"
-            type="text"
-            value={username}
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor="email">Email</label>
-          <SignUpInput
-            id="email"
-            name="email"
-            type="text"
-            value={email}
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor="password">Password</label>
-          <SignUpInput
-            id="password"
-            name="password"
-            type="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor="confirm_password">Confirm Password</label>
-          <SignUpInput
-            id="confirm_password"
-            name="confirm_password"
-            type="password"
-            value={confirm_password}
-            onChange={handleChange}
-          />
-        </InputGroup>
-        
-        <Button>Submit</Button>
-          Already have an account? <Link style={{textDecoration:'none', color:'##E94D4D'}} to="/">Sign In</Link>
-      </SignUpForm>
+      <FormContainer>
+        <SignUpForm onSubmit={(e) => {
+          e.preventDefault();
+          handleRegister(formData);
+        }} >
+          <FormTitle>
+            Create your app/ly account
+          </FormTitle>
+          <InputGroup>
+            <label>Username</label>
+            <SignUpInput
+              name="username"
+              type="text"
+              value={username}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="email">Email</label>
+            <SignUpInput
+              id="email"
+              name="email"
+              type="text"
+              value={email}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="password">Password</label>
+            <SignUpInput
+              id="password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="confirm_password">Confirm Password</label>
+            <SignUpInput
+              id="confirm_password"
+              name="confirm_password"
+              type="password"
+              value={confirm_password}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <ErrorMsg>{renderError()}</ErrorMsg>
+          <Button>Submit</Button>
+        </SignUpForm>
+        Already have an account? <Link style={{textDecoration:'none', color:'##E94D4D'}} to="/">Sign In</Link>
+      </FormContainer>
     </Container>
   )
 }

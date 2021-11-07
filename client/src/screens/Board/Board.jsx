@@ -39,7 +39,7 @@ const PageTitle = styled.h4`
   margin: 20px 0 0 20px;
 
   @media (max-width: 425px) {
-    margin-top: 0px;
+    
   }
 `
 
@@ -59,7 +59,7 @@ const DroppableColumn = styled.div`
   height: 600px;
 
   @media (max-width: 425px) {
-    height: 500px;
+    height: 450px;
     width: 200px;
   }
 `

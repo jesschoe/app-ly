@@ -9,26 +9,49 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState({});
+  const [errorMsg, setErrorMsg] = useState('')
   const history = useHistory();
 
   useEffect(() => {
     const handleVerify = async () => {
       const user = await verifyUser();
-      setUser(user);
+      user ? setUser(user) : setUser(null);
     }
     handleVerify();
   }, [])
 
   const handleLogin = async (formData) => {
-    const user = await loginUser(formData);
-    setUser(user);
-    history.push('/jobs/all/board')
+    try {
+      const user = await loginUser(formData);
+      setUser(user);
+      setErrorMsg('')
+      history.push('/jobs/all/board')
+    } catch (error) {
+      console.log(error)
+      setErrorMsg('Invalid login credentials')
+    }
   }
 
   const handleRegister = async (formData) => {
-    const user = await registerUser(formData);
-    setUser(user);
-    history.push('/jobs/all/board')
+    try {
+      const user = await registerUser(formData);
+      setUser(user)
+      setErrorMsg('')
+      history.push('/jobs/all/board')
+    } catch (error) {
+      console.log(error)
+      setErrorMsg('Sign up details invalid')
+    }
+  }
+
+  const renderError = () => {
+    if (errorMsg.length > 3) {
+      return (
+        <div>
+          {errorMsg}
+        </div>
+      )
+    }
   }
 
   const handleLogout = () => {
@@ -41,13 +64,13 @@ function App() {
     <div className="App">
       <Switch>
         <Route path='/signup'>
-          <SignUp handleRegister={handleRegister} />
+          <SignUp handleRegister={handleRegister} renderError={renderError}/>
         </Route>
         <Route path='/jobs'>
           <MainContainer user={user} handleLogout={handleLogout} />
         </Route>
         <Route exact path='/'>
-          {!user? <SignIn handleLogin={handleLogin} /> : <Redirect to='/jobs/all/board'/>}
+          {!user? <SignIn handleLogin={handleLogin} renderError={renderError}/> : <Redirect to='/jobs/all/board'/>}
         </Route>
       </Switch>
     </div>
