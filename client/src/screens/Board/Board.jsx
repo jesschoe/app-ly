@@ -7,10 +7,12 @@ import JobCreate from "../../components/JobCreate/JobCreate";
 
 const BoardContainer = styled.div`
   display: flex;
-  padding: 0 20px;
+  justify-items: start;
+  align-items: start;
+  padding: 0 5px;
   height: 90%;
   width: 90%;
-  margin: 10px;
+  margin: 5px;
   overflow-x: auto;
 
   @media (max-width: 425px) {
@@ -111,10 +113,12 @@ const DraggableItem = styled.div`
   margin: 10px 0;
   minHeight: 50px;
   background-color: #FFFFFF;
-  background-image: ${props => props.priority === '3' ? 'linear-gradient(90deg, #E94D4D 2%, #FFFFFF 0)' :
+  background-image: ${props => 
+    props.priority === '3' ? 'linear-gradient(90deg, #E94D4D 2%, #FFFFFF 0)' :
     props.priority === '2' ? 'linear-gradient(90deg, #F4C78E 2%, #FFFFFF 0)' : 
     'linear-gradient(90deg, #0F3875 2%, #FFFFFF 0)'};
-  border: ${props => props.priority === '3' ? '1px solid #E94D4D' :
+  border: ${props => 
+    props.priority === '3' ? '1px solid #E94D4D' :
     props.priority === '2' ? '1px solid #F4C78E' : 
     '1px solid #0F3875'};
   border-radius: 5px;
@@ -129,8 +133,6 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
   const [showMore, setShowMore] = useState(false)
   const [items, setItems] = useState(null)
   const [detailsId, setDetailsId] = useState(null)
-
-
 
   useEffect(() => {
     setItems(jobs?.map(job => {

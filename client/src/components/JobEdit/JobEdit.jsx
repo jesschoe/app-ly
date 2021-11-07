@@ -14,14 +14,25 @@ const EditForm = styled.form`
   position: absolute;
   background: #FFFFFF;
   padding: 10px;
-  top: 25%;
-  left: 25%;
+  top: 15%;
+  left: 15%;
   z-index: 20;
+
+  @media (max-width: 425px) {
+    align-items: center;
+    width: 70%;
+    font-size: .5em;
+  }
 `
 
 const FormSection = styled.div`
   display: flex;
   margin: 10px;
+
+  @media (max-width: 425px) {
+    flex-direction: column;
+    margin: 0;
+  }
 `
 
 const InputGroup = styled.div`
@@ -29,10 +40,18 @@ const InputGroup = styled.div`
   flex-direction: column;
   align-items: start;
   margin: 0 20px;
+
+  @media (max-width: 425px) {
+    margin: 5px;
+  }
 `
 
 const EditInput = styled.input`
   padding: 10px;
+
+  @media (max-width: 425px) {
+    padding: 5px;
+  }
 `
 
 const Dropdown = styled.select`
@@ -44,6 +63,10 @@ const Dropdown = styled.select`
   &:focus {
     outline: none;
     border: 1px solid #E94D4D;
+  }
+
+  @media (max-width: 425px) {
+    padding: 5px;
   }
 `
 
@@ -68,6 +91,10 @@ const Title = styled.h5`
   letter-spacing: .5em;
   font-size: 1.2em;
   margin: 20px 30px;
+
+  @media (max-width: 425px) {
+    margin: 5px;
+  }
 `
 
 const ButtonDiv = styled.div`
@@ -123,7 +150,7 @@ export default function JobEdit({ job, editJob, setShowEditJobModal }) {
         <ButtonDiv onClick={handleClose}>
           <Icon src={deleteIcon} alt='delete contact' />
         </ButtonDiv>
-        <Title>Add Job Opportunity</Title>
+        <Title>Update Job Opportunity</Title>
         <FormSection>
           <InputGroup>
             <label htmlFor='company'>Company</label>
