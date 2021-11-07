@@ -75,9 +75,9 @@ _The **App/ly** MVP is a full CRUD, full stack application with a Rails back end
 
 ![contacts](/client/src/assets/contacts.png)
 
-- Jobs screen on tablet
+- Job Application Tracking Board
 
-![tablet](client/src/assets/tablet.png)
+![board](client/src/assets/board.png)
 
 - Sign up and jobs on mobile
 
