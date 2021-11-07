@@ -21,7 +21,18 @@ const BoardContainer = styled.div`
     height: 80%;
   }
 `
-
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+`
+const HelperDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  text-align: right;
+  
+`
 const Title = styled.h5`
   color: #0F3875;
   font-size: .7em;
@@ -29,7 +40,6 @@ const Title = styled.h5`
   margin: 30px 0 10px 0;
   text-transform: uppercase;
 `
-
 const PageTitle = styled.h4`
   align-self: start;
   color: #0F3875;
@@ -40,15 +50,15 @@ const PageTitle = styled.h4`
   margin: 20px 0 0 20px;
   text-transform: uppercase;
 `
-
 const HelperText = styled.div`
-  align-self: start;
   color: #0F3875;
   font-style: italic;
   font-size: .7em;
-  margin-left: 20px;
 `
-
+const PriorityText = styled.div`
+  color: #0F3875;
+  font-size: .7em;  
+`
 const DroppableColumn = styled.div`
   border-radius: 5px;
   height: 600px;
@@ -259,8 +269,13 @@ export default function Board({ jobs, user, saveBoard, newJob, editJob }) {
 
   return (
     <>
-      <PageTitle>All Jobs</PageTitle>
-      <HelperText>drag items, click to see details</HelperText>
+      <TitleDiv>
+        <PageTitle>All Jobs</PageTitle>
+        <HelperDiv>
+          <HelperText>Drag items, click to see more options</HelperText>
+          <PriorityText>Priority: <span style={{color:'#E94D4D'}}>HIGH</span> <span style={{color:'#F4C78E'}}>MEDIUM</span> LOW</PriorityText>
+        </HelperDiv>
+      </TitleDiv>
       <BoardContainer>
         {!jobs ? 'Loading...' :
         <DragDropContext
