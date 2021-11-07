@@ -18,6 +18,7 @@ const SignInForm = styled.form`
   align-items: center;
   background-color: #FFFFFF;
   border-radius: 5px;
+  box-shadow: 2px 2px 4px #B7B7B7;
   display: flex;
   flex-direction: column;
   justify-content: center;
