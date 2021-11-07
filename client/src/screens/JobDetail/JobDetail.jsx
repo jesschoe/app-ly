@@ -6,6 +6,7 @@ import JobEdit from '../../components/JobEdit/JobEdit'
 import ContactCreate from '../../components/ContactCreate/ContactCreate'
 import ContactEdit from '../../components/ContactEdit/ContactEdit'
 import DeleteAlert from '../../components/DeleteAlert/DeleteAlert'
+import NoteCard from '../../components/NoteCard.jsx/NoteCard'
 import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
 import add from '../../assets/add-icon.svg'
@@ -130,22 +131,6 @@ const NotesList = styled.div`
   }
 `
 
-const NotesForm = styled.form`
-  display: flex;
-  margin: 20px;
-`
-
-const NoteInput = styled.input`
-  padding: 5px 10px;
-  width: 100%;
-  border: none;
-  autofocus;
-  &:focus {
-    outline: none;
-    border: 1px solid #E94D4D;
-  }
-`
-
 const DetailsCard = styled.div`
   background-color: #FFFFFF;
   height: 100%;
@@ -153,17 +138,6 @@ const DetailsCard = styled.div`
   box-shadow: 2px 2px 3px grey;
   border-radius: 5px;
   padding: 10px 10px 20px 10px;
-`
-
-const NoteCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  background-color: #FFFFFF;
-  margin: 10px;
-  box-shadow: 2px 2px 3px grey;
-  border-radius: 5px;
-  padding: 10px;
 `
 
 const Title = styled.h4`
@@ -239,17 +213,6 @@ const IconDiv = styled.div`
   margin-top: 5px;
 `
 
-const Button = styled.button`
-  background-color: #E94D4D;
-  border: none;
-  color: #FFFFFF;
-  font-size: .5em;
-  padding: 7px 20px;
-  text-transform: uppercase;
-  align-self: center;
-  margin: 0 0 0 10px;
-  cursor: pointer;
-`
 
 export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, deleteNote, newContact, editContact, deleteContact }) {
   const [job, setJob] = useState(null)
@@ -260,13 +223,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
   const [contactId, setContactId] = useState(null)
   const [contact, setContact] = useState(null)
   const { id } = useParams()
-  const [formData, setFormData] = useState({
-    date: new Date(),
-    content: '',
-    job_id: id
-  })
-  
-  
+
   useEffect(() => {
       const job = jobs?.find(job => job.id === Number(id))
       setJob(job)
@@ -290,14 +247,6 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
     setContactId(id)
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-  }))
-  }
-
   const handleAdd = () => {
     setShowAddContactModal(prev => !prev)
   }
@@ -318,7 +267,7 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
             <div onClick={confirmDelete}><Icon src={deleteIcon} alt='delete job' /></div>
           </ButtonDiv>
           <TitleOrange>{job?.company}</TitleOrange>
-          <DetailsText><a href={job?.url}>Link to Post</a></DetailsText>
+          <DetailsText><a href={job?.url} alt={job?.url} target='_blank'>Link to Post</a></DetailsText>
           <DetailsText>Location: {job?.location}</DetailsText>
           <DetailsText>Position: {job?.position}</DetailsText>
           <DetailsText>Salary: {job?.salary}</DetailsText>
@@ -349,29 +298,14 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
       <NotesColumn>
         <Title>Notes</Title>
         <NotesList>
-          <NotesForm onSubmit={e => {
-            e.preventDefault()
-            newNote(job.id, formData)
-            setFormData({    
-              date: new Date(),
-              content: '',
-              job_id: id
-            })
-          }}>
-            <NoteInput type='text' name='content' value={formData.content} onChange={handleChange} />
-            <Button type='submit'>add</Button>
-          </NotesForm>
-          {job?.notes.slice(0).reverse().map(note => {
-            return (
-              <NoteCard key={note.id}>
-                <ButtonDiv onClick={() => handleNoteDelete(note.job_id, note.id)}>
-                  <Icon src={deleteIcon} alt='delete note' />
-                </ButtonDiv>
-                <DateOrange>{note.date}</DateOrange>
-                <DetailsText>{note.content}</DetailsText>
-              </NoteCard>
-            )
-          })}
+          <NoteCard 
+            job={job} 
+            handleNoteDelete={handleNoteDelete}
+            newNote={newNote}
+            DateOrange={DateOrange}
+            Icon={Icon}
+            ButtonDiv={ButtonDiv}
+            id={id} />
         </NotesList> 
       </NotesColumn>
       {showEditJobModal ? 

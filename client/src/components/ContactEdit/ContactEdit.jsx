@@ -116,7 +116,7 @@ export default function ContactEdit({ id, contact, user, editContact, setShowEdi
           <EditInput type='text' id='phone' name='phone' value={formData?.phone} onChange={handleChange}/>
         </InputGroup>
         <Button type='submit'>
-          submit
+          update
         </Button>
 
       </EditForm>
