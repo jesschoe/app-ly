@@ -152,7 +152,7 @@ export default function SignIn({ handleLogin, renderError }) {
           <Button>Sign In</Button>
         </SignInForm>
           <Link 
-            style={{margin:'20px', textDecoration:'none', color:'##E94D4D'}} 
+            style={{margin:'20px', textDecoration:'none', color:'#E94D4D'}} 
             to="/signup"
           >Create an account</Link>
       </Container>

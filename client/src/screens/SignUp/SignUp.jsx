@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Wireframe from '../../assets/wireframes.png'
 
 const Container = styled.div`
   align-items: center;
@@ -146,6 +147,14 @@ const ErrorMsg = styled.h4`
   font-style: italic;
 `
 
+const Image = styled.img`
+
+
+  @media (max-width: 940px) {
+    display: none;
+  }
+`
+
 export default function SignUp({ handleRegister, renderError }) {
   const [formData, setFormData] = useState({
     username: '',
@@ -173,6 +182,7 @@ export default function SignUp({ handleRegister, renderError }) {
         <Logo>
           <div>app</div><Slash></Slash><div>ly</div>
         </Logo>
+        <Image src={Wireframe} alt="wireframes of app/ly" />
       </LogoDiv>
       <FormContainer>
         <SignUpForm onSubmit={(e) => {
@@ -225,7 +235,7 @@ export default function SignUp({ handleRegister, renderError }) {
           <Button>Submit</Button>
         </SignUpForm>
         Already have an account? 
-        <Link style={{textDecoration:'none', color:'##E94D4D'}} to="/">Sign In</Link>
+        <Link style={{textDecoration:'none', color:'#E94D4D'}} to="/">Sign In</Link>
       </FormContainer>
     </Container>
   )
