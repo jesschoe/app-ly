@@ -12,6 +12,10 @@ const BoardContainer = styled.div`
   width: 90%;
   margin: 10px;
   overflow-x: auto;
+
+  @media (max-width: 425px) {
+    height: 80%;
+  }
 `
 
 const Title = styled.h5`
@@ -31,6 +35,10 @@ const PageTitle = styled.h4`
   letter-spacing: .7em;
   align-self: start;
   margin: 20px 0 0 20px;
+
+  @media (max-width: 425px) {
+    margin-top: 0px;
+  }
 `
 
 const HelperText = styled.div`
@@ -45,8 +53,13 @@ const DroppableColumn = styled.div`
   border-radius: 5px;
   padding: 10px;
   margin: 0 0 0 10px;
-  width: 250px;;
+  width: 250px;
   height: 600px;
+
+  @media (max-width: 425px) {
+    height: 500px;
+    width: 200px;
+  }
 `
 
 const ShowMore = styled.ul`

@@ -110,7 +110,7 @@ export default function JobCreate({ job, user, newJob, setShowAddJobModal, colum
     column: `${columnId ? columnId :'wishlist'}`,
     contacts: [],
     notes: [],
-    user_id: user.id
+    user_id: user?.id
   })
 
   const {company, location, position, salary, url, offer_salary, applied, interview, offer} = formData

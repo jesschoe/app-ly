@@ -15,24 +15,6 @@ const Logo = styled.div`
   margin-top: -10px;
   text-transform: none;
   letter-spacing: 0;
-
-  @media (max-width: 425px) {
-    display: none;
-  }
-`
-
-const MobileLogo = styled.div`
-  font-family: 'Ephesis', cursive;
-  font-size: 3.5em;
-  color: #E94D4D;
-  margin-top: -10px;
-  text-transform: none;
-  letter-spacing: 0;
-  display: none;
-
-  @media (max-width: 425px) {
-    display: flex;
-  }
 `
 
 const Slash = styled.div`
@@ -87,14 +69,6 @@ export default function Header({ user, handleLogout }) {
           <div style={{ margin: '0 8px' }}>app</div><Slash></Slash><div>ly</div>
         </Link>
       </Logo>
-      <MobileLogo>
-        <Link 
-          to='/jobs/' 
-          style={{ textDecoration: 'none', color: '#E94D4D', display: 'flex' }}
-        >
-          <div style={{ margin: '0 8px' }}>app</div><Slash></Slash><div>ly</div>
-        </Link>
-      </MobileLogo>
       <div>
         <Title>{user?.username}'s jobs</Title>
       </div>
