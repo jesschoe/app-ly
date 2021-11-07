@@ -31,7 +31,10 @@ const HelperDiv = styled.div`
   flex-direction: column;
   justify-content: end;
   text-align: right;
-  
+
+  @media (max-width: 425px) {
+    display: none;
+  }
 `
 const Title = styled.h5`
   color: #0F3875;
