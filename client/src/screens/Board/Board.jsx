@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 as uuid } from 'uuid';
 import styled from "styled-components";
-import add from '../../assets/add-icon.svg'
 import JobCreate from "../../components/JobCreate/JobCreate";
+import add from '../../assets/add-icon.svg'
 
 const BoardContainer = styled.div`
-  display: flex;
-  justify-items: start;
   align-items: start;
-  padding: 0 5px;
+  display: flex;
   height: 90%;
-  width: 90%;
+  justify-items: start;
   margin: 5px;
   overflow-x: auto;
+  padding: 0 5px;
+  width: 90%;
 
   @media (max-width: 425px) {
     height: 80%;
@@ -21,42 +21,38 @@ const BoardContainer = styled.div`
 `
 
 const Title = styled.h5`
-  text-transform: uppercase;
   color: #0F3875;
   font-size: .7em;
   letter-spacing: .7em;
   margin: 30px 0 10px 0;
+  text-transform: uppercase;
 `
 
 const PageTitle = styled.h4`
-  text-transform: uppercase;
-  justify-self: start;
+  align-self: start;
   color: #0F3875;
   font-size: 1.1em;
   font-weight: 300;
+  justify-self: start;
   letter-spacing: .7em;
-  align-self: start;
   margin: 20px 0 0 20px;
-
-  @media (max-width: 425px) {
-    
-  }
+  text-transform: uppercase;
 `
 
 const HelperText = styled.div`
   align-self: start;
+  color: #0F3875;
   font-style: italic;
   font-size: .7em;
-  color: #0F3875;
   margin-left: 20px;
 `
 
 const DroppableColumn = styled.div`
   border-radius: 5px;
-  padding: 10px;
-  margin: 0 0 0 10px;
-  width: 250px;
   height: 600px;
+  margin: 0 0 0 10px;
+  padding: 10px;
+  width: 250px;
 
   @media (max-width: 425px) {
     height: 450px;
@@ -74,18 +70,18 @@ const DetailsDiv = styled.div`
 `
 
 const DetailsText = styled.div`
-  text-align: left;
   font-size: .7em;
   line-height: 1.7em;
+  text-align: left;
 `
 
 const DetailsTitle = styled.div`
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .3em;
-  text-align: left;
   font-size: .7em;
+  font-weight: 600;
+  letter-spacing: .3em;
   line-height: 1.7em;
+  text-align: left;
+  text-transform: uppercase;
 `
 
 const AddIcon = styled.img`
@@ -94,24 +90,17 @@ const AddIcon = styled.img`
 `
 
 const Overlay = styled.div`
+  background-color: #0F3875;
+  height: 100%;
+  left: 0;
+  opacity: .5;
   position: fixed;
   top: 0;
-  left: 0;
-  height: 100%;
   width: 100%;
   z-index: 10;
-  background-color: #0F3875;
-  opacity: .5;
 `
 
 const DraggableItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  user-select: none;
-  font-size: .8em;
-  padding: 16px;
-  margin: 10px 0;
-  minHeight: 50px;
   background-color: #FFFFFF;
   background-image: ${props => 
     props.priority === '3' ? 'linear-gradient(90deg, #E94D4D 2%, #FFFFFF 0)' :
@@ -123,6 +112,13 @@ const DraggableItem = styled.div`
     '1px solid #0F3875'};
   border-radius: 5px;
   box-shadow: 2px 2px 2px #B9B9B9;
+  display: flex;
+  flex-direction: column;
+  font-size: .8em;
+  margin: 10px 0;
+  minHeight: 50px;
+  padding: 16px;
+  user-select: none;
   ...provided.draggableProps.style;
 `
 
@@ -305,10 +301,8 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
                                       </DetailsDiv>
                                         {showMore && detailsId === item.id ? (
                                           <ShowMore>
-
                                             <DetailsText>Location: {item.location}</DetailsText>
                                             <DetailsText>Salary: {item.salary}</DetailsText>
-                                            
                                             <DetailsText>
                                               {column.name==='interviews' ? (
                                                 <>
@@ -321,7 +315,6 @@ export default function Board({ jobs, user, saveBoard, newJob }) {
                                                 ''}  
                                             </DetailsText>
                                           </ShowMore>
-                                          
                                         ) : ''}
                                     </DraggableItem>
                                   );

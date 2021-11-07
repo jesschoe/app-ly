@@ -109,6 +109,7 @@ src
       |__ JobEdit.jsx
       |__ JobForm.jsx
       |__ Navbar.jsx
+      |__ NoteCard.jsx
 |__ containers/
       |__ MainContainer.jsx
 |__ layouts/
@@ -170,8 +171,55 @@ src
 
 ## Code Showcase
 
-> Use this section to include a brief code snippet of functionality that you are proud of and a brief description.
+_The tracking board was a lot of fun to implement and it took some conditional rendering and toggles to achieve what I wanted it to do. The first piece of code is part of the styled component for the draggable items to render the correct color according to the priority level._
+
+```
+const DraggableItem = styled.div`
+  background-color: #FFFFFF;
+  background-image: ${props =>
+    props.priority === '3' ? 'linear-gradient(90deg, #E94D4D 2%, #FFFFFF 0)' :
+    props.priority === '2' ? 'linear-gradient(90deg, #F4C78E 2%, #FFFFFF 0)' :
+    'linear-gradient(90deg, #0F3875 2%, #FFFFFF 0)'};
+  border: ${props =>
+    props.priority === '3' ? '1px solid #E94D4D' :
+    props.priority === '2' ? '1px solid #F4C78E' :
+    '1px solid #0F3875'};
+```
+
+_And here is where I have the item render different things according to which column it's in and whether the item was clicked for more details (toggling the showMore)._
+
+```
+  <DetailsDiv>
+    <DetailsTitle>{item.company}</DetailsTitle>
+    <DetailsText>{column.name==='applied' ? item.applied :
+      column.name==='interview' ? item.interview :
+      column.name==='offer' ? item.offer :
+      ''}
+    </DetailsText>
+  </DetailsDiv>
+  <DetailsDiv>
+    <DetailsText>{item.position}</DetailsText>
+  </DetailsDiv>
+    {showMore && detailsId === item.id ? (
+      <ShowMore>
+        <DetailsText>Location: {item.location}</DetailsText>
+        <DetailsText>Salary: {item.salary}</DetailsText>
+        <DetailsText>
+          {column.name==='interviews' ? (
+            <>
+              Applied: {item.applied} </>) :
+           column.name==='offers' ? (
+             <>
+                Applied: {item.applied}<br/>
+                Interviewed: {item.interview}
+              </>) :
+            ''}
+        </DetailsText>
+      </ShowMore>
+    ) : ''}
+```
 
 ## Code Issues & Resolutions
 
-> Use this section to list of all major issues encountered and their resolution.
+- _I ran into the issue of the board columns not updating for each job when moved to a different column and it took some troubleshooting to figure out that the backend wasn't updated properly when I added the 'board' attribute to the jobs._
+- _Realized a bit too late that the items are not keeping their order within each column because the jobs array is updating every time the state changes. Will do a rework of this and perhaps create a board table to handle all the board changes more elegantly._
