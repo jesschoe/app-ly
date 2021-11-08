@@ -49,8 +49,22 @@ const SignUpForm = styled.form`
   margin: 10px 20px;
 `
 const SignUpInput = styled.input`
+  autofocus;
+  border: 1px solid #0F3875;
+  font-family: 'Raleway';
+  font-size: 1.1em;
   padding: 10px;
   width: 200px;
+
+  &:focus {
+    border: 1px solid #E94D4D;
+    outline: none;
+  }
+
+  @media (max-width: 425px) {
+    padding: 5px;
+    width: 100%;
+  }
 `
 const Button = styled.button`
   align-self: center;
