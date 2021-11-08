@@ -167,6 +167,10 @@ const DetailsText = styled.div`
     font-size: .6em;
   }
 `
+const PostUrl = styled.a`
+  text-decoration: none;
+  color: #E94D4D;
+`
 const Icon = styled.img`
   cursor: pointer;  
   margin: 0 5px;
@@ -255,12 +259,12 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
           <TitleOrange>{job?.company}</TitleOrange>
           {job?.url.length>1 ? (
             <DetailsText>
-              <a 
+              <PostUrl 
                 href={job?.url} 
                 alt={job?.url} 
                 target='_blank' 
                 rel="noreferrer"
-              >Link to Post</a>
+              >Link to Post</PostUrl>
             </DetailsText> ) : ''}
           <DetailsText>Location: {job?.location}</DetailsText>
           <DetailsText>Position: {job?.position}</DetailsText>

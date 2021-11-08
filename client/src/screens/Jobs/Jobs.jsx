@@ -62,6 +62,10 @@ const HelperText = styled.div`
   font-size: .7em;
   font-style: italic;
   margin: 20px;
+
+  @media (max-width: 575px) {
+    display: none;
+  }
 `
 const AddIcon = styled.img`
   cursor: pointer;
