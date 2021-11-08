@@ -26,7 +26,7 @@ const SignInForm = styled.form`
   width: 400px;
 
   @media (max-width: 425px) {
-    width: 300px;
+    width: 70%;
   }
 `
 const InputGroup = styled.div`

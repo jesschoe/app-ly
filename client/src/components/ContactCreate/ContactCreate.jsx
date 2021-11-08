@@ -15,6 +15,14 @@ const EditForm = styled.form`
   top: 25%;
   left: 40%;
   z-index: 20;
+
+  @media (max-width: 425px) {
+    align-items: center;
+    font-size: .5em;
+    left: 13%;
+    top: 20%;
+    width: 70%;
+  }
 `
 
 const Title = styled.h5`

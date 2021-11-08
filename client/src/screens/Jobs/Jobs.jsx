@@ -6,18 +6,13 @@ import JobCreate from '../../components/JobCreate/JobCreate'
 import add from '../../assets/add-icon.svg'
 
 const Container = styled.div`
-  align-items: center;
+  align-content: center;
   display: flex;
   flex-direction: column;
-  height: 90%;
-  justify-items: center;
   overflow: hidden;
-  padding: 20px;
   width: 90%;
-
-  @media (max-width: 425px) {
-    padding: 5px;
-  }
+  height: 90%;
+  padding: 20px;
 `
 const CardTop = styled.div`
   background-color: #FFF4EE;
@@ -26,8 +21,7 @@ const CardTop = styled.div`
   flex-direction: column;
   height: 85%;
   margin: 20px;
-  padding: 20px;
-  width: 80%;
+  width: 90%;
 
   @media (max-width: 425px) {
     background-color: #0F3875;
@@ -40,7 +34,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow: auto;
+  overflow-y: auto;
 `
 const TitleDiv = styled.div`
   display: flex;

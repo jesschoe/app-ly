@@ -10,11 +10,11 @@ const Card = styled.div`
   width: 250px;
 
   @media (max-width: 920px) {
-    width: 200px;
+    width: 240px;
   }
 
   @media (max-width: 425px) {
-    width: 180px;
+    width: 220px;
     margin: 10px;
   }
 `
