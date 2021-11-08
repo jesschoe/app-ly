@@ -77,11 +77,11 @@ _The **App/ly** MVP is a full CRUD, full stack application with a Rails back end
 
 - Job Application Tracking Board
 
-![board](client/src/assets/board.png)
+![board](/client/src/assets/board.jpg)
 
 - Sign up and jobs on mobile
 
-![mobile](client/src/assets/mobile.png)
+![mobile](/client/src/assets/mobile.png)
 
 #### Component Tree
 
