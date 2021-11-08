@@ -70,7 +70,7 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
   
   return (
     <>
-    {jobs ? (
+    {jobs && (
       <>
       <Title>All Contacts</Title>
       <Container>
@@ -103,7 +103,7 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
         }
         </CardContainer> 
       </Container>
-    </> ) : 'Loading...'}
+    </> )}
     </>
   )
 }
