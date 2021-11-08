@@ -39,8 +39,12 @@ export default function MainContainer({ user, handleLogout }) {
   }
 
   const deleteJob = async (id) => {
-    await destroyJob(user?.id, id);
-    setToggle(prev => !prev)
+    try {
+      await destroyJob(user?.id, id);
+      setToggle(prev => !prev)
+    } catch(error) {
+      console.log(error)
+    }
     
   }
 
