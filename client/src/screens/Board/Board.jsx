@@ -273,7 +273,7 @@ export default function Board({ jobs, user, saveBoard, newJob, editJob }) {
   return (
     <>
       <TitleDiv>
-        <PageTitle>All Jobs</PageTitle>
+        <PageTitle>Job Tracker</PageTitle>
         <HelperDiv>
           <HelperText>Drag items, click to see more options</HelperText>
           <PriorityText>Priority: <span style={{color:'#E94D4D'}}>HIGH</span> <span style={{color:'#F4C78E'}}>MEDIUM</span> LOW</PriorityText>
