@@ -42,6 +42,11 @@ const CardContainer = styled.div`
   justify-content: center;
   overflow: auto;
 `
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+`
 const Title = styled.h4`
   align-self: start;
   color: #0F3875;
@@ -53,11 +58,10 @@ const Title = styled.h4`
   text-transform: uppercase;
 `
 const HelperText = styled.div`
-  align-self: start;
   color: #0F3875;
   font-size: .7em;
   font-style: italic;
-  margin-left: 20px;
+  margin: 20px;
 `
 const AddIcon = styled.img`
   cursor: pointer;
@@ -83,8 +87,10 @@ export default function Jobs({ user, jobs, newJob }) {
 
   return (
     <>
-      <Title>All Jobs</Title>
-      <HelperText>click to see details</HelperText>
+      <TitleDiv>
+        <Title>All Jobs</Title>
+        <HelperText>click a card to see details</HelperText>
+      </TitleDiv>
       <Container>
         <CardTop>
           <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>

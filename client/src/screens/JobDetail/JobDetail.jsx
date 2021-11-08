@@ -253,14 +253,15 @@ export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, del
             </div>
           </ButtonDiv>
           <TitleOrange>{job?.company}</TitleOrange>
-          <DetailsText>
-            <a 
-              href={job?.url} 
-              alt={job?.url} 
-              target='_blank' 
-              rel="noreferrer"
-            >Link to Post</a>
-          </DetailsText>
+          {job?.url.length>1 ? (
+            <DetailsText>
+              <a 
+                href={job?.url} 
+                alt={job?.url} 
+                target='_blank' 
+                rel="noreferrer"
+              >Link to Post</a>
+            </DetailsText> ) : ''}
           <DetailsText>Location: {job?.location}</DetailsText>
           <DetailsText>Position: {job?.position}</DetailsText>
           <DetailsText>Salary: {job?.salary}</DetailsText>

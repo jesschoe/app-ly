@@ -37,14 +37,6 @@ const Title = styled.h4`
   align-self: start;
   margin: 20px 0 0 20px;
 `
-
-const HelperText = styled.div`
-  align-self: start;
-  font-style: italic;
-  font-size: .7em;
-  color: #0F3875;
-  margin-left: 20px;
-`
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -75,7 +67,6 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
   return (
     <>
       <Title>All Contacts</Title>
-      <HelperText>click to see details</HelperText>
       <Container>
         <CardContainer>
           {jobs?.map(job => {
