@@ -67,7 +67,8 @@ function App() {
           <SignUp handleRegister={handleRegister} renderError={renderError}/>
         </Route>
         <Route path='/jobs'>
-          <MainContainer user={user} handleLogout={handleLogout} />
+          {user && 
+          <MainContainer user={user} handleLogout={handleLogout} />}
         </Route>
         <Route exact path='/'>
           {!user? 

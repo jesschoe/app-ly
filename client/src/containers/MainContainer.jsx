@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, useHistory } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { readAllJobs, createJob, updateJob, destroyJob } from '../services/jobs'
 import { createContact, updateContact, createNote, destroyContact, destroyNote } from '../services/contacts'
 import Layout from '../layouts/Layout'
@@ -9,9 +9,8 @@ import JobDetail from '../screens/JobDetail/JobDetail'
 import Jobs from '../screens/Jobs/Jobs'
 
 export default function MainContainer({ user, handleLogout }) {
-  const [jobs, setJobs] = useState([])
+  const [jobs, setJobs] = useState(null)
   const [toggle, setToggle] = useState(false)
-  const history = useHistory()
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -36,8 +35,7 @@ export default function MainContainer({ user, handleLogout }) {
     const updatedJob = await updateJob(user?.id, id, formData);
     setJobs(prevState => prevState.map(job => {
       return job.id === Number(id) ? updatedJob : job
-    }))
-    history.push(`/jobs/all/board`);
+    }));
   }
 
   const deleteJob = async (id) => {
@@ -73,6 +71,7 @@ export default function MainContainer({ user, handleLogout }) {
 
   return (
     <div>
+      {jobs && (
       <Layout user={user} handleLogout={handleLogout}>
         <Switch>
         <Route path='/jobs/all/board'>
@@ -113,7 +112,7 @@ export default function MainContainer({ user, handleLogout }) {
             />
           </Route>
         </Switch>
-      </Layout>
+      </Layout> )}
     </div>
   )
 }

@@ -251,7 +251,9 @@ export default function Board({ jobs, user, saveBoard, newJob, editJob }) {
   };
 
   useEffect(() => {
+    if(formData) {
       saveBoard(formData?.id, formData)
+    }
   }, [formData])
 
   const handleClick = (id) => {
