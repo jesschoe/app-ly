@@ -21,6 +21,7 @@ const CardTop = styled.div`
   flex-direction: column;
   height: 85%;
   margin: 20px;
+  padding-top: 20px;
   width: 90%;
 
   @media (max-width: 425px) {
