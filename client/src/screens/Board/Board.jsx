@@ -32,7 +32,7 @@ const HelperDiv = styled.div`
   justify-content: end;
   text-align: right;
 
-  @media (max-width: 425px) {
+  @media (max-width: 650px) {
     display: none;
   }
 `
