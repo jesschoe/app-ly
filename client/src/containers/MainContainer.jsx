@@ -45,7 +45,6 @@ export default function MainContainer({ user, handleLogout }) {
     } catch(error) {
       console.log(error)
     }
-    
   }
 
   const newContact = async (job_id, formData) => {
