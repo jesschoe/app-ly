@@ -70,6 +70,8 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
   
   return (
     <>
+    {jobs ? (
+      <>
       <Title>All Contacts</Title>
       <Container>
         <CardContainer>
@@ -101,6 +103,7 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
         }
         </CardContainer> 
       </Container>
+    </> ) : 'Loading...'}
     </>
   )
 }
