@@ -21,6 +21,7 @@ const CardContainer = styled.div`
   justify-content: center;
   margin: 20px;
   overflow-y: auto;
+  padding: 20px 0;
   width: 90%;
 
   @media (max-width: 425px) {
@@ -66,7 +67,6 @@ export default function Contacts({ user, jobs, editContact, newContact, deleteCo
     )
     setContactId(id)
   }
-
   
   return (
     <>
