@@ -43,7 +43,7 @@ export default function MainContainer({ user, handleLogout }) {
   const deleteJob = async (id) => {
     await destroyJob(user?.id, id);
     setToggle(prev => !prev)
-    history.push(`/jobs`)
+    
   }
 
   const newContact = async (job_id, formData) => {

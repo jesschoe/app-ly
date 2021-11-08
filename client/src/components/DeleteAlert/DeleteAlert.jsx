@@ -1,3 +1,4 @@
+import { useHistory } from "react-router"
 import styled from "styled-components"
 
 const Alert = styled.div`
@@ -35,9 +36,11 @@ const Button = styled.button`
 `
 
 export default function DeleteAlert({ job, deleteJob, setShowDeleteAlert }) {
+  const history = useHistory()
   const handleDelete = () => {
     deleteJob(job?.id)
     setShowDeleteAlert(prev => !prev)
+    history.push(`/jobs`)
   }
 
   return (
