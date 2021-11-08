@@ -15,6 +15,7 @@ const Logo = styled.div`
   letter-spacing: 0;
   margin-top: -10px;
   text-transform: none;
+  z-index: 5;
 `
 const Slash = styled.div`
   border-left: 1px solid #E94D4D;
