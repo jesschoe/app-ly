@@ -12,9 +12,12 @@ import deleteIcon from '../../assets/delete-icon.png'
 import add from '../../assets/add-icon.svg'
 
 const Container = styled.div`
-  align-items: center;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 425px) {
+    align-items: center;
+  }
 `
 const DetailsContainer = styled.div`
   display: grid;
