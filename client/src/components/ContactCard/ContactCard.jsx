@@ -2,6 +2,26 @@ import styled from "styled-components"
 import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
 
+export default function ContactCard({ job, contact, deleteContact, handleContactEdit }) {
+  const handleDelete = (id) => {
+    deleteContact(job.id, id)
+  }
+  
+  return (
+    <Card>
+      <ButtonDiv>
+        <div onClick={() => handleContactEdit(contact.id)}><Icon src={editIcon} alt='update contact' /></div>
+        <div onClick={() => handleDelete(contact.id)}><Icon src={deleteIcon} alt='delete contact' /></div>
+      </ButtonDiv>
+      <TitleOrange>{contact.name}</TitleOrange>
+      <DetailsText>Company: {job.company}</DetailsText>
+      <DetailsText>Position: {contact.position}</DetailsText>
+      <DetailsText>Email: {contact.email}</DetailsText>
+      <DetailsText>Phone: {contact.phone}</DetailsText>
+    </Card>
+  )
+}
+
 const Card = styled.div`
   background-color: #FFFFFF;
   border-radius: 5px;
@@ -48,22 +68,3 @@ const ButtonDiv = styled.div`
   justify-content: end;
 `
 
-export default function ContactCard({ job, contact, deleteContact, handleContactEdit }) {
-  const handleDelete = (id) => {
-    deleteContact(job.id, id)
-  }
-  
-  return (
-    <Card>
-      <ButtonDiv>
-        <div onClick={() => handleContactEdit(contact.id)}><Icon src={editIcon} alt='update contact' /></div>
-        <div onClick={() => handleDelete(contact.id)}><Icon src={deleteIcon} alt='delete contact' /></div>
-      </ButtonDiv>
-      <TitleOrange>{contact.name}</TitleOrange>
-      <DetailsText>Company: {job.company}</DetailsText>
-      <DetailsText>Position: {contact.position}</DetailsText>
-      <DetailsText>Email: {contact.email}</DetailsText>
-      <DetailsText>Phone: {contact.phone}</DetailsText>
-    </Card>
-  )
-}

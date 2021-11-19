@@ -2,6 +2,80 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import deleteIcon from '../../assets/delete-icon.png'
 
+export default function ContactEdit({ id, contact, editContact, setShowEditContactModal }) {
+  const [formData, setFormData] = useState(contact)
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleClose = () => {
+    setShowEditContactModal(prev => !prev)
+  }
+
+  return (
+    <div>
+      <EditForm onSubmit={e => {
+        e.preventDefault()
+        editContact(formData.job_id, id, formData)
+        setShowEditContactModal(prev => !prev)
+      }}>
+        <ButtonDiv onClick={handleClose}>
+          <Icon src={deleteIcon} alt='delete contact' />
+        </ButtonDiv>
+        <Title>Update Contact</Title>
+        <InputGroup>
+          <label htmlFor='name'>Name</label>
+          <EditInput 
+            type='text' 
+            id='name' 
+            name='name' 
+            value={formData?.name} 
+            onChange={handleChange} 
+          />
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='position'>Position</label>
+          <EditInput 
+            type='text' 
+            id='position' 
+            name='position' 
+            value={formData?.position} 
+            onChange={handleChange}
+          />
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='email'>Email</label>
+          <EditInput 
+            type='text' 
+            id='email' 
+            name='email' 
+            value={formData?.email} 
+            onChange={handleChange}
+          />
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='phone'>Phone</label>
+          <EditInput 
+            type='text' 
+            id='phone' 
+            name='phone' 
+            value={formData?.phone} 
+            onChange={handleChange}
+          />
+        </InputGroup>
+        <Button type='submit'>
+          update
+        </Button>
+      </EditForm>
+    </div>
+  )
+}
+
 const EditForm = styled.form`
   align-items: center;
   display: flex;
@@ -78,76 +152,3 @@ const Icon = styled.img`
   width: 20px;
 `
 
-export default function ContactEdit({ id, contact, user, editContact, setShowEditContactModal }) {
-  const [formData, setFormData] = useState(contact)
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleClose = () => {
-    setShowEditContactModal(prev => !prev)
-  }
-
-  return (
-    <div>
-      <EditForm onSubmit={e => {
-        e.preventDefault()
-        editContact(formData.job_id, id, formData)
-        setShowEditContactModal(prev => !prev)
-      }}>
-        <ButtonDiv onClick={handleClose}>
-          <Icon src={deleteIcon} alt='delete contact' />
-        </ButtonDiv>
-        <Title>Update Contact</Title>
-        <InputGroup>
-          <label htmlFor='name'>Name</label>
-          <EditInput 
-            type='text' 
-            id='name' 
-            name='name' 
-            value={formData?.name} 
-            onChange={handleChange} 
-          />
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor='position'>Position</label>
-          <EditInput 
-            type='text' 
-            id='position' 
-            name='position' 
-            value={formData?.position} 
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor='email'>Email</label>
-          <EditInput 
-            type='text' 
-            id='email' 
-            name='email' 
-            value={formData?.email} 
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor='phone'>Phone</label>
-          <EditInput 
-            type='text' 
-            id='phone' 
-            name='phone' 
-            value={formData?.phone} 
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <Button type='submit'>
-          update
-        </Button>
-      </EditForm>
-    </div>
-  )
-}

@@ -2,6 +2,41 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import accountIcon from '../../assets/account-blue.svg'
 
+export default function Header({ user, handleLogout }) {
+  return (
+    <Container>
+      <Logo>
+        <Link 
+          to='/jobs/all/board' 
+          style={{ textDecoration: 'none', color: '#E94D4D', display: 'flex' }}
+        >
+          <div style={{ margin: '0 8px' }}>app</div><Slash></Slash><div>ly</div>
+        </Link>
+      </Logo>
+      <div>
+        <Title>Welcome, {user?.username}!</Title>
+      </div>
+      <MobileNav>
+        <Link 
+          to='/jobs' 
+          style={{ textDecoration:'none', color:'white' }}
+        >
+          <LinkName>jobs</LinkName>
+        </Link>
+        <Link 
+          to='/jobs/all/contacts' 
+          style={{ textDecoration:'none', color:'white' }}
+        >
+          <LinkName>contacts</LinkName>
+        </Link>
+        <div style={{cursor: 'pointer'}}onClick={handleLogout}>
+          <Icon src={accountIcon} alt='account icon' />
+        </div>
+      </MobileNav>
+    </Container>
+  )
+}
+
 const Container = styled.div`
   align-content: start;
   display: flex;
@@ -54,37 +89,3 @@ const Icon = styled.img`
   width: 25px;
 `
 
-export default function Header({ user, handleLogout }) {
-  return (
-    <Container>
-      <Logo>
-        <Link 
-          to='/jobs/all/board' 
-          style={{ textDecoration: 'none', color: '#E94D4D', display: 'flex' }}
-        >
-          <div style={{ margin: '0 8px' }}>app</div><Slash></Slash><div>ly</div>
-        </Link>
-      </Logo>
-      <div>
-        <Title>Welcome, {user?.username}!</Title>
-      </div>
-      <MobileNav>
-        <Link 
-          to='/jobs' 
-          style={{ textDecoration:'none', color:'white' }}
-        >
-          <LinkName>jobs</LinkName>
-        </Link>
-        <Link 
-          to='/jobs/all/contacts' 
-          style={{ textDecoration:'none', color:'white' }}
-        >
-          <LinkName>contacts</LinkName>
-        </Link>
-        <div style={{cursor: 'pointer'}}onClick={handleLogout}>
-          <Icon src={accountIcon} alt='account icon' />
-        </div>
-      </MobileNav>
-    </Container>
-  )
-}

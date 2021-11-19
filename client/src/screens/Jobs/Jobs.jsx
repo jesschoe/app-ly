@@ -5,6 +5,49 @@ import JobCard from '../../components/JobCard/JobCard'
 import JobCreate from '../../components/JobCreate/JobCreate'
 import add from '../../assets/add-icon.svg'
 
+export default function Jobs({ user, jobs, newJob }) {
+  const [showAddJobModal, setShowAddJobModal] = useState(false)
+
+  const handleAdd = () => {
+    setShowAddJobModal(prev => !prev)
+  }
+
+  return (
+    <>
+      <TitleDiv>
+        <Title>All Jobs</Title>
+        <HelperText>click a card to see details</HelperText>
+      </TitleDiv>
+      <Container>
+        <CardTop>
+          <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
+          <CardContainer>
+            {jobs.map(job => {
+              return (
+                <Link 
+                  to={`/jobs/${job.id}`} 
+                  key={job.id}
+                  style={{textDecoration:'none', color:'#0F3875'}}
+                >
+                  <JobCard job={job} />
+                </Link>
+              )
+            })}
+          {showAddJobModal ? (
+            <>
+              <Overlay></Overlay>
+              <JobCreate 
+                user={user} 
+                newJob={newJob} 
+                setShowAddJobModal={setShowAddJobModal}/> 
+            </>): ''}
+          </CardContainer>
+        </CardTop>
+      </Container>
+    </>
+  )
+}
+
 const Container = styled.div`
   align-content: center;
   display: flex;
@@ -77,45 +120,3 @@ const Overlay = styled.div`
   z-index: 10;
 `
 
-export default function Jobs({ user, jobs, newJob }) {
-  const [showAddJobModal, setShowAddJobModal] = useState(false)
-
-  const handleAdd = () => {
-    setShowAddJobModal(prev => !prev)
-  }
-
-  return (
-    <>
-      <TitleDiv>
-        <Title>All Jobs</Title>
-        <HelperText>click a card to see details</HelperText>
-      </TitleDiv>
-      <Container>
-        <CardTop>
-          <div onClick={handleAdd}><AddIcon src={add} alt='add job' /></div>
-          <CardContainer>
-            {jobs.map(job => {
-              return (
-                <Link 
-                  to={`/jobs/${job.id}`} 
-                  key={job.id}
-                  style={{textDecoration:'none', color:'#0F3875'}}
-                >
-                  <JobCard job={job} />
-                </Link>
-              )
-            })}
-          {showAddJobModal ? (
-            <>
-              <Overlay></Overlay>
-              <JobCreate 
-                user={user} 
-                newJob={newJob} 
-                setShowAddJobModal={setShowAddJobModal}/> 
-            </>): ''}
-          </CardContainer>
-        </CardTop>
-      </Container>
-    </>
-  )
-}

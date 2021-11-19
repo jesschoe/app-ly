@@ -2,6 +2,83 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import deleteIcon from '../../assets/delete-icon.png'
 
+export default function ContactCreate({ job, contact, newContact, setShowAddContactModal }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    position: '',
+    email: '',
+    phone: '',
+    job_id: job.id
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleClose = () => {
+    setShowAddContactModal(prev => !prev)
+  }
+
+  console.log(contact)
+  return (
+    <div>
+      <EditForm onSubmit={e => {
+        e.preventDefault()
+        newContact(formData.job_id, formData)
+        setShowAddContactModal(prev => !prev)
+      }}>
+        <ButtonDiv onClick={handleClose}>
+          <Icon src={deleteIcon} alt='delete contact' />
+        </ButtonDiv>
+        <Title>Add Contact</Title>
+        <InputGroup>
+          <label htmlFor='name'>Name</label>
+          <EditInput 
+            type='text' 
+            id='name' 
+            name='name' 
+            value={formData?.name} 
+            onChange={handleChange}/>
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='position'>Position</label>
+          <EditInput 
+            type='text' 
+            id='position' 
+            name='position' 
+            value={formData?.position} 
+            onChange={handleChange}/>
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='email'>Email</label>
+          <EditInput 
+            type='text' 
+            id='email' 
+            name='email' 
+            value={formData?.email} 
+            onChange={handleChange}/>
+        </InputGroup>
+        <InputGroup>
+          <label htmlFor='phone'>Phone</label>
+          <EditInput 
+            type='text' 
+            id='phone' 
+            name='phone' 
+            value={formData?.phone} 
+            onChange={handleChange}/>
+        </InputGroup>
+        <Button type='submit'>
+          submit
+        </Button>
+      </EditForm>
+    </div>
+  )
+}
+
 const EditForm = styled.form`
   border-radius: 5px;
   box-shadow: 2px 2px 4px #000000;
@@ -78,59 +155,3 @@ const Icon = styled.img`
   text-align: right;
 `
 
-export default function ContactCreate({ job, contact, user, newContact, setShowAddContactModal }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    position: '',
-    email: '',
-    phone: '',
-    job_id: job.id
-  })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleClose = () => {
-    setShowAddContactModal(prev => !prev)
-  }
-
-  console.log(contact)
-  return (
-    <div>
-      <EditForm onSubmit={e => {
-        e.preventDefault()
-        newContact(formData.job_id, formData)
-        setShowAddContactModal(prev => !prev)
-      }}>
-        <ButtonDiv onClick={handleClose}>
-          <Icon src={deleteIcon} alt='delete contact' />
-        </ButtonDiv>
-        <Title>Add Contact</Title>
-        <InputGroup>
-          <label htmlFor='name'>Name</label>
-          <EditInput type='text' id='name' name='name' value={formData?.name} onChange={handleChange}/>
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor='position'>Position</label>
-          <EditInput type='text' id='position' name='position' value={formData?.position} onChange={handleChange}/>
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor='email'>Email</label>
-          <EditInput type='text' id='email' name='email' value={formData?.email} onChange={handleChange}/>
-        </InputGroup>
-        <InputGroup>
-          <label htmlFor='phone'>Phone</label>
-          <EditInput type='text' id='phone' name='phone' value={formData?.phone} onChange={handleChange}/>
-        </InputGroup>
-        <Button type='submit'>
-          submit
-        </Button>
-      </EditForm>
-    </div>
-  )
-}

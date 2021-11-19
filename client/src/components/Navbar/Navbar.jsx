@@ -5,19 +5,6 @@ import contactsIcon from '../../assets/contacts-icon.svg'
 import accountIcon from '../../assets/account-icon.svg'
 import boardIcon from '../../assets/board-icon.svg'
 
-const Nav = styled.div`
-align-content: center;
-display: flex;
-  flex-direction: column;
-  font-size: .6em;
-  justify-content: space-around;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-`
-const LinkName = styled.div`
-  margin: 5px 4px 30px 4px;
-`
-
 export default function Navbar({ user, handleLogout }) {
   return (
     <Nav>
@@ -42,3 +29,17 @@ export default function Navbar({ user, handleLogout }) {
     </Nav>
   )
 }
+
+
+const Nav = styled.div`
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  font-size: .6em;
+  justify-content: space-around;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+`
+const LinkName = styled.div`
+  margin: 5px 4px 30px 4px;
+`

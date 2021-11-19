@@ -1,5 +1,16 @@
 import styled from "styled-components"
 
+export default function JobCard({ job }) {
+  return (
+    <Card>
+      <TitleOrange>{job.company}</TitleOrange>
+      <Details>Location: {job.location}</Details>
+      <Details>Position: {job.position}</Details>
+      <Details>Salary: {job.salary}</Details>
+    </Card>
+  )
+}
+
 const Card = styled.div`
   background-color: #FFFFFF;
   border-radius: 5px;
@@ -35,13 +46,3 @@ const Details = styled.div`
   line-height: 1.7em;
 `
 
-export default function JobCard({ job }) {
-  return (
-    <Card>
-      <TitleOrange>{job.company}</TitleOrange>
-      <Details>Location: {job.location}</Details>
-      <Details>Position: {job.position}</Details>
-      <Details>Salary: {job.salary}</Details>
-    </Card>
-  )
-}

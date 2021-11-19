@@ -1,6 +1,25 @@
 import { useHistory } from "react-router"
 import styled from "styled-components"
 
+export default function DeleteAlert({ job, deleteJob, setShowDeleteAlert }) {
+  const history = useHistory()
+  const handleDelete = () => {
+    deleteJob(job?.id)
+    setShowDeleteAlert(prev => !prev)
+    history.push(`/jobs`)
+  }
+
+  return (
+    <Alert>
+      Are you sure you want to stop tracking this job application? All associated notes and contacts will be deleted.
+      <ButtonDiv>
+        <Button onClick={handleDelete}>yes</Button>
+        <Button onClick={() => setShowDeleteAlert(prev=>!prev)}>no</Button>
+      </ButtonDiv>
+    </Alert>
+  )
+}
+
 const Alert = styled.div`
   align-items: start;
   background: #FFFFFF;
@@ -35,21 +54,3 @@ const Button = styled.button`
   text-transform: uppercase;
 `
 
-export default function DeleteAlert({ job, deleteJob, setShowDeleteAlert }) {
-  const history = useHistory()
-  const handleDelete = () => {
-    deleteJob(job?.id)
-    setShowDeleteAlert(prev => !prev)
-    history.push(`/jobs`)
-  }
-
-  return (
-    <Alert>
-      Are you sure you want to stop tracking this job application? All associated notes and contacts will be deleted.
-      <ButtonDiv>
-        <Button onClick={handleDelete}>yes</Button>
-        <Button onClick={() => setShowDeleteAlert(prev=>!prev)}>no</Button>
-      </ButtonDiv>
-    </Alert>
-  )
-}

@@ -2,6 +2,24 @@ import Header from "../components/Header/Header"
 import Navbar from "../components/Navbar/Navbar"
 import styled from 'styled-components'
 
+export default function Layout({ children, user, handleLogout }) {
+  return (
+    <Container>
+        <Nav>
+          <Navbar user={user} handleLogout={handleLogout} />
+        </Nav>
+        <Main>
+          <HeaderLinks>
+            <Header user={user} handleLogout={handleLogout} />
+          </HeaderLinks>
+          <Content>
+            {children}
+          </Content>
+        </Main>
+    </Container>
+  )
+}
+
 const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -40,20 +58,3 @@ const Content = styled.div`
   width: 100vw;
 `
 
-export default function Layout({ children, user, handleLogout }) {
-  return (
-    <Container>
-        <Nav>
-          <Navbar user={user} handleLogout={handleLogout} />
-        </Nav>
-        <Main>
-          <HeaderLinks>
-            <Header user={user} handleLogout={handleLogout} />
-          </HeaderLinks>
-          <Content>
-            {children}
-          </Content>
-        </Main>
-    </Container>
-  )
-}

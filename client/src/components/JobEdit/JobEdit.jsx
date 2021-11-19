@@ -4,118 +4,6 @@ import styled from 'styled-components'
 import 'react-datepicker/dist/react-datepicker.css'
 import deleteIcon from '../../assets/delete-icon.png'
 
-const EditForm = styled.form`
-  align-items: start;
-  background: #FFFFFF;
-  border-radius: 5px;
-  box-shadow: 2px 2px 4px #000000;
-  color: #0F3875;
-  display: flex;
-  flex-direction: column;
-  font-size: .6em;
-  left: 25%;
-  padding: 10px;
-  position: absolute;
-  top: 20%;
-  z-index: 20;
-
-  @media (max-width: 425px) {
-    align-items: center;
-    font-size: .5em;
-    left: 15%;
-    top: 12%;
-    width: 70%;
-  }
-`
-const FormSection = styled.div`
-  display: flex;
-  margin: 10px;
-
-  @media (max-width: 425px) {
-    flex-direction: column;
-    margin: 0;
-    width: 180px;
-  }
-`
-const InputGroup = styled.div`
-  align-items: start;
-  display: flex;
-  flex-direction: column;
-  margin: 0 20px;
-
-  @media (max-width: 425px) {
-    margin: 5px 0 5px -10px;
-    width: 100%;
-  }
-`
-const EditInput = styled.input`
-  autofocus;
-  border: 1px solid #0F3875;
-  font-family: 'Raleway';
-  font-size: 1.1em;
-  padding: 10px;
-
-  &:focus {
-    border: 1px solid #E94D4D;
-    outline: none;
-  }
-  
-  @media (max-width: 425px) {
-    padding: 5px;
-    width: 100%;
-  }
-`
-const Dropdown = styled.select`
-  autofocus;
-  border: 1px solid #0F3875;
-  font-family: 'Raleway';
-  font-size: 1.1em;
-  padding: 10px;
-  &:focus {
-    border: 1px solid #E94D4D;
-    outline: none;
-  }
-
-  @media (max-width: 425px) {
-    padding: 5px;
-  }
-`
-const Calendar = styled.div`
-  margin-bottom: 10px;
-`
-const Button = styled.button`
-  align-self: center;
-  background-color: #E94D4D;
-  border: none;
-  color: #FFFFFF;
-  cursor: pointer;
-  font-size: .9em;
-  margin: 20px;
-  padding: 7px 20px;
-  text-transform: uppercase;
-`
-const Title = styled.h5`
-  color: #E94D4D;
-  font-size: 1.2em;
-  letter-spacing: .5em;
-  margin: 20px 30px;
-  text-transform: uppercase;
-
-  @media (max-width: 425px) {
-    margin: 5px;
-  }
-`
-const ButtonDiv = styled.div`
-  align-self: end;
-  cursor: pointer;
-  display: flex;
-`
-const Icon = styled.img`
-  margin: 0 5px;
-  text-align: right;
-  width: 20px;
-`
-
 export default function JobEdit({ job, editJob, setShowEditJobModal }) {
   const [appliedDate, setAppliedDate] = useState(new Date())
   const [interviewDate, setInterviewDate] = useState(new Date())
@@ -273,3 +161,116 @@ export default function JobEdit({ job, editJob, setShowEditJobModal }) {
     </div>
   )
 }
+
+const EditForm = styled.form`
+  align-items: start;
+  background: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #000000;
+  color: #0F3875;
+  display: flex;
+  flex-direction: column;
+  font-size: .6em;
+  left: 25%;
+  padding: 10px;
+  position: absolute;
+  top: 20%;
+  z-index: 20;
+
+  @media (max-width: 425px) {
+    align-items: center;
+    font-size: .5em;
+    left: 15%;
+    top: 12%;
+    width: 70%;
+  }
+`
+const FormSection = styled.div`
+  display: flex;
+  margin: 10px;
+
+  @media (max-width: 425px) {
+    flex-direction: column;
+    margin: 0;
+    width: 180px;
+  }
+`
+const InputGroup = styled.div`
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+
+  @media (max-width: 425px) {
+    margin: 5px 0 5px -10px;
+    width: 100%;
+  }
+`
+const EditInput = styled.input`
+  autofocus;
+  border: 1px solid #0F3875;
+  font-family: 'Raleway';
+  font-size: 1.1em;
+  padding: 10px;
+
+  &:focus {
+    border: 1px solid #E94D4D;
+    outline: none;
+  }
+  
+  @media (max-width: 425px) {
+    padding: 5px;
+    width: 100%;
+  }
+`
+const Dropdown = styled.select`
+  autofocus;
+  border: 1px solid #0F3875;
+  font-family: 'Raleway';
+  font-size: 1.1em;
+  padding: 10px;
+  &:focus {
+    border: 1px solid #E94D4D;
+    outline: none;
+  }
+
+  @media (max-width: 425px) {
+    padding: 5px;
+  }
+`
+const Calendar = styled.div`
+  margin-bottom: 10px;
+`
+const Button = styled.button`
+  align-self: center;
+  background-color: #E94D4D;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: .9em;
+  margin: 20px;
+  padding: 7px 20px;
+  text-transform: uppercase;
+`
+const Title = styled.h5`
+  color: #E94D4D;
+  font-size: 1.2em;
+  letter-spacing: .5em;
+  margin: 20px 30px;
+  text-transform: uppercase;
+
+  @media (max-width: 425px) {
+    margin: 5px;
+  }
+`
+const ButtonDiv = styled.div`
+  align-self: end;
+  cursor: pointer;
+  display: flex;
+`
+const Icon = styled.img`
+  margin: 0 5px;
+  text-align: right;
+  width: 20px;
+`
+

@@ -3,6 +3,92 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Wireframe from '../../assets/wireframes.png'
 
+export default function SignUp({ handleRegister, renderError }) {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    errorMsg: ''
+  })
+  const { username, email, password, confirm_password } = formData
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+  return (
+    <Container>
+      <LogoDiv>
+        <Title2>keep track of your</Title2>
+        <Title>job applications</Title>
+        <SmallTitle>from start to offer with</SmallTitle>
+        <Logo>
+          <div>app</div><Slash></Slash><div>ly</div>
+        </Logo>
+        <Image src={Wireframe} alt="wireframes of app/ly" />
+      </LogoDiv>
+      <FormContainer>
+        <SignUpForm onSubmit={(e) => {
+          e.preventDefault();
+          handleRegister(formData);
+        }} >
+          <FormTitle>
+            Create your app/ly account
+          </FormTitle>
+          <InputGroup>
+            <label>Username</label>
+            <SignUpInput
+              name="username"
+              type="text"
+              value={username}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="email">Email</label>
+            <SignUpInput
+              id="email"
+              name="email"
+              type="text"
+              value={email}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="password">Password</label>
+            <SignUpInput
+              id="password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="confirm_password">Confirm Password</label>
+            <SignUpInput
+              id="confirm_password"
+              name="confirm_password"
+              type="password"
+              value={confirm_password}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <ErrorMsg>{renderError()}</ErrorMsg>
+          <Button>Submit</Button>
+        </SignUpForm>
+        Already have an account? 
+        <Link style={{textDecoration:'none', color:'#E94D4D'}} to="/">Sign In</Link>
+      </FormContainer>
+    </Container>
+  )
+}
+
 const Container = styled.div`
   align-items: center;
   background-color: #FFF4EE;
@@ -170,88 +256,3 @@ const Image = styled.img`
   }
 `
 
-export default function SignUp({ handleRegister, renderError }) {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirm_password: '',
-    errorMsg: ''
-  })
-  const { username, email, password, confirm_password } = formData
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
-
-  return (
-    <Container>
-      <LogoDiv>
-        <Title2>keep track of your</Title2>
-        <Title>job applications</Title>
-        <SmallTitle>from start to offer with</SmallTitle>
-        <Logo>
-          <div>app</div><Slash></Slash><div>ly</div>
-        </Logo>
-        <Image src={Wireframe} alt="wireframes of app/ly" />
-      </LogoDiv>
-      <FormContainer>
-        <SignUpForm onSubmit={(e) => {
-          e.preventDefault();
-          handleRegister(formData);
-        }} >
-          <FormTitle>
-            Create your app/ly account
-          </FormTitle>
-          <InputGroup>
-            <label>Username</label>
-            <SignUpInput
-              name="username"
-              type="text"
-              value={username}
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor="email">Email</label>
-            <SignUpInput
-              id="email"
-              name="email"
-              type="text"
-              value={email}
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor="password">Password</label>
-            <SignUpInput
-              id="password"
-              name="password"
-              type="password"
-              value={password}
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor="confirm_password">Confirm Password</label>
-            <SignUpInput
-              id="confirm_password"
-              name="confirm_password"
-              type="password"
-              value={confirm_password}
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <ErrorMsg>{renderError()}</ErrorMsg>
-          <Button>Submit</Button>
-        </SignUpForm>
-        Already have an account? 
-        <Link style={{textDecoration:'none', color:'#E94D4D'}} to="/">Sign In</Link>
-      </FormContainer>
-    </Container>
-  )
-}

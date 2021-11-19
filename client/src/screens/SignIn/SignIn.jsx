@@ -2,6 +2,69 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+export default function SignIn({ handleLogin, renderError }) {
+  const [formData, setFormData] = useState({
+    username: 'tester',
+    password: 'tester'
+  })
+  const { username, password } = formData
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+  return (
+    <>
+      <Container>
+        <LogoDiv>
+          <Title>apply aptly with</Title>
+          <Logo>
+            <div>app</div><Slash></Slash><div>ly</div>
+          </Logo>
+        </LogoDiv>
+        <SignInForm onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin(formData);
+        }} >
+          <FormTitle>
+            Sign in to app/ly
+          </FormTitle>
+          <InputGroup>
+            <label htmlFor='username'>Username</label>
+            <SignInInput
+              id='username'
+              name="username"
+              type="text"
+              value={username}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor='password'>Password</label>
+            <SignInInput
+              id='password'
+              name="password"
+              type="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          <ErrorMsg>{renderError()}</ErrorMsg>
+          <Button>Sign In</Button>
+        </SignInForm>
+          <Link 
+            style={{margin:'20px', textDecoration:'none', color:'#E94D4D'}} 
+            to="/signup"
+          >Create an account</Link>
+      </Container>
+    </>
+  )
+}
+
 const Container = styled.div`
   align-items: center;
   background-color: #FFF4EE;
@@ -112,65 +175,3 @@ const ErrorMsg = styled.h4`
   font-style: italic;
 `
 
-export default function SignIn({ handleLogin, renderError }) {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  })
-  const { username, password } = formData
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
-
-  return (
-    <>
-      <Container>
-        <LogoDiv>
-          <Title>apply aptly with</Title>
-          <Logo>
-            <div>app</div><Slash></Slash><div>ly</div>
-          </Logo>
-        </LogoDiv>
-        <SignInForm onSubmit={(e) => {
-          e.preventDefault();
-          handleLogin(formData);
-        }} >
-          <FormTitle>
-            Sign in to app/ly
-          </FormTitle>
-          <InputGroup>
-            <label htmlFor='username'>Username</label>
-            <SignInInput
-              id='username'
-              name="username"
-              type="text"
-              value={username}
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <InputGroup>
-            <label htmlFor='password'>Password</label>
-            <SignInInput
-              id='password'
-              name="password"
-              type="password"
-              value={password}
-              onChange={handleChange}
-            />
-          </InputGroup>
-          <ErrorMsg>{renderError()}</ErrorMsg>
-          <Button>Sign In</Button>
-        </SignInForm>
-          <Link 
-            style={{margin:'20px', textDecoration:'none', color:'#E94D4D'}} 
-            to="/signup"
-          >Create an account</Link>
-      </Container>
-    </>
-  )
-}
