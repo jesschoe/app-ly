@@ -11,6 +11,153 @@ import editIcon from '../../assets/edit-icon.png'
 import deleteIcon from '../../assets/delete-icon.png'
 import add from '../../assets/add-icon.svg'
 
+export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, deleteNote, newContact, editContact, deleteContact }) {
+  const [job, setJob] = useState(null)
+  const [showEditJobModal, setShowEditJobModal] = useState(false)
+  const [showEditContactModal, setShowEditContactModal] = useState(false)
+  const [showAddContactModal, setShowAddContactModal] = useState(false)
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false)
+  const [contactId, setContactId] = useState(null)
+  const [contact, setContact] = useState(null)
+  const { id } = useParams()
+
+  useEffect(() => {
+      const job = jobs?.find(job => job.id === Number(id))
+      setJob(job)
+  }, [jobs, id])
+
+  const handleEdit = () => {
+    setShowEditJobModal(prev => !prev)
+  }
+
+  const confirmDelete = () => {
+    setShowDeleteAlert(prev => !prev)
+  }
+
+  const handleContactEdit = (id) => {
+    setShowEditContactModal(prev =>! prev)
+    setContact((jobs.find(job => {
+      return (
+        job.contacts.find(contact => contact.id === Number(id))
+      )})).contacts.find(contact => contact.id === Number(id))
+    )
+    setContactId(id)
+  }
+
+  const handleAdd = () => {
+    setShowAddContactModal(prev => !prev)
+  }
+
+  const handleNoteDelete =  (job_id, id) => {
+    deleteNote(job_id, id)
+  }
+
+  return (
+    <Container>
+    <DetailsContainer>
+      <DetailsColumn>
+        <Title>Job Details</Title>
+        <Details>
+          <DetailsCard>
+          <ButtonDiv>
+            <div onClick={handleEdit}>
+              <Icon src={editIcon} alt='update job' />
+            </div>
+            <div onClick={confirmDelete}>
+              <Icon src={deleteIcon} alt='delete job' />
+            </div>
+          </ButtonDiv>
+          <TitleOrange>{job?.company}</TitleOrange>
+          {job?.url.length>1 ? (
+            <DetailsText>
+              <PostUrl 
+                href={job?.url} 
+                alt={job?.url} 
+                target='_blank' 
+                rel="noreferrer"
+              >Link to Post</PostUrl>
+            </DetailsText> ) : ''}
+          <DetailsText>Location: {job?.location}</DetailsText>
+          <DetailsText>Position: {job?.position}</DetailsText>
+          <DetailsText>Salary: {job?.salary}</DetailsText>
+          <DetailsText>Date Applied: {job?.applied}</DetailsText>
+          <DetailsText>Next Interview: {job?.interview}</DetailsText>
+          <DetailsText>Date of Offer: {job?.offer}</DetailsText>
+          <DetailsText>Salary Offered: {job?.offerSalary}</DetailsText>
+          </DetailsCard>
+        </Details>
+        <Title>Contacts</Title>
+        <ContactsList>
+          <IconDiv onClick={handleAdd}>
+            <AddIcon src={add} alt='add job' />
+          </IconDiv>
+          <ContactCards>
+            {job?.contacts.map(contact => {
+              return (
+                <ContactCard 
+                  key={contact.id}
+                  setShowEditContactModal={setShowEditContactModal} 
+                  contact={contact} 
+                  handleContactEdit={handleContactEdit}
+                  deleteContact={deleteContact}
+                  job={job} />
+              )
+            })}
+          </ContactCards>
+        </ContactsList>
+      </DetailsColumn>
+      <NotesColumn>
+        <Title>Notes</Title>
+        <NotesList>
+          <NoteCard 
+            job={job} 
+            handleNoteDelete={handleNoteDelete}
+            newNote={newNote}
+            DateOrange={DateOrange}
+            Icon={Icon}
+            ButtonDiv={ButtonDiv}
+            id={id} />
+        </NotesList> 
+      </NotesColumn>
+      {showEditJobModal ? 
+        <>
+          <Overlay></Overlay>
+          <JobEdit 
+            job={job} 
+            editJob={editJob} 
+            setShowEditJobModal={setShowEditJobModal}/> 
+        </>  : ''}
+        {showAddContactModal ? 
+        <>
+          <Overlay></Overlay>
+          <ContactCreate
+            job={job} 
+            newContact={newContact} 
+            setShowAddContactModal={setShowAddContactModal}/> 
+        </>  : ''}
+        {showEditContactModal ? 
+        <>
+          <Overlay></Overlay>
+          <ContactEdit 
+            id={contactId}
+            contact={contact}
+            user={user} 
+            editContact={editContact}
+            setShowEditContactModal={setShowEditContactModal}/> 
+        </>  : ''}
+        {showDeleteAlert ? 
+        <>
+          <Overlay></Overlay>
+          <DeleteAlert 
+            job={job}
+            deleteJob={deleteJob}
+            setShowDeleteAlert={setShowDeleteAlert} />
+        </>  : ''}
+    </DetailsContainer>
+    </Container>
+  )
+}
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -203,149 +350,3 @@ const IconDiv = styled.div`
   margin-top: 5px;
 `
 
-export default function JobDetail({ jobs, user, editJob, deleteJob, newNote, deleteNote, newContact, editContact, deleteContact }) {
-  const [job, setJob] = useState(null)
-  const [showEditJobModal, setShowEditJobModal] = useState(false)
-  const [showEditContactModal, setShowEditContactModal] = useState(false)
-  const [showAddContactModal, setShowAddContactModal] = useState(false)
-  const [showDeleteAlert, setShowDeleteAlert] = useState(false)
-  const [contactId, setContactId] = useState(null)
-  const [contact, setContact] = useState(null)
-  const { id } = useParams()
-
-  useEffect(() => {
-      const job = jobs?.find(job => job.id === Number(id))
-      setJob(job)
-  }, [jobs, id])
-
-  const handleEdit = () => {
-    setShowEditJobModal(prev => !prev)
-  }
-
-  const confirmDelete = () => {
-    setShowDeleteAlert(prev => !prev)
-  }
-
-  const handleContactEdit = (id) => {
-    setShowEditContactModal(prev =>! prev)
-    setContact((jobs.find(job => {
-      return (
-        job.contacts.find(contact => contact.id === Number(id))
-      )})).contacts.find(contact => contact.id === Number(id))
-    )
-    setContactId(id)
-  }
-
-  const handleAdd = () => {
-    setShowAddContactModal(prev => !prev)
-  }
-
-  const handleNoteDelete =  (job_id, id) => {
-    deleteNote(job_id, id)
-  }
-
-  return (
-    <Container>
-    <DetailsContainer>
-      <DetailsColumn>
-        <Title>Job Details</Title>
-        <Details>
-          <DetailsCard>
-          <ButtonDiv>
-            <div onClick={handleEdit}>
-              <Icon src={editIcon} alt='update job' />
-            </div>
-            <div onClick={confirmDelete}>
-              <Icon src={deleteIcon} alt='delete job' />
-            </div>
-          </ButtonDiv>
-          <TitleOrange>{job?.company}</TitleOrange>
-          {job?.url.length>1 ? (
-            <DetailsText>
-              <PostUrl 
-                href={job?.url} 
-                alt={job?.url} 
-                target='_blank' 
-                rel="noreferrer"
-              >Link to Post</PostUrl>
-            </DetailsText> ) : ''}
-          <DetailsText>Location: {job?.location}</DetailsText>
-          <DetailsText>Position: {job?.position}</DetailsText>
-          <DetailsText>Salary: {job?.salary}</DetailsText>
-          <DetailsText>Date Applied: {job?.applied}</DetailsText>
-          <DetailsText>Next Interview: {job?.interview}</DetailsText>
-          <DetailsText>Date of Offer: {job?.offer}</DetailsText>
-          <DetailsText>Salary Offered: {job?.offerSalary}</DetailsText>
-          </DetailsCard>
-        </Details>
-        <Title>Contacts</Title>
-        <ContactsList>
-          <IconDiv onClick={handleAdd}>
-            <AddIcon src={add} alt='add job' />
-          </IconDiv>
-          <ContactCards>
-            {job?.contacts.map(contact => {
-              return (
-                <ContactCard 
-                  key={contact.id}
-                  setShowEditContactModal={setShowEditContactModal} 
-                  contact={contact} 
-                  handleContactEdit={handleContactEdit}
-                  deleteContact={deleteContact}
-                  job={job} />
-              )
-            })}
-          </ContactCards>
-        </ContactsList>
-      </DetailsColumn>
-      <NotesColumn>
-        <Title>Notes</Title>
-        <NotesList>
-          <NoteCard 
-            job={job} 
-            handleNoteDelete={handleNoteDelete}
-            newNote={newNote}
-            DateOrange={DateOrange}
-            Icon={Icon}
-            ButtonDiv={ButtonDiv}
-            id={id} />
-        </NotesList> 
-      </NotesColumn>
-      {showEditJobModal ? 
-        <>
-          <Overlay></Overlay>
-          <JobEdit 
-            job={job} 
-            editJob={editJob} 
-            setShowEditJobModal={setShowEditJobModal}/> 
-        </>  : ''}
-        {showAddContactModal ? 
-        <>
-          <Overlay></Overlay>
-          <ContactCreate
-            job={job} 
-            newContact={newContact} 
-            setShowAddContactModal={setShowAddContactModal}/> 
-        </>  : ''}
-        {showEditContactModal ? 
-        <>
-          <Overlay></Overlay>
-          <ContactEdit 
-            id={contactId}
-            contact={contact}
-            user={user} 
-            editContact={editContact}
-            setShowEditContactModal={setShowEditContactModal}/> 
-        </>  : ''}
-        {showDeleteAlert ? 
-        <>
-          <Overlay></Overlay>
-          <DeleteAlert 
-            job={job}
-            deleteJob={deleteJob}
-            setShowDeleteAlert={setShowDeleteAlert} />
-        </>  : ''}
-    </DetailsContainer>
-    </Container>
-  )
-}
